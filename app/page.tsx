@@ -1,65 +1,166 @@
-import Image from "next/image";
+import { Hero } from "@/components/hero/Hero";
+import { AboutSriLanka } from "@/components/sections/AboutSriLanka";
+import { AboutMe } from "@/components/sections/AboutMe";
+import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
+import { Destinations } from "@/components/sections/Destinations";
+import { InquiryForm } from "@/components/sections/InquiryForm";
+import { ThingsToDo } from "@/components/sections/ThingsToDo";
+import { TravelStories } from "@/components/sections/TravelStories";
+import { Testimonials } from "@/components/sections/Testimonials";
+import { FAQ } from "@/components/sections/FAQ";
+import { CurrencyConverter } from "@/components/ui/currency-converter";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, MapPin, Calendar, BookOpen, HelpCircle } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <Hero />
+      <AboutSriLanka />
+      <AboutMe />
+      <WhyChooseUs />
+      <section className="py-20 bg-[#FAF8F3]">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <Destinations />
+            </div>
+            <div className="lg:col-span-1">
+              <InquiryForm />
+            </div>
+          </div>
+        </div>
+      </section>
+      <ThingsToDo />
+      <TravelStories />
+      <Testimonials />
+      
+      {/* Helpful Tools Section */}
+      <section className="py-20 bg-gradient-to-br from-primary/5 via-[#FAF8F3] to-primary/5">
+        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-[#1C1917] sm:text-4xl">
+              Helpful Travel Tools
+            </h2>
+            <p className="mx-auto max-w-2xl text-lg text-[#57534E]">
+              Essential resources to help you plan your perfect Sri Lanka adventure
+            </p>
+          </div>
+          
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <Card className="group transition-all hover:shadow-lg">
+              <CardContent className="p-6">
+                <div className="mb-4 rounded-lg bg-primary/10 p-3 w-fit">
+                  <MapPin className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-[#1C1917]">
+                  Destinations
+                </h3>
+                <p className="mb-4 text-[#57534E]">
+                  Explore all the amazing places Sri Lanka has to offer
+                </p>
+                <Button asChild variant="ghost" className="group-hover:text-primary">
+                  <Link href="/destinations">
+                    Explore <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="group transition-all hover:shadow-lg">
+              <CardContent className="p-6">
+                <div className="mb-4 rounded-lg bg-primary/10 p-3 w-fit">
+                  <Calendar className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-[#1C1917]">
+                  Tours & Packages
+                </h3>
+                <p className="mb-4 text-[#57534E]">
+                  Curated itineraries for every type of traveler
+                </p>
+                <Button asChild variant="ghost" className="group-hover:text-primary">
+                  <Link href="/tours">
+                    View Tours <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="group transition-all hover:shadow-lg">
+              <CardContent className="p-6">
+                <div className="mb-4 rounded-lg bg-primary/10 p-3 w-fit">
+                  <BookOpen className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-[#1C1917]">
+                  Travel Tips
+                </h3>
+                <p className="mb-4 text-[#57534E]">
+                  Everything you need to know before your trip
+                </p>
+                <Button asChild variant="ghost" className="group-hover:text-primary">
+                  <Link href="/travel-tips">
+                    Read Guide <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="group transition-all hover:shadow-lg">
+              <CardContent className="p-6">
+                <div className="mb-4 rounded-lg bg-primary/10 p-3 w-fit">
+                  <HelpCircle className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold text-[#1C1917]">
+                  FAQ
+                </h3>
+                <p className="mb-4 text-[#57534E]">
+                  Answers to common questions about visiting Sri Lanka
+                </p>
+                <Button asChild variant="ghost" className="group-hover:text-primary">
+                  <Link href="#faq">
+                    View FAQ <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Currency Converter */}
+          <div className="mt-12">
+            <div className="mx-auto max-w-md">
+              <CurrencyConverter />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <FAQ />
+      
+      {/* Final CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-primary to-primary-deep text-white">
+        <div className="mx-auto max-w-4xl px-4 text-center md:px-6 lg:px-8">
+          <h2 className="mb-4 text-3xl font-bold sm:text-4xl md:text-5xl">
+            Ready to Start Your Sri Lanka Adventure?
+          </h2>
+          <p className="mb-8 text-lg text-white/90">
+            Let&apos;s create a customized itinerary that perfectly matches your interests, 
+            budget, and travel style. Get in touch today!
           </p>
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <Button asChild size="lg" variant="secondary">
+              <Link href="/contact">
+                Plan Your Trip
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Link href="/tours">View Tour Packages</Link>
+            </Button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+    </>
   );
 }

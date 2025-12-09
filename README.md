@@ -1,36 +1,172 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Easy Tripper - Sri Lanka Travel Website
+
+A production-quality, mobile-first travel website for Sri Lanka built with Next.js, TailwindCSS, shadcn/ui, and MagicUI components.
+
+## Features
+
+- 🎨 Modern, responsive design with mobile-first approach
+- 🚀 Next.js 16 with App Router and TypeScript
+- 🎭 Smooth animations with Framer Motion
+- 📱 Fully accessible UI components
+- 🔍 SEO optimized with metadata
+- ⚡ Server-side rendering (SSR) and Incremental Static Regeneration (ISR)
+- 📝 Working inquiry form with server actions
+- 🎯 Type-safe with TypeScript
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: TailwindCSS v4
+- **UI Components**: shadcn/ui
+- **Animations**: Framer Motion
+- **Form Handling**: React Hook Form + Zod
+- **Icons**: Lucide React
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+  ├── actions/
+  │   └── sendInquiry.ts      # Server action for inquiry form
+  ├── destinations/
+  │   ├── [slug]/
+  │   │   └── page.tsx        # Dynamic destination pages
+  │   └── page.tsx            # All destinations listing
+  ├── stories/
+  │   └── page.tsx            # Travel stories gallery
+  ├── contact/
+  │   └── page.tsx            # Contact page
+  ├── layout.tsx              # Root layout
+  ├── page.tsx                # Home page
+  └── globals.css             # Global styles
 
-## Learn More
+components/
+  ├── header/
+  │   ├── TopBar.tsx          # Top contact bar
+  │   └── MainNav.tsx         # Main navigation
+  ├── hero/
+  │   └── Hero.tsx            # Hero section with animations
+  ├── sections/
+  │   ├── AboutSriLanka.tsx
+  │   ├── AboutMe.tsx
+  │   ├── WhyChooseUs.tsx
+  │   ├── Destinations.tsx
+  │   ├── InquiryForm.tsx
+  │   ├── ThingsToDo.tsx
+  │   ├── TravelStories.tsx
+  │   ├── Testimonials.tsx
+  │   ├── FAQ.tsx
+  │   └── Footer.tsx
+  └── ui/                     # shadcn/ui components
 
-To learn more about Next.js, take a look at the following resources:
+lib/
+  ├── data.ts                 # Mock data
+  ├── types.ts                # TypeScript types
+  ├── seo.ts                  # SEO configuration
+  └── utils.ts                # Utility functions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+public/
+  └── images/                 # Image assets
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Adding Images
 
-## Deploy on Vercel
+Place your images in the `public/images/` directory. Required images:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `hero-sri-lanka.jpg` - Hero section background
+- `jagath.jpg` - Guide portrait
+- `kandy.jpg`, `ella.jpg`, `sigiriya.jpg`, etc. - Destination images
+- `about-1.jpg`, `about-2.jpg`, `about-3.jpg` - About section images
+- `story-*.jpg` - Travel story images
+- `activity-*.jpg` - Activity images
+- `og-image.jpg` - Open Graph image
+- `sri-lanka-map.jpg` - Footer map image
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Customization
+
+### Colors
+
+Edit `app/globals.css` to customize the color scheme:
+
+- Primary: `#0EA5E9` (sky-500)
+- Primary Deep: `#1E40AF` (blue-800)
+- Accent: `#F59E0B` (amber-500)
+
+### Content
+
+Update mock data in `lib/data.ts`:
+- Destinations
+- Travel stories
+- Testimonials
+- FAQs
+- Things to do
+
+### Contact Information
+
+Update contact details in:
+- `components/header/TopBar.tsx`
+- `components/sections/Footer.tsx`
+- `app/contact/page.tsx`
+
+## Inquiry Form
+
+The inquiry form uses Next.js Server Actions. Currently, it logs submissions to the console. To send emails:
+
+1. Install an email service (e.g., nodemailer, Resend, SendGrid)
+2. Update `app/actions/sendInquiry.ts` to send emails
+3. Add environment variables for email configuration
+
+## Deployment
+
+### Build
+
+```bash
+npm run build
+```
+
+### Start Production Server
+
+```bash
+npm start
+```
+
+### Deploy to Vercel
+
+The easiest way to deploy is using [Vercel](https://vercel.com):
+
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Vercel will automatically detect Next.js and deploy
+
+## License
+
+This project is private and proprietary.
+
+## Contact
+
+For questions or support, contact Jagath Premasinghe at info@easytripper.lk
