@@ -24,20 +24,20 @@ export function Hero() {
 
   return (
     <>
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#FAF8F3]">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-background">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop"
             alt="Sri Lanka landscape"
             fill
-            className="object-cover opacity-10"
+            className="object-cover opacity-20"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-white" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-20 lg:px-8">
           <div className="text-center">
             {/* Badge */}
             <motion.div
@@ -46,12 +46,10 @@ export function Hero() {
               transition={{ duration: 0.6 }}
               className="mb-6 flex items-center justify-center gap-3"
             >
-              <Badge className="rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-white shadow-lg">
-                Expert Guide
+              <Badge className="rounded-full bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary hover:bg-primary/20 border-primary/20 border backdrop-blur-sm tracking-wide uppercase">
+                <Star className="w-3 h-3 mr-1.5 fill-primary" />
+                Expert Local Guide
               </Badge>
-              <span className="text-sm text-[#57534E]">
-                Personalized travel experiences in Sri Lanka
-              </span>
             </motion.div>
 
             {/* Main Headline */}
@@ -61,8 +59,8 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-6"
             >
-              <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-[#1C1917] sm:text-5xl md:text-6xl lg:text-7xl">
-                <span className="block relative h-16 sm:h-20 md:h-24 lg:h-28">
+              <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl font-serif">
+                <span className="block relative h-12 sm:h-16 md:h-20 lg:h-24 mb-1">
                   {words.map((word, index) => (
                     <span
                       key={word}
@@ -70,8 +68,8 @@ export function Hero() {
                         absolute left-0 right-0 transition-all duration-500
                         ${
                           index === currentWord
-                            ? "opacity-100 translate-y-0"
-                            : "opacity-0 translate-y-4 pointer-events-none"
+                            ? "opacity-100 translate-y-0 blur-0"
+                            : "opacity-0 translate-y-8 blur-sm pointer-events-none"
                         }
                       `}
                     >
@@ -79,13 +77,13 @@ export function Hero() {
                     </span>
                   ))}
                 </span>
-                <span className="block text-primary">Sri Lanka</span>
+                <span className="block text-primary drop-shadow-sm italic">Sri Lanka</span>
               </h1>
-              <div className="relative inline-block">
-                <span className="relative z-10 block text-2xl font-semibold text-[#1C1917] sm:text-3xl md:text-4xl">
-                  Unforgettable Adventures Await!
+              <div className="relative inline-block mt-2">
+                <span className="relative z-10 block text-xl font-medium text-muted-foreground sm:text-2xl md:text-3xl font-sans tracking-tight">
+                  Unforgettable Adventures Await
                 </span>
-                <span className="absolute bottom-2 left-0 right-0 h-1.5 bg-accent/40 -skew-x-12 rounded-full" />
+                <span className="absolute bottom-1 left-0 right-0 h-2 bg-accent/20 -skew-x-12 rounded-full -z-10" />
               </div>
             </motion.div>
 
@@ -94,19 +92,10 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mx-auto mb-4 max-w-2xl text-lg text-[#57534E] sm:text-xl"
+              className="mx-auto mb-10 max-w-xl text-base text-muted-foreground sm:text-lg leading-relaxed font-sans"
             >
-              Dive into a world of culture, nature, and adventure with our collection of
-              incredible Sri Lankan experiences!
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mx-auto mb-10 max-w-2xl text-lg text-[#57534E]"
-            >
-              From ancient temples to pristine beaches, from wildlife safaris to tea
-              plantations
+              Dive into a world of culture, nature, and adventure. From ancient temples to pristine beaches, 
+              experience the pearl of the Indian Ocean with a personalized touch.
             </motion.p>
 
             {/* CTA Button */}
@@ -114,15 +103,15 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+              className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
             >
-              <Button asChild size="lg" className="group rounded-full bg-accent px-8 py-6 text-base font-semibold hover:bg-accent/90 shadow-lg hover:shadow-xl transition-all">
-                <Link href="/contact">
+              <Button asChild size="lg" className="h-12 px-8 text-base rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-primary/25 transition-all duration-300 w-full sm:w-auto">
+                <Link href="/plan-your-trip">
                   Plan Your Trip
-                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full px-8 py-6 text-base">
+              <Button asChild variant="outline" size="lg" className="h-12 px-8 text-base rounded-full border-2 hover:bg-muted/50 transition-all duration-300 w-full sm:w-auto">
                 <Link href="/destinations">Explore Destinations</Link>
               </Button>
             </motion.div>

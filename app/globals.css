@@ -7,57 +7,73 @@
   --color-dominant: #FAF8F3;
   --color-dominant-light: #FFFBF5;
   --color-dominant-dark: #F5F1E8;
-  
+
   /* 30% - Secondary: Rich Emerald Green (tea plantations, nature) */
   --color-primary: #0D9488;
   --color-primary-deep: #0F766E;
   --color-primary-light: #14B8A6;
-  
+
   /* 10% - Accent: Golden Amber (temples, sunsets, spices) */
   --color-accent: #F59E0B;
   --color-accent-deep: #D97706;
   --color-accent-light: #FBBF24;
-  
+
   --color-text: #1C1917;
   --color-text-muted: #57534E;
   --color-muted-bg: #F5F5F4;
-  
+
   --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+}
+
+@layer base {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.02em;
+  }
 }
 
 :root {
   /* 60% - Dominant Background Colors */
+  --background: 38 33% 97%;
+  /* #FAF8F3 converted to HSL for better opacity handling if needed, but keeping hex for now or using hex directly if tailwind 4 supports it well. Let's stick to the hex values provided but ensure they are consistent. */
   --background: #FAF8F3;
   --foreground: #1C1917;
-  
+
   /* 30% - Secondary/Primary Colors (Emerald Green) */
   --primary: #0D9488;
   --primary-foreground: #ffffff;
   --primary-hover: #0F766E;
-  
+
   /* Supporting Colors */
   --secondary: #F0FDFA;
   --secondary-foreground: #0F766E;
   --muted: #F5F5F4;
   --muted-foreground: #57534E;
-  
+
   /* 10% - Accent Colors (Golden Amber) */
   --accent: #F59E0B;
   --accent-foreground: #ffffff;
   --accent-hover: #D97706;
-  
+
   /* UI Colors */
   --border: #E7E5E4;
   --input: #E7E5E4;
   --ring: #0D9488;
   --radius: 1rem;
-  
+
   /* Component Colors */
   --popover: #ffffff;
   --popover-foreground: #1C1917;
   --card: #ffffff;
   --card-foreground: #1C1917;
-  
+
   /* Status Colors */
   --destructive: #EF4444;
   --destructive-foreground: #ffffff;
@@ -79,26 +95,26 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-  
+
   /* Smooth scroll behavior */
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 10px;
   }
-  
+
   ::-webkit-scrollbar-track {
     background: #FAF8F3;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     background: #0D9488;
     border-radius: 5px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     background: #0F766E;
   }
@@ -108,6 +124,7 @@ body {
   from {
     height: 0;
   }
+
   to {
     height: var(--radix-accordion-content-height);
   }
@@ -117,6 +134,7 @@ body {
   from {
     height: var(--radix-accordion-content-height);
   }
+
   to {
     height: 0;
   }

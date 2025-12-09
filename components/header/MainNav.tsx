@@ -38,16 +38,16 @@ export function MainNav() {
               href="/"
               className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal"
             >
-              <span className="text-2xl font-bold text-primary">Easy Tripper</span>
+              <span className="text-2xl font-bold text-primary tracking-tight font-serif">Easy Tripper</span>
             </Link>
           </NavbarLogo>
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
             <NavbarButton
               as={Link}
-              href="/contact"
-              variant="secondary"
-              className="text-slate-700 hover:text-primary"
+              href="/plan-your-trip"
+              variant="primary"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-md"
             >
               Plan Your Trip
             </NavbarButton>
@@ -62,7 +62,7 @@ export function MainNav() {
                 href="/"
                 className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal"
               >
-                <span className="text-2xl font-bold text-primary">Easy Tripper</span>
+                <span className="text-2xl font-bold text-primary font-serif">Easy Tripper</span>
               </Link>
             </NavbarLogo>
             <MobileNavToggle
@@ -83,7 +83,7 @@ export function MainNav() {
                 className={`relative block text-lg font-medium transition-colors ${
                   pathname === item.link
                     ? "text-primary"
-                    : "text-neutral-600 dark:text-neutral-300 hover:text-primary"
+                    : "text-muted-foreground hover:text-primary"
                 }`}
               >
                 <span className="block">{item.name}</span>
@@ -92,10 +92,10 @@ export function MainNav() {
             <div className="flex w-full flex-col gap-4 pt-4">
               <NavbarButton
                 as={Link}
-                href="/contact"
+                href="/plan-your-trip"
                 onClick={() => setIsMobileMenuOpen(false)}
                 variant="primary"
-                className="w-full"
+                className="w-full bg-primary text-primary-foreground"
               >
                 Plan Your Trip
               </NavbarButton>
