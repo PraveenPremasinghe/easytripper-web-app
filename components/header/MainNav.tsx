@@ -19,6 +19,7 @@ const navItems = [
   { name: "Home", link: "/" },
   { name: "Destinations", link: "/destinations" },
   { name: "Tours", link: "/tours" },
+  { name: "Vehicles", link: "/vehicles" },
   { name: "Stories", link: "/stories" },
   { name: "Travel Tips", link: "/travel-tips" },
   { name: "Contact", link: "/contact" },

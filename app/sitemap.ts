@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: absoluteUrl("/tours"), lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     {
+      url: absoluteUrl("/vehicles"),
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: absoluteUrl("/plan-your-trip"),
       lastModified: now,
       changeFrequency: "weekly",

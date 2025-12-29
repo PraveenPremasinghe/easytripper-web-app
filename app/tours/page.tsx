@@ -8,7 +8,7 @@ import { ArrowRight, Calendar, Users, MapPin, Check, X } from "lucide-react";
 import { tours } from "@/lib/data";
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, toursItemListJsonLd } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -26,6 +26,7 @@ export default function ToursPage() {
           { name: "Tours", url: absoluteUrl("/tours") },
         ])}
       />
+      <JsonLd id="ld-tours-itemlist" data={toursItemListJsonLd(tours)} />
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12 text-center">
