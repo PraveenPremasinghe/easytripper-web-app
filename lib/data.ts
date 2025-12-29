@@ -113,6 +113,58 @@ export const destinations: Destination[] = [
   }
 ];
 
+export interface Vehicle {
+  id: string;
+  name: string;
+  type: "Car" | "Van" | "Bus" | "Jeep";
+  capacity: {
+    passengers: number;
+    luggage: number;
+  };
+  features: string[];
+  image: string;
+  description: string;
+}
+
+export const vehicles: Vehicle[] = [
+  {
+    id: "luxury-sedan",
+    name: "Luxury Sedan (Prius/Axio)",
+    type: "Car",
+    capacity: { passengers: 3, luggage: 2 },
+    features: ["Air Conditioned", "Bluetooth Audio", "Comfortable Seating", "WiFi on board"],
+    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop",
+    description: "Perfect for couples or small families. Enjoy a smooth and comfortable ride through Sri Lanka's scenic roads."
+  },
+  {
+    id: "luxury-van",
+    name: "Luxury KDH Van",
+    type: "Van",
+    capacity: { passengers: 7, luggage: 6 },
+    features: ["Dual A/C", "Adjustable Seats", "Ample Leg Room", "Tinted Windows"],
+    image: "https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?w=800&h=600&fit=crop",
+    description: "Ideal for families and small groups. Spacious interiors ensure a relaxing journey even on long trips."
+  },
+  {
+    id: "mini-coach",
+    name: "Tourist Mini Coach",
+    type: "Bus",
+    capacity: { passengers: 15, luggage: 12 },
+    features: ["Microphone", "Reclining Seats", "Overhead Racks", "Panoramic Windows"],
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=600&fit=crop",
+    description: "The best choice for larger tour groups. Travel together comfortably with plenty of space for everyone."
+  },
+  {
+    id: "safari-jeep",
+    name: "4x4 Safari Jeep",
+    type: "Jeep",
+    capacity: { passengers: 6, luggage: 0 },
+    features: ["4 Wheel Drive", "Open Top / Canopy", "Elevated Views", "Experienced Tracker"],
+    image: "https://images.unsplash.com/photo-1533587851505-d119e13fa0d7?w=800&h=600&fit=crop",
+    description: "Rugged and ready for adventure. Essential for navigating Yala, Udawalawe, and other national parks."
+  }
+];
+
 export const stories: Story[] = [
   {
     id: "1",

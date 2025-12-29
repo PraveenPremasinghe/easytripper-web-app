@@ -71,6 +71,36 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "TravelAgency",
+              "name": "Easy Tripper Sri Lanka",
+              "image": "https://easytripper.lk/images/og-image.jpg",
+              "description": "Expert local tour guide in Sri Lanka offering customized private tours, wildlife safaris, and cultural experiences.",
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "LK"
+              },
+              "priceRange": "$$",
+              "telephone": "+94770000000",
+              "url": "https://easytripper.lk",
+              "founder": {
+                "@type": "Person",
+                "name": "Jagath Premasinghe",
+                "jobTitle": "Tour Guide"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Sri Lanka"
+              }
+            })
+          }}
+        />
+      </head>
       <body className="antialiased">
         <TopBar />
         <MainNav />

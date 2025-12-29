@@ -2,6 +2,7 @@ import { Hero } from "@/components/hero/Hero";
 import { AboutSriLanka } from "@/components/sections/AboutSriLanka";
 import { AboutMe } from "@/components/sections/AboutMe";
 import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
+import { OurFleet } from "@/components/sections/OurFleet";
 import { Destinations } from "@/components/sections/Destinations";
 import { InquiryForm } from "@/components/sections/InquiryForm";
 import { ThingsToDo } from "@/components/sections/ThingsToDo";
@@ -21,6 +22,7 @@ export default function Home() {
       <AboutSriLanka />
       <AboutMe />
       <WhyChooseUs />
+      <OurFleet />
       <section className="py-16 md:py-24 bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="grid gap-8 lg:gap-12 lg:grid-cols-3">

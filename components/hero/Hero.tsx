@@ -3,12 +3,17 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
-import Image from "next/image";
-import { topTravelPlaces } from "@/lib/data";
+import { ImagesSlider } from "@/components/ui/images-slider";
+
+const heroImages = [
+  "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=1920&h=1080&fit=crop", // Yala Leopard
+  "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop", // Sigiriya
+  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&h=1080&fit=crop", // Beach
+  "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&h=1080&fit=crop", // Train
+];
 
 const words = ["Explore", "Discover", "Experience", "Adventure"];
 
@@ -23,32 +28,25 @@ export function Hero() {
   }, []);
 
   return (
-    <>
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-background">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop"
-            alt="Sri Lanka landscape"
-            fill
-            className="object-cover opacity-20"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-20 lg:px-8">
-          <div className="text-center">
+    <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-background">
+      <ImagesSlider className="h-[90vh]" images={heroImages}>
+        <motion.div
+          initial={{ opacity: 0, y: -80 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="z-50 flex flex-col justify-center items-center"
+        >
+          <div className="relative z-10 mx-auto max-w-7xl px-4 text-center">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6 flex items-center justify-center gap-3"
+              className="mb-8 flex items-center justify-center gap-3"
             >
-              <Badge className="rounded-full bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary hover:bg-primary/20 border-primary/20 border backdrop-blur-sm tracking-wide uppercase">
-                <Star className="w-3 h-3 mr-1.5 fill-primary" />
-                Expert Local Guide
+              <Badge className="rounded-full bg-white/10 px-6 py-2 text-sm font-medium text-white hover:bg-white/20 border-white/20 border backdrop-blur-md tracking-wide uppercase shadow-xl">
+                <Star className="w-4 h-4 mr-2 fill-yellow-400 text-yellow-400" />
+                World-Class Local Guide
               </Badge>
             </motion.div>
 
@@ -57,19 +55,19 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-6"
+              className="mb-8"
             >
-              <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl font-serif">
-                <span className="block relative h-12 sm:h-16 md:h-20 lg:h-24 mb-1">
+              <h1 className="mb-6 text-4xl font-bold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl font-serif drop-shadow-2xl">
+                <span className="block relative h-16 sm:h-20 md:h-24 lg:h-32 mb-2">
                   {words.map((word, index) => (
                     <span
                       key={word}
                       className={`
-                        absolute left-0 right-0 transition-all duration-500
+                        absolute left-0 right-0 transition-all duration-700 ease-in-out
                         ${
                           index === currentWord
-                            ? "opacity-100 translate-y-0 blur-0"
-                            : "opacity-0 translate-y-8 blur-sm pointer-events-none"
+                            ? "opacity-100 translate-y-0 blur-0 scale-100"
+                            : "opacity-0 translate-y-12 blur-md scale-90 pointer-events-none"
                         }
                       `}
                     >
@@ -77,50 +75,36 @@ export function Hero() {
                     </span>
                   ))}
                 </span>
-                <span className="block text-primary drop-shadow-sm italic">Sri Lanka</span>
-              </h1>
-              <div className="relative inline-block mt-2">
-                <span className="relative z-10 block text-xl font-medium text-muted-foreground sm:text-2xl md:text-3xl font-sans tracking-tight">
-                  Unforgettable Adventures Await
+                <span className="block text-primary-foreground drop-shadow-lg italic">
+                  Sri Lanka
                 </span>
-                <span className="absolute bottom-1 left-0 right-0 h-2 bg-accent/20 -skew-x-12 rounded-full -z-10" />
-              </div>
+              </h1>
+              <p className="mx-auto max-w-2xl text-lg text-white/90 sm:text-xl md:text-2xl font-light tracking-wide leading-relaxed drop-shadow-md">
+                Your exclusive gateway to the pearl of the Indian Ocean.
+                Customized luxury tours, private fleet, and unforgettable memories.
+              </p>
             </motion.div>
 
-            {/* Description */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mx-auto mb-10 max-w-xl text-base text-muted-foreground sm:text-lg leading-relaxed font-sans"
-            >
-              Dive into a world of culture, nature, and adventure. From ancient temples to pristine beaches, 
-              experience the pearl of the Indian Ocean with a personalized touch.
-            </motion.p>
-
-            {/* CTA Button */}
+            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
+              className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
             >
-              <Button asChild size="lg" className="h-12 px-8 text-base rounded-full bg-primary hover:bg-primary/90 shadow-lg hover:shadow-primary/25 transition-all duration-300 w-full sm:w-auto">
+              <Button asChild size="lg" className="h-14 px-10 text-lg rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-2xl hover:scale-105 transition-all duration-300 w-full sm:w-auto border-0">
                 <Link href="/plan-your-trip">
                   Plan Your Trip
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="h-12 px-8 text-base rounded-full border-2 hover:bg-muted/50 transition-all duration-300 w-full sm:w-auto">
+              <Button asChild variant="outline" size="lg" className="h-14 px-10 text-lg rounded-full bg-white/10 backdrop-blur-md border-white/30 text-white hover:bg-white/20 hover:text-white hover:scale-105 transition-all duration-300 w-full sm:w-auto">
                 <Link href="/destinations">Explore Destinations</Link>
               </Button>
             </motion.div>
           </div>
-        </div>
-      </section>
-
-     
-    </>
+        </motion.div>
+      </ImagesSlider>
+    </section>
   );
 }
-
