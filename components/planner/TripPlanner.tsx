@@ -2,12 +2,12 @@
 
 import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
-import { provinces, Place, Province } from "@/lib/places";
+import { provinces, Place } from "@/lib/places";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Plus, X, MapPin, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SaveTripDialog } from "./SaveTripDialog";

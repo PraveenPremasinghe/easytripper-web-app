@@ -2,6 +2,9 @@ import { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { InquiryForm } from "@/components/sections/InquiryForm";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -11,6 +14,13 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50/30 to-white">
+      <JsonLd
+        id="ld-breadcrumb-contact"
+        data={breadcrumbJsonLd([
+          { name: "Home", url: absoluteUrl("/") },
+          { name: "Contact", url: absoluteUrl("/contact") },
+        ])}
+      />
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h1 className="mb-4 text-4xl font-bold text-slate-900 sm:text-5xl md:text-6xl">

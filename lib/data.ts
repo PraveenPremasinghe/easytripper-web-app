@@ -1,4 +1,4 @@
-import { Destination, Story, Testimonial, FAQ, ThingToDo, Tour, TopTravelPlace } from "./types";
+import { Destination, Story, Testimonial, FAQ, ThingToDo, Tour, TopTravelPlace, Vehicle } from "./types";
 
 export const destinations: Destination[] = [
   {
@@ -307,7 +307,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "3",
     title: "Galle Fort Walking Tour",
     category: "Culture",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop3.jpg",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
     description: "Stroll through the well-preserved Dutch colonial fort with its charming architecture.",
     location: "Galle"
   },
@@ -315,7 +315,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "4",
     title: "Traditional Kandyan Dance Show",
     category: "Culture",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop4.jpg",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop",
     description: "Watch vibrant traditional dance performances showcasing Sri Lankan culture.",
     location: "Kandy"
   },
@@ -324,7 +324,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "5",
     title: "Hike to Ella Rock",
     category: "Nature",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop5.jpg",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop",
     description: "Trek through tea plantations to reach stunning panoramic views of the hill country.",
     location: "Ella"
   },
@@ -332,7 +332,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "6",
     title: "Royal Botanical Gardens",
     category: "Nature",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop6.jpg",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
     description: "Wander through 147 acres of beautifully landscaped gardens with exotic plants.",
     location: "Kandy"
   },
@@ -340,7 +340,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "7",
     title: "Sinharaja Rainforest",
     category: "Nature",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop7.jpg",
+    image: "https://images.unsplash.com/photo-1511497584788-876760111969?w=800&h=600&fit=crop",
     description: "Explore the last remaining primary rainforest in Sri Lanka, a biodiversity hotspot.",
     location: "Ratnapura"
   },
@@ -348,7 +348,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "8",
     title: "Tea Plantation Tour",
     category: "Nature",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop8.jpg",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop",
     description: "Learn about tea production and enjoy fresh Ceylon tea in the highlands.",
     location: "Nuwara Eliya"
   },
@@ -357,7 +357,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "9",
     title: "Unawatuna Beach",
     category: "Beaches",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop9.jpg",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop",
     description: "Relax on this beautiful crescent-shaped beach with calm waters perfect for swimming.",
     location: "Galle"
   },
@@ -365,7 +365,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "10",
     title: "Arugam Bay Surfing",
     category: "Beaches",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop10.jpg",
+    image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&h=600&fit=crop",
     description: "Ride the waves at one of Asia's best surf spots with consistent breaks.",
     location: "Arugam Bay"
   },
@@ -373,7 +373,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "11",
     title: "Mirissa Beach",
     category: "Beaches",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop11.jpg",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop",
     description: "Enjoy golden sands, palm trees, and excellent whale watching opportunities.",
     location: "Mirissa"
   },
@@ -382,7 +382,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "12",
     title: "Yala National Park Safari",
     category: "Wildlife",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop12.jpg",
+    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&h=600&fit=crop",
     description: "Spot leopards, elephants, and diverse birdlife on an exciting jeep safari.",
     location: "Yala"
   },
@@ -390,7 +390,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "13",
     title: "Udawalawe Elephant Transit Home",
     category: "Wildlife",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop13.jpg",
+    image: "https://images.unsplash.com/photo-1494253109108-2e30c049369b?w=800&h=600&fit=crop",
     description: "Watch orphaned elephants being fed and prepared for release back into the wild.",
     location: "Udawalawe"
   },
@@ -398,7 +398,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "14",
     title: "Whale Watching Tour",
     category: "Wildlife",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop14.jpg",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop",
     description: "See blue whales, sperm whales, and dolphins in their natural habitat.",
     location: "Mirissa"
   },
@@ -407,7 +407,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "15",
     title: "Cooking Class in Kandy",
     category: "Food",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop15.jpg",
+    image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&h=600&fit=crop",
     description: "Learn to prepare authentic Sri Lankan curries and traditional dishes.",
     location: "Kandy"
   },
@@ -415,7 +415,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "16",
     title: "Street Food Tour in Colombo",
     category: "Food",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop16.jpg",
+    image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&h=600&fit=crop",
     description: "Sample local favorites like hoppers, kottu roti, and fresh fruit.",
     location: "Colombo"
   },
@@ -423,7 +423,7 @@ export const thingsToDo: ThingToDo[] = [
     id: "17",
     title: "Jaffna Food Experience",
     category: "Food",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop17.jpg",
+    image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&h=600&fit=crop",
     description: "Taste unique Tamil cuisine including crab curry and traditional sweets.",
     location: "Jaffna"
   }
@@ -674,45 +674,96 @@ export const tours: Tour[] = [
 export const topTravelPlaces: TopTravelPlace[] = [
   {
     id: "1",
-    title: "Maldives Magic",
-    subtitle: "Unlocked",
-    duration: "8 Days/7 Night",
-    rating: 4.5,
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop",
-    emoji: "🌊"
-  },
-  {
-    id: "2",
-    title: "Dubai Desert",
-    subtitle: "Adventure",
-    duration: "7 Days/6 Night",
-    rating: 4.5,
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&h=600&fit=crop"
-  },
-  {
-    id: "3",
-    title: "Bali: Where",
-    subtitle: "Serenity Lives",
-    duration: "9 Days/8 Night",
-    rating: 4.5,
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&h=600&fit=crop",
-    emoji: "🧘"
-  },
-  {
-    id: "4",
     title: "Sri Lanka",
     subtitle: "Cultural Triangle",
-    duration: "7 Days/6 Night",
+    duration: "7 Days / 6 Nights",
     rating: 5,
     image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop"
   },
   {
+    id: "2",
+    title: "Hill Country",
+    subtitle: "Tea & Train Views",
+    duration: "6 Days / 5 Nights",
+    rating: 4.9,
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop"
+  },
+  {
+    id: "3",
+    title: "Southern Coast",
+    subtitle: "Beaches & Forts",
+    duration: "5 Days / 4 Nights",
+    rating: 4.8,
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=600&fit=crop"
+  },
+  {
+    id: "4",
+    title: "Wildlife",
+    subtitle: "Safari Adventure",
+    duration: "6 Days / 5 Nights",
+    rating: 4.9,
+    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&h=600&fit=crop"
+  },
+  {
     id: "5",
-    title: "Thailand",
-    subtitle: "Tropical Paradise",
-    duration: "10 Days/9 Night",
-    rating: 4.5,
-    image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&h=600&fit=crop"
+    title: "East Coast",
+    subtitle: "Surf & Sun",
+    duration: "8 Days / 7 Nights",
+    rating: 4.7,
+    image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&h=600&fit=crop"
   }
+];
+
+export const vehicles: Vehicle[] = [
+  {
+    id: "sedan",
+    name: "Comfort Sedan",
+    category: "Car",
+    passengers: "1–2 passengers",
+    luggage: "2 suitcases",
+    idealFor: ["Couples", "City transfers", "Short tours"],
+    features: ["A/C", "Comfortable seating", "Bottled water"],
+    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "van",
+    name: "Tour Van",
+    category: "Van",
+    passengers: "3–6 passengers",
+    luggage: "4–6 suitcases",
+    idealFor: ["Families", "Friends", "Multi-day trips"],
+    features: ["A/C", "Extra legroom", "Flexible stops"],
+    image: "https://images.unsplash.com/photo-1542362567-b07e54358753?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "4x4",
+    name: "4x4 Adventure",
+    category: "4x4",
+    passengers: "1–4 passengers",
+    luggage: "3–4 suitcases",
+    idealFor: ["Off-the-beaten-path", "Nature & safari routes", "Rough roads"],
+    features: ["High clearance", "A/C", "Comfort suspension"],
+    image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "mini-bus",
+    name: "Mini Bus",
+    category: "Mini Bus",
+    passengers: "7–12 passengers",
+    luggage: "8–12 suitcases",
+    idealFor: ["Small groups", "Pilgrimage tours", "Corporate trips"],
+    features: ["A/C", "Spacious seats", "Large luggage space"],
+    image: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?w=1200&h=800&fit=crop",
+  },
+  {
+    id: "bus",
+    name: "Coach Bus",
+    category: "Bus",
+    passengers: "13–30 passengers",
+    luggage: "Large luggage bay",
+    idealFor: ["Large groups", "Tours with hotels", "Event transport"],
+    features: ["A/C", "Reclining seats", "Professional driver"],
+    image: "https://images.unsplash.com/photo-1542362567-b07e54358753?w=1200&h=800&fit=crop",
+  },
 ];
 

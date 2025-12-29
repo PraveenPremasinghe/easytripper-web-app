@@ -7,6 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, MapPin, Calendar, Clock, Thermometer } from "lucide-react";
 import { destinations, thingsToDo } from "@/lib/data";
 import { InquiryForm } from "@/components/sections/InquiryForm";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/site";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -51,6 +54,14 @@ export default async function DestinationPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-white">
+      <JsonLd
+        id="ld-breadcrumb-destination"
+        data={breadcrumbJsonLd([
+          { name: "Home", url: absoluteUrl("/") },
+          { name: "Destinations", url: absoluteUrl("/destinations") },
+          { name: destination.name, url: absoluteUrl(`/destinations/${destination.slug}`) },
+        ])}
+      />
       {/* Hero Image */}
       <div className="relative h-[60vh] w-full overflow-hidden">
         <Image

@@ -13,10 +13,15 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, MapPin, Calendar, BookOpen, HelpCircle } from "lucide-react";
+import { Vehicles } from "@/components/sections/Vehicles";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqJsonLd } from "@/lib/seo";
+import { faqs } from "@/lib/data";
 
 export default function Home() {
   return (
     <>
+      <JsonLd id="ld-faq-home" data={faqJsonLd(faqs)} />
       <Hero />
       <AboutSriLanka />
       <AboutMe />
@@ -37,6 +42,7 @@ export default function Home() {
       </section>
       <ThingsToDo />
       <TravelStories />
+      <Vehicles />
       <Testimonials />
       
       {/* Helpful Tools Section */}

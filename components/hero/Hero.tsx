@@ -3,12 +3,10 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
-import Image from "next/image";
-import { topTravelPlaces } from "@/lib/data";
+import { AuroraBackground } from "@/components/aceternity/AuroraBackground";
 
 const words = ["Explore", "Discover", "Experience", "Adventure"];
 
@@ -24,20 +22,8 @@ export function Hero() {
 
   return (
     <>
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-background">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop"
-            alt="Sri Lanka landscape"
-            fill
-            className="object-cover opacity-20"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-20 lg:px-8">
+      <AuroraBackground>
+        <section className="mx-auto max-w-7xl px-4 py-12 md:px-6 md:py-20 lg:px-8">
           <div className="text-center">
             {/* Badge */}
             <motion.div
@@ -48,7 +34,7 @@ export function Hero() {
             >
               <Badge className="rounded-full bg-primary/10 px-4 py-1.5 text-xs font-medium text-primary hover:bg-primary/20 border-primary/20 border backdrop-blur-sm tracking-wide uppercase">
                 <Star className="w-3 h-3 mr-1.5 fill-primary" />
-                Expert Local Guide
+                Sri Lanka private tours for international travelers
               </Badge>
             </motion.div>
 
@@ -94,8 +80,8 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mx-auto mb-10 max-w-xl text-base text-muted-foreground sm:text-lg leading-relaxed font-sans"
             >
-              Dive into a world of culture, nature, and adventure. From ancient temples to pristine beaches, 
-              experience the pearl of the Indian Ocean with a personalized touch.
+              Land in Colombo (CMB) and travel Sri Lanka in comfort—culture, tea country, safaris, and beaches.
+              We design custom routes and provide the right vehicle for your trip.
             </motion.p>
 
             {/* CTA Button */}
@@ -116,8 +102,8 @@ export function Hero() {
               </Button>
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AuroraBackground>
 
      
     </>

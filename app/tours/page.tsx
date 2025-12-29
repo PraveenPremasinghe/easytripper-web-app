@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Users, MapPin, Check, X } from "lucide-react";
 import { tours } from "@/lib/data";
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Tours & Packages",
@@ -16,6 +19,13 @@ export const metadata: Metadata = {
 export default function ToursPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 to-white">
+      <JsonLd
+        id="ld-breadcrumb-tours"
+        data={breadcrumbJsonLd([
+          { name: "Home", url: absoluteUrl("/") },
+          { name: "Tours", url: absoluteUrl("/tours") },
+        ])}
+      />
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12 text-center">

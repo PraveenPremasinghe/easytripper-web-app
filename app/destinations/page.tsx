@@ -5,6 +5,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { destinations } from "@/lib/data";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Destinations",
@@ -14,6 +17,13 @@ export const metadata: Metadata = {
 export default function DestinationsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50/30 to-white">
+      <JsonLd
+        id="ld-breadcrumb-destinations"
+        data={breadcrumbJsonLd([
+          { name: "Home", url: absoluteUrl("/") },
+          { name: "Destinations", url: absoluteUrl("/destinations") },
+        ])}
+      />
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h1 className="mb-4 text-4xl font-bold text-slate-900 sm:text-5xl md:text-6xl">

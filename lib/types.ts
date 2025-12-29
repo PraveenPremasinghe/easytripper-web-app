@@ -73,3 +73,14 @@ export type TopTravelPlace = {
   emoji?: string;
 };
 
+export type Vehicle = {
+  id: string;
+  name: string;
+  category: "Car" | "Van" | "Mini Bus" | "Bus" | "4x4";
+  passengers: string;
+  luggage: string;
+  idealFor: string[];
+  features: string[];
+  image: string;
+};
+

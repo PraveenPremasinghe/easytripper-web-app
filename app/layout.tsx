@@ -4,6 +4,9 @@ import "./globals.css";
 import { TopBar } from "@/components/header/TopBar";
 import { MainNav } from "@/components/header/MainNav";
 import { Footer } from "@/components/sections/Footer";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,45 +21,47 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://easytripper.lk"),
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: "Explore Sri Lanka with Jagath Premasinghe | Easy Tripper",
     template: "%s | Easy Tripper",
   },
-  description:
-    "Discover the beauty of Sri Lanka with expert local guide Jagath Premasinghe. Customized tours, cultural experiences, wildlife safaris, and unforgettable adventures across the Pearl of the Indian Ocean.",
+  description: siteConfig.description,
   keywords: [
     "Sri Lanka travel",
     "Sri Lanka tours",
+    "Sri Lanka private tour",
+    "Sri Lanka driver guide",
     "travel guide Sri Lanka",
     "Jagath Premasinghe",
     "Sri Lanka destinations",
     "Ceylon travel",
   ],
   authors: [{ name: "Jagath Premasinghe" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://easytripper.lk",
+    url: siteConfig.url,
     siteName: "Easy Tripper - Sri Lanka Travel Guide",
     title: "Explore Sri Lanka with Jagath Premasinghe",
-    description:
-      "Discover the beauty of Sri Lanka with expert local guide Jagath Premasinghe. Customized tours, cultural experiences, wildlife safaris, and unforgettable adventures.",
+    description: siteConfig.description,
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Sri Lanka Travel Guide",
+        alt: "Easy Tripper - Private Sri Lanka Tours",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Explore Sri Lanka with Jagath Premasinghe",
-    description:
-      "Discover the beauty of Sri Lanka with expert local guide Jagath Premasinghe.",
-    images: ["/images/og-image.jpg"],
+    description: siteConfig.description,
+    images: ["/twitter-image"],
   },
   robots: {
     index: true,
@@ -76,6 +81,8 @@ export default function RootLayout({
         <MainNav />
         <main className="pt-[141px]">{children}</main>
         <Footer />
+        <JsonLd id="ld-org" data={organizationJsonLd()} />
+        <JsonLd id="ld-website" data={websiteJsonLd()} />
       </body>
     </html>
   );
