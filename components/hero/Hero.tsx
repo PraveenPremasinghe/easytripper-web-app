@@ -91,7 +91,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-6"
           >
-            <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+            <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif">
               <span className="block relative h-16 sm:h-20 md:h-24 lg:h-28 xl:h-32">
                 {words.map((word, index) => (
                   <span
@@ -109,7 +109,7 @@ export function Hero() {
                   </span>
                 ))}
               </span>
-              <span className="block text-primary mt-2">Sri Lanka</span>
+              <span className="block text-primary mt-2 font-serif">Sri Lanka</span>
             </h1>
             <div className="relative inline-block mt-4">
               <span className="relative z-10 block text-xl font-semibold text-foreground sm:text-2xl md:text-3xl lg:text-4xl">
@@ -156,7 +156,7 @@ export function Hero() {
               size="lg"
               className="group rounded-full bg-accent px-8 py-6 text-base font-semibold hover:bg-accent/90 shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
-              <Link href="/contact">
+              <Link href="/plan-your-trip">
                 Plan Your Sri Lanka Trip
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
