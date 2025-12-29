@@ -1,36 +1,73 @@
-import { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight, Calendar, Users, MapPin, Check, X } from "lucide-react";
 import { tours } from "@/lib/data";
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-
-export const metadata: Metadata = {
-  title: "Tours & Packages",
-  description: "Discover our curated tour packages for exploring Sri Lanka - from cultural adventures to beach getaways",
-};
+import { ItineraryTimeline } from "@/components/sections/ItineraryTimeline";
+import { motion } from "framer-motion";
 
 export default function ToursPage() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const categories = ["All", ...Array.from(new Set(tours.map((t) => t.category)))];
+
+  const filteredTours =
+    selectedCategory === "All"
+      ? tours
+      : tours.filter((tour) => tour.category === selectedCategory);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/5">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-slate-900 sm:text-5xl md:text-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-12 text-center"
+        >
+          <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
             Tours & Packages
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Carefully crafted itineraries to help you experience the best of Sri Lanka. 
             All tours can be customized to your preferences.
           </p>
-        </div>
+        </motion.div>
+
+        {/* Category Filter Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-8 flex justify-center"
+        >
+          <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
+            <TabsList className="flex flex-wrap justify-center gap-2">
+              {categories.map((category) => (
+                <TabsTrigger key={category} value={category} className="rounded-full">
+                  {category}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        </motion.div>
 
         {/* Tours Grid */}
-        <div className="grid gap-8 lg:grid-cols-2">
-          {tours.map((tour) => (
+        <motion.div
+          key={selectedCategory}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="grid gap-8 lg:grid-cols-2"
+        >
+          {filteredTours.map((tour) => (
             <Card
               key={tour.id}
               className="group h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
@@ -50,7 +87,7 @@ export default function ToursPage() {
               </div>
 
               <CardContent className="p-6">
-                <div className="mb-4 flex flex-wrap gap-4 text-sm text-slate-600">
+                <div className="mb-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
                     <span>{tour.duration}</span>
@@ -66,11 +103,11 @@ export default function ToursPage() {
                   )}
                 </div>
 
-                <p className="mb-4 text-slate-700">{tour.description}</p>
+                <p className="mb-4 text-foreground">{tour.description}</p>
 
                 <div className="mb-4">
-                  <h4 className="mb-2 font-semibold text-slate-900">Highlights:</h4>
-                  <ul className="space-y-1 text-sm text-slate-600">
+                  <h4 className="mb-2 font-semibold text-foreground">Highlights:</h4>
+                  <ul className="space-y-1 text-sm text-muted-foreground">
                     {tour.highlights.slice(0, 3).map((highlight, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
@@ -83,7 +120,7 @@ export default function ToursPage() {
                 <div className="mb-4 flex items-baseline gap-2">
                   <span className="text-3xl font-bold text-primary">{tour.price}</span>
                   {tour.priceNote && (
-                    <span className="text-sm text-slate-500">{tour.priceNote}</span>
+                    <span className="text-sm text-muted-foreground">{tour.priceNote}</span>
                   )}
                 </div>
 
@@ -115,7 +152,7 @@ export default function ToursPage() {
                       </DialogHeader>
                       <div className="space-y-6">
                         <div>
-                          <div className="flex flex-wrap gap-4 text-sm text-slate-600">
+                          <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                             <div className="flex items-center gap-2">
                               <Calendar className="h-4 w-4" />
                               <span>{tour.duration}</span>
@@ -135,26 +172,17 @@ export default function ToursPage() {
 
 
                         <div>
-                          <h3 className="mb-2 text-xl font-semibold">Itinerary</h3>
-                          <ul className="space-y-2">
-                            {tour.itinerary.map((day, index) => (
-                              <li key={index} className="flex items-start gap-3 text-slate-700">
-                                <span className="mt-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-semibold text-white">
-                                  {index + 1}
-                                </span>
-                                <span>{day}</span>
-                              </li>
-                            ))}
-                          </ul>
+                          <h3 className="mb-4 text-xl font-semibold text-foreground">Itinerary</h3>
+                          <ItineraryTimeline itinerary={tour.itinerary} />
                         </div>
 
                         <div className="grid gap-4 md:grid-cols-2">
                           <div>
-                            <h3 className="mb-2 text-xl font-semibold">Includes</h3>
+                            <h3 className="mb-2 text-xl font-semibold text-foreground">Includes</h3>
                             <ul className="space-y-1">
                               {tour.includes.map((item, index) => (
-                                <li key={index} className="flex items-start gap-2 text-sm text-slate-700">
-                                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-600" />
+                                <li key={index} className="flex items-start gap-2 text-sm text-foreground">
+                                  <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-success" />
                                   <span>{item}</span>
                                 </li>
                               ))}
@@ -162,11 +190,11 @@ export default function ToursPage() {
                           </div>
                           {tour.excludes && tour.excludes.length > 0 && (
                             <div>
-                              <h3 className="mb-2 text-xl font-semibold">Excludes</h3>
+                              <h3 className="mb-2 text-xl font-semibold text-foreground">Excludes</h3>
                               <ul className="space-y-1">
                                 {tour.excludes.map((item, index) => (
-                                  <li key={index} className="flex items-start gap-2 text-sm text-slate-700">
-                                    <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-600" />
+                                  <li key={index} className="flex items-start gap-2 text-sm text-foreground">
+                                    <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-destructive" />
                                     <span>{item}</span>
                                   </li>
                                 ))}
@@ -176,8 +204,8 @@ export default function ToursPage() {
                         </div>
 
                         <div>
-                          <h3 className="mb-2 text-xl font-semibold">Best Time to Visit</h3>
-                          <p className="text-slate-700">{tour.bestTime}</p>
+                          <h3 className="mb-2 text-xl font-semibold text-foreground">Best Time to Visit</h3>
+                          <p className="text-muted-foreground">{tour.bestTime}</p>
                         </div>
 
                         <div className="flex gap-3 pt-4">
@@ -209,12 +237,12 @@ export default function ToursPage() {
 
         {/* Custom Tour CTA */}
         <div className="mt-12">
-          <Card className="bg-gradient-to-r from-emerald-50 to-amber-50">
+          <Card className="bg-gradient-to-r from-primary/10 via-background to-accent/10">
             <CardContent className="p-8 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-slate-900">
+              <h2 className="mb-4 text-3xl font-bold text-foreground">
                 Don&apos;t see what you&apos;re looking for?
               </h2>
-              <p className="mb-6 text-lg text-slate-600">
+              <p className="mb-6 text-lg text-muted-foreground">
                 We can create a completely customized itinerary based on your interests, 
                 budget, and travel dates.
               </p>

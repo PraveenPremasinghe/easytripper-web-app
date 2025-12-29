@@ -50,7 +50,7 @@ export default async function DestinationPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Hero Image */}
       <div className="relative h-[60vh] w-full overflow-hidden">
         <Image
@@ -85,20 +85,20 @@ export default async function DestinationPage({ params }: Props) {
           {/* Main Content */}
           <div className="lg:col-span-2">
             <div className="mb-8">
-              <p className="mb-6 text-lg leading-relaxed text-slate-700">
+              <p className="mb-6 text-lg leading-relaxed text-foreground">
                 {destination.description || destination.excerpt}
               </p>
 
               {destination.highlights && destination.highlights.length > 0 && (
                 <div className="mb-8">
-                  <h2 className="mb-4 text-2xl font-bold text-slate-900">
+                  <h2 className="mb-4 text-2xl font-bold text-foreground">
                     Highlights
                   </h2>
                   <ul className="grid gap-3 sm:grid-cols-2">
                     {destination.highlights.map((highlight, index) => (
                       <li
                         key={index}
-                        className="flex items-start gap-3 text-slate-700"
+                        className="flex items-start gap-3 text-foreground"
                       >
                         <span className="mt-1 h-2 w-2 rounded-full bg-primary" />
                         {highlight}
@@ -115,8 +115,8 @@ export default async function DestinationPage({ params }: Props) {
                       <div className="flex items-center gap-3">
                         <Calendar className="h-5 w-5 text-primary" />
                         <div>
-                          <p className="font-semibold text-slate-900">Best Time</p>
-                          <p className="text-slate-600">{destination.bestTime}</p>
+                          <p className="font-semibold text-foreground">Best Time</p>
+                          <p className="text-muted-foreground">{destination.bestTime}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -129,8 +129,8 @@ export default async function DestinationPage({ params }: Props) {
                       <div className="flex items-center gap-3">
                         <Clock className="h-5 w-5 text-primary" />
                         <div>
-                          <p className="font-semibold text-slate-900">Duration</p>
-                          <p className="text-slate-600">{destination.duration}</p>
+                          <p className="font-semibold text-foreground">Duration</p>
+                          <p className="text-muted-foreground">{destination.duration}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -147,7 +147,7 @@ export default async function DestinationPage({ params }: Props) {
                 if (destinationActivities.length > 0) {
                   return (
                     <div className="mt-8">
-                      <h2 className="mb-4 text-2xl font-bold text-slate-900">
+                      <h2 className="mb-4 text-2xl font-bold text-foreground">
                         Things to Do in {destination.name}
                       </h2>
                       <div className="grid gap-4 sm:grid-cols-2">
@@ -165,10 +165,10 @@ export default async function DestinationPage({ params }: Props) {
                               <div className="mb-2 flex items-center justify-between">
                                 <Badge variant="secondary">{activity.category}</Badge>
                               </div>
-                              <h3 className="mb-2 font-semibold text-slate-900">
+                              <h3 className="mb-2 font-semibold text-foreground">
                                 {activity.title}
                               </h3>
-                              <p className="text-sm text-slate-600">{activity.description}</p>
+                              <p className="text-sm text-muted-foreground">{activity.description}</p>
                             </CardContent>
                           </Card>
                         ))}
@@ -181,12 +181,12 @@ export default async function DestinationPage({ params }: Props) {
 
               {/* Travel Tips for this Destination */}
               <div className="mt-8">
-                <h2 className="mb-4 text-2xl font-bold text-slate-900">
+                <h2 className="mb-4 text-2xl font-bold text-foreground">
                   Travel Tips
                 </h2>
-                <Card className="bg-slate-50">
+                <Card className="bg-muted/30">
                   <CardContent className="p-6">
-                    <ul className="space-y-3 text-slate-700">
+                    <ul className="space-y-3 text-foreground">
                       <li className="flex items-start gap-3">
                         <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
                         <span>
@@ -222,7 +222,7 @@ export default async function DestinationPage({ params }: Props) {
                 if (relatedDestinations.length > 0) {
                   return (
                     <div className="mt-8">
-                      <h2 className="mb-4 text-2xl font-bold text-slate-900">
+                      <h2 className="mb-4 text-2xl font-bold text-foreground">
                         Explore More in {destination.region}
                       </h2>
                       <div className="grid gap-4 sm:grid-cols-3">
@@ -238,10 +238,10 @@ export default async function DestinationPage({ params }: Props) {
                                 />
                               </div>
                               <CardContent className="p-4">
-                                <h3 className="font-semibold text-slate-900 group-hover:text-primary">
+                                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                                   {related.name}
                                 </h3>
-                                <p className="mt-1 text-sm text-slate-600 line-clamp-2">
+                                <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
                                   {related.excerpt}
                                 </p>
                               </CardContent>

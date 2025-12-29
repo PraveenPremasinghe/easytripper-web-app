@@ -14,11 +14,14 @@ import {
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/ui/resizable-navbar";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navItems = [
   { name: "Home", link: "/" },
   { name: "Destinations", link: "/destinations" },
   { name: "Tours", link: "/tours" },
+  { name: "Vehicles", link: "/vehicles" },
+  { name: "Blog", link: "/blog" },
   { name: "Stories", link: "/stories" },
   { name: "Travel Tips", link: "/travel-tips" },
   { name: "Contact", link: "/contact" },
@@ -43,11 +46,12 @@ export function MainNav() {
           </NavbarLogo>
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             <NavbarButton
               as={Link}
               href="/contact"
               variant="secondary"
-              className="text-slate-700 hover:text-primary"
+              className="text-foreground hover:text-primary dark:text-foreground"
             >
               Plan Your Trip
             </NavbarButton>

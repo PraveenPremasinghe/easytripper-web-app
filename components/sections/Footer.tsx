@@ -4,34 +4,34 @@ import Image from "next/image";
 
 export function Footer() {
   return (
-    <footer className="border-t bg-slate-900 text-slate-300">
+    <footer className="border-t bg-slate-900 dark:bg-slate-950 text-slate-300 dark:text-slate-400">
       <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-white">Easy Tripper</h3>
-            <p className="text-sm">
+            <h3 className="text-2xl font-bold text-white dark:text-slate-100">Easy Tripper</h3>
+            <p className="text-sm text-slate-300 dark:text-slate-400">
               Your trusted guide to exploring the beauty of Sri Lanka. Customized
               tours and authentic experiences.
             </p>
             <div className="flex gap-4">
               <Link
                 href="#"
-                className="text-slate-400 transition-colors hover:text-primary"
+                className="text-slate-400 dark:text-slate-500 transition-colors hover:text-primary"
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </Link>
               <Link
                 href="#"
-                className="text-slate-400 transition-colors hover:text-primary"
+                className="text-slate-400 dark:text-slate-500 transition-colors hover:text-primary"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </Link>
               <Link
                 href="#"
-                className="text-slate-400 transition-colors hover:text-primary"
+                className="text-slate-400 dark:text-slate-500 transition-colors hover:text-primary"
                 aria-label="Twitter"
               >
                 <Twitter className="h-5 w-5" />
@@ -41,7 +41,7 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="mb-4 font-semibold text-white">Quick Links</h4>
+            <h4 className="mb-4 font-semibold text-white dark:text-slate-100">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/" className="hover:text-primary">
@@ -78,7 +78,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="mb-4 font-semibold text-white">Contact</h4>
+            <h4 className="mb-4 font-semibold text-white dark:text-slate-100">Contact</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3">
                 <Phone className="mt-0.5 h-4 w-4 flex-shrink-0" />
@@ -104,7 +104,7 @@ export function Footer() {
 
           {/* Map */}
           <div>
-            <h4 className="mb-4 font-semibold text-white">Location</h4>
+            <h4 className="mb-4 font-semibold text-white dark:text-slate-100">Location</h4>
             <div className="relative aspect-video overflow-hidden rounded-lg">
               <Image
                 src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=450&fit=crop"
@@ -116,7 +116,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-slate-800 pt-8 text-center text-sm text-slate-400">
+        <div className="mt-8 border-t border-slate-800 dark:border-slate-700 pt-8 text-center text-sm text-slate-400 dark:text-slate-500">
           <p>
             © {new Date().getFullYear()} Easy Tripper. All rights reserved. | Jagath
             Premasinghe

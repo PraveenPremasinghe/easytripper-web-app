@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select";
 import { sendInquiry } from "@/app/actions/sendInquiry";
 import { CheckCircle2, Loader2 } from "lucide-react";
+import { toast } from "@/components/ui/toaster";
 
 const inquirySchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -60,10 +61,17 @@ export function InquiryForm() {
       await sendInquiry(data);
       setIsSuccess(true);
       reset();
+      toast.success(
+        "Inquiry Sent Successfully!",
+        "We've received your inquiry and will get back to you within 24 hours."
+      );
       setTimeout(() => setIsSuccess(false), 5000);
     } catch (error) {
       console.error("Error submitting inquiry:", error);
-      alert("Something went wrong. Please try again.");
+      toast.error(
+        "Submission Failed",
+        "Something went wrong. Please try again or contact us directly."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -75,7 +83,7 @@ export function InquiryForm() {
         <CardContent className="flex flex-col items-center justify-center p-8 text-center">
           <CheckCircle2 className="mb-4 h-16 w-16 text-green-500" />
           <h3 className="mb-2 text-xl font-semibold">Thank you!</h3>
-          <p className="text-slate-600">
+          <p className="text-muted-foreground">
             We&apos;ve received your inquiry and will get back to you within 24 hours.
           </p>
         </CardContent>
@@ -87,7 +95,7 @@ export function InquiryForm() {
     <Card className="sticky top-24">
       <CardHeader>
         <CardTitle>Plan Your Trip</CardTitle>
-        <p className="text-sm text-slate-600">
+        <p className="text-sm text-muted-foreground">
           Fill out the form below and we&apos;ll create a customized itinerary for you.
         </p>
       </CardHeader>

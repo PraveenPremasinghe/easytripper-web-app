@@ -26,7 +26,7 @@ const itemVariants = {
 
 export function TravelStories() {
   return (
-    <section id="stories" className="py-20 bg-gradient-to-br from-slate-50 to-sky-50">
+    <section id="stories" className="py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -35,10 +35,10 @@ export function TravelStories() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl">
+          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
             Travel Stories
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Real adventures from our travelers
           </p>
         </motion.div>
@@ -73,22 +73,22 @@ export function TravelStories() {
                             </Badge>
                           ))}
                         </div>
-                        <h3 className="mb-2 text-xl font-semibold text-slate-900">
+                        <h3 className="mb-2 text-xl font-semibold text-foreground">
                           {story.title}
                         </h3>
-                        <p className="mb-4 text-slate-600 line-clamp-2">
+                        <p className="mb-4 text-muted-foreground line-clamp-2">
                           {story.excerpt}
                         </p>
                         {story.date && (
-                          <p className="text-sm text-slate-500">{story.date}</p>
+                          <p className="text-sm text-muted-foreground">{story.date}</p>
                         )}
                       </CardContent>
                     </div>
                   </DialogTrigger>
                   <DialogContent className="max-w-4xl">
                     <div className="space-y-4">
-                      <h3 className="text-2xl font-bold">{story.title}</h3>
-                      <p className="text-slate-600">{story.excerpt}</p>
+                      <h3 className="text-2xl font-bold text-foreground">{story.title}</h3>
+                      <p className="text-muted-foreground">{story.excerpt}</p>
                       <div className="grid grid-cols-2 gap-4">
                         {story.gallery.map((image, index) => (
                           <div

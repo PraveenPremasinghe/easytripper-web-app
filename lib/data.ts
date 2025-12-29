@@ -1,5 +1,6 @@
-import { Destination, Story, Testimonial, FAQ, ThingToDo, Tour, TopTravelPlace } from "./types";
+import { Destination, Story, Testimonial, FAQ, ThingToDo, Tour, TopTravelPlace, Vehicle, BlogPost } from "./types";
 
+// Destinations data
 export const destinations: Destination[] = [
   {
     slug: "kandy",
@@ -713,6 +714,238 @@ export const topTravelPlaces: TopTravelPlace[] = [
     duration: "10 Days/9 Night",
     rating: 4.5,
     image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&h=600&fit=crop"
+  }
+];
+
+export const vehicles: Vehicle[] = [
+  {
+    id: "sedan-car",
+    name: "Sedan Car",
+    type: "Car",
+    passengers: 3,
+    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&h=600&fit=crop",
+    features: [
+      "Air-conditioned",
+      "Comfortable seating",
+      "GPS navigation",
+      "Professional driver",
+      "Luggage space"
+    ],
+    idealFor: ["Couples", "Small families (up to 3)", "Business travelers"],
+    airConditioned: true,
+    description: "Perfect for couples and small families. Comfortable, fuel-efficient, and ideal for city tours and short-distance travel.",
+    priceRange: "Affordable daily rates"
+  },
+  {
+    id: "van",
+    name: "Comfortable Van",
+    type: "Van",
+    passengers: 7,
+    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop",
+    features: [
+      "Air-conditioned",
+      "Spacious interior",
+      "Extra luggage space",
+      "Comfortable seats",
+      "GPS navigation",
+      "Professional driver"
+    ],
+    idealFor: ["Families (4-7 people)", "Small groups", "Extended tours"],
+    airConditioned: true,
+    description: "Spacious and comfortable for families and small groups. Perfect for longer journeys with ample space for luggage and comfortable seating.",
+    priceRange: "Mid-range pricing"
+  },
+  {
+    id: "luxury-vehicle",
+    name: "Luxury Vehicle",
+    type: "Luxury",
+    passengers: 4,
+    image: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=800&h=600&fit=crop",
+    features: [
+      "Premium air-conditioning",
+      "Leather seats",
+      "Premium sound system",
+      "WiFi connectivity",
+      "Refreshments included",
+      "Professional chauffeur",
+      "GPS navigation"
+    ],
+    idealFor: ["Luxury travelers", "Business executives", "Special occasions", "Couples seeking comfort"],
+    airConditioned: true,
+    description: "Experience Sri Lanka in ultimate comfort and style. Premium vehicles with luxury amenities for discerning travelers who value comfort and elegance.",
+    priceRange: "Premium pricing"
+  },
+  {
+    id: "4x4-jeep",
+    name: "4x4 Safari Jeep",
+    type: "4x4",
+    passengers: 6,
+    image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop",
+    features: [
+      "4-wheel drive",
+      "Open-top design",
+      "Safari-ready",
+      "Rugged terrain capable",
+      "Professional safari guide",
+      "Binoculars provided",
+      "First aid kit"
+    ],
+    idealFor: ["Wildlife safaris", "Adventure seekers", "National park tours", "Off-road adventures"],
+    airConditioned: false,
+    description: "Specially designed for wildlife safaris and off-road adventures. Perfect for exploring national parks like Yala, Udawalawe, and Wilpattu. Open-top design for optimal wildlife viewing.",
+    priceRange: "Safari package rates"
+  },
+  {
+    id: "minibus",
+    name: "Mini Bus",
+    type: "Bus",
+    passengers: 15,
+    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=600&fit=crop",
+    features: [
+      "Air-conditioned",
+      "Large luggage compartment",
+      "Comfortable reclining seats",
+      "Professional driver",
+      "Tour guide accommodation",
+      "GPS navigation"
+    ],
+    idealFor: ["Large groups (8-15 people)", "Corporate tours", "Extended family trips", "School groups"],
+    airConditioned: true,
+    description: "Ideal for larger groups and extended tours. Spacious, comfortable, and equipped with all amenities for group travel across Sri Lanka.",
+    priceRange: "Group rates available"
+  },
+  {
+    id: "compact-car",
+    name: "Compact Car",
+    type: "Car",
+    passengers: 2,
+    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=600&fit=crop",
+    features: [
+      "Air-conditioned",
+      "Fuel-efficient",
+      "Easy parking",
+      "Professional driver",
+      "GPS navigation"
+    ],
+    idealFor: ["Couples", "Solo travelers", "Budget-conscious travelers", "City tours"],
+    airConditioned: true,
+    description: "Economical and efficient for couples and solo travelers. Perfect for city tours and short trips with excellent fuel economy.",
+    priceRange: "Budget-friendly rates"
+  }
+];
+
+export const blogPosts: BlogPost[] = [
+  {
+    id: "1",
+    slug: "complete-guide-sri-lanka-first-time-visitors",
+    title: "Complete Guide to Sri Lanka for First-Time Visitors",
+    excerpt: "Everything you need to know for your first trip to Sri Lanka, from visa requirements to cultural etiquette and must-see destinations.",
+    content: "Sri Lanka, the Pearl of the Indian Ocean, offers an incredible diversity of experiences in a compact island nation. This comprehensive guide covers everything first-time visitors need to know...",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=600&fit=crop",
+    author: "Jagath Premasinghe",
+    publishedAt: "2024-12-01",
+    category: "Travel Guide",
+    tags: ["First-time visitors", "Travel tips", "Sri Lanka guide"],
+    readTime: 12,
+    seoKeywords: ["Sri Lanka travel guide", "first time Sri Lanka", "Sri Lanka tips", "travel to Sri Lanka"]
+  },
+  {
+    id: "2",
+    slug: "best-time-visit-sri-lanka-weather-seasons",
+    title: "Best Time to Visit Sri Lanka: Weather & Seasons Guide",
+    excerpt: "Understanding Sri Lanka's two monsoon seasons and finding the perfect time to visit based on your travel preferences and destinations.",
+    content: "Sri Lanka's tropical climate means there's always a good time to visit somewhere on the island. This guide explains the two monsoon seasons and helps you plan your perfect trip...",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200&h=600&fit=crop",
+    author: "Jagath Premasinghe",
+    publishedAt: "2024-11-25",
+    category: "Travel Guide",
+    tags: ["Weather", "Best time to visit", "Seasons"],
+    readTime: 8,
+    seoKeywords: ["best time to visit Sri Lanka", "Sri Lanka weather", "monsoon season Sri Lanka"]
+  },
+  {
+    id: "3",
+    slug: "cultural-triangle-sri-lanka-ancient-heritage",
+    title: "Exploring the Cultural Triangle: Sri Lanka's Ancient Heritage",
+    excerpt: "Discover the UNESCO World Heritage Sites of Anuradhapura, Polonnaruwa, and Sigiriya in Sri Lanka's Cultural Triangle.",
+    content: "The Cultural Triangle of Sri Lanka encompasses three ancient capitals that showcase the island's rich Buddhist heritage. This guide takes you through these remarkable sites...",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=600&fit=crop",
+    author: "Jagath Premasinghe",
+    publishedAt: "2024-11-20",
+    category: "Destination",
+    tags: ["Cultural Triangle", "UNESCO", "Ancient cities", "Sigiriya"],
+    readTime: 10,
+    seoKeywords: ["Cultural Triangle Sri Lanka", "Sigiriya", "Anuradhapura", "Polonnaruwa", "UNESCO Sri Lanka"]
+  },
+  {
+    id: "4",
+    slug: "yala-national-park-wildlife-safari-guide",
+    title: "Yala National Park: Complete Wildlife Safari Guide",
+    excerpt: "Everything you need to know about spotting leopards, elephants, and exotic birds in Yala National Park, Sri Lanka's premier wildlife destination.",
+    content: "Yala National Park is one of Asia's best destinations for wildlife viewing, particularly for leopard sightings. This comprehensive guide covers safari tips, best times to visit, and what to expect...",
+    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=1200&h=600&fit=crop",
+    author: "Jagath Premasinghe",
+    publishedAt: "2024-11-15",
+    category: "Wildlife",
+    tags: ["Yala", "Wildlife safari", "Leopards", "National parks"],
+    readTime: 9,
+    seoKeywords: ["Yala National Park", "Sri Lanka safari", "leopard safari Sri Lanka", "wildlife Sri Lanka"]
+  },
+  {
+    id: "5",
+    slug: "hill-country-train-journey-kandy-ella",
+    title: "The Scenic Train Journey from Kandy to Ella: A Traveler's Guide",
+    excerpt: "Experience one of the world's most beautiful train journeys through Sri Lanka's tea country, from Kandy through Nuwara Eliya to Ella.",
+    content: "The train journey from Kandy to Ella is often described as one of the world's most scenic rail routes. This guide covers everything from booking tickets to what to expect along the way...",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200&h=600&fit=crop",
+    author: "Jagath Premasinghe",
+    publishedAt: "2024-11-10",
+    category: "Travel Guide",
+    tags: ["Train journey", "Hill country", "Kandy", "Ella", "Tea country"],
+    readTime: 7,
+    seoKeywords: ["Kandy to Ella train", "Sri Lanka train journey", "scenic train Sri Lanka", "tea country train"]
+  },
+  {
+    id: "6",
+    slug: "sri-lankan-cuisine-food-guide-travelers",
+    title: "Sri Lankan Cuisine: A Food Lover's Guide to Local Dishes",
+    excerpt: "Discover the flavors of Sri Lanka with this comprehensive guide to local cuisine, from rice and curry to street food favorites.",
+    content: "Sri Lankan cuisine is a vibrant fusion of flavors influenced by Indian, Dutch, Portuguese, and British colonial history. This guide introduces you to must-try dishes and where to find them...",
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&h=600&fit=crop",
+    author: "Jagath Premasinghe",
+    publishedAt: "2024-11-05",
+    category: "Food",
+    tags: ["Food", "Cuisine", "Local dishes", "Street food"],
+    readTime: 11,
+    seoKeywords: ["Sri Lankan food", "Sri Lanka cuisine", "local food Sri Lanka", "rice and curry"]
+  },
+  {
+    id: "7",
+    slug: "galle-fort-colonial-heritage-southern-coast",
+    title: "Galle Fort: Exploring Sri Lanka's Colonial Heritage",
+    excerpt: "Step back in time at Galle Fort, a UNESCO World Heritage Site showcasing Dutch colonial architecture on Sri Lanka's southern coast.",
+    content: "Galle Fort is one of Sri Lanka's most charming destinations, combining colonial history with modern cafes, boutiques, and art galleries. This guide helps you explore this unique destination...",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=600&fit=crop",
+    author: "Jagath Premasinghe",
+    publishedAt: "2024-10-30",
+    category: "Destination",
+    tags: ["Galle", "Colonial", "UNESCO", "Southern coast"],
+    readTime: 8,
+    seoKeywords: ["Galle Fort", "Galle Sri Lanka", "colonial Sri Lanka", "southern coast Sri Lanka"]
+  },
+  {
+    id: "8",
+    slug: "whale-watching-mirissa-complete-guide",
+    title: "Whale Watching in Mirissa: Complete Guide to Blue Whale Encounters",
+    excerpt: "Experience the thrill of spotting blue whales, sperm whales, and dolphins off the coast of Mirissa, one of the world's best whale watching destinations.",
+    content: "Mirissa has become one of the world's premier whale watching destinations, offering opportunities to see blue whales, the largest animals on Earth. This guide covers everything you need to know...",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&h=600&fit=crop",
+    author: "Jagath Premasinghe",
+    publishedAt: "2024-10-25",
+    category: "Wildlife",
+    tags: ["Whale watching", "Mirissa", "Blue whales", "Marine life"],
+    readTime: 9,
+    seoKeywords: ["whale watching Mirissa", "blue whales Sri Lanka", "Mirissa whale watching", "Sri Lanka marine life"]
   }
 ];
 

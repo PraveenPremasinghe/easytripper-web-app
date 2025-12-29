@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export function AboutMe() {
   return (
-    <section id="about-me" className="py-20 bg-gradient-to-br from-primary/5 via-[#FAF8F3] to-primary/5">
+    <section id="about-me" className="py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,10 +19,10 @@ export function AboutMe() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold text-[#1C1917] sm:text-4xl md:text-5xl">
+          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
             About Your Guide
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-[#57534E]">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Meet Jagath Premasinghe, your expert local guide
           </p>
         </motion.div>
@@ -42,21 +42,21 @@ export function AboutMe() {
 
               {/* Content */}
               <CardContent className="flex flex-col justify-center p-8">
-                <h3 className="mb-2 text-2xl font-bold text-[#1C1917]">
+                <h3 className="mb-2 text-2xl font-bold text-foreground">
                   Jagath Premasinghe
                 </h3>
-                <p className="mb-6 text-[#57534E]">
+                <p className="mb-6 text-muted-foreground">
                   Professional Tour Guide & Travel Consultant
                 </p>
 
-                <p className="mb-6 leading-relaxed text-[#57534E]">
+                <p className="mb-6 leading-relaxed text-muted-foreground">
                   With over 10 years of experience guiding travelers through Sri Lanka,
                   I&apos;m passionate about sharing the beauty, culture, and hidden gems of
                   my homeland. I specialize in creating personalized itineraries that
                   combine must-see attractions with authentic local experiences.
                 </p>
 
-                <p className="mb-6 leading-relaxed text-[#57534E]">
+                <p className="mb-6 leading-relaxed text-muted-foreground">
                   Whether you&apos;re interested in ancient history, wildlife safaris, beach
                   relaxation, or mountain adventures, I&apos;ll ensure your journey is
                   unforgettable. My goal is to make you feel like a local, not just a

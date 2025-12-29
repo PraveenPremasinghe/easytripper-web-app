@@ -199,14 +199,14 @@ const quickFacts = [
 
 export default function TravelTipsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50/30 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/5">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-slate-900 sm:text-5xl md:text-6xl">
+          <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
             Travel Tips & Guide
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Everything you need to know for a smooth and enjoyable trip to Sri Lanka
           </p>
         </div>
@@ -223,8 +223,8 @@ export default function TravelTipsPage() {
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {quickFacts.map((fact, index) => (
                 <div key={index} className="space-y-1">
-                  <p className="text-sm font-semibold text-slate-900">{fact.label}</p>
-                  <p className="text-sm text-slate-600">{fact.value}</p>
+                  <p className="text-sm font-semibold text-foreground">{fact.label}</p>
+                  <p className="text-sm text-muted-foreground">{fact.value}</p>
                 </div>
               ))}
             </div>
@@ -252,7 +252,7 @@ export default function TravelTipsPage() {
                         <AccordionTrigger className="text-left font-semibold">
                           {tip.title}
                         </AccordionTrigger>
-                        <AccordionContent className="text-slate-700">
+                        <AccordionContent className="text-foreground">
                           {tip.content}
                         </AccordionContent>
                       </AccordionItem>
@@ -273,29 +273,29 @@ export default function TravelTipsPage() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <ul className="space-y-3 text-slate-700">
+            <ul className="space-y-3 text-foreground">
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
                 <span>Keep copies of important documents (passport, visa, insurance) separate from originals</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
                 <span>Register with your embassy if staying for extended periods</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
                 <span>Respect local customs and traditions - Sri Lankans are very welcoming and appreciate respectful visitors</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
                 <span>Carry cash for emergencies - not all places accept cards</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
                 <span>Download offline maps and translation apps before arrival</span>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
                 <span>Be flexible - things may not always go as planned, but that&apos;s part of the adventure!</span>
               </li>
             </ul>
@@ -303,12 +303,12 @@ export default function TravelTipsPage() {
         </Card>
 
         {/* CTA */}
-        <Card className="mt-12 bg-gradient-to-r from-emerald-50 to-amber-50">
+        <Card className="mt-12 bg-gradient-to-r from-primary/10 via-background to-accent/10">
           <CardContent className="p-8 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-slate-900">
+            <h2 className="mb-4 text-3xl font-bold text-foreground">
               Ready to Plan Your Trip?
             </h2>
-            <p className="mb-6 text-lg text-slate-600">
+            <p className="mb-6 text-lg text-muted-foreground">
               Have questions or need personalized advice? Get in touch with us!
             </p>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">

@@ -67,7 +67,7 @@ const itemVariants = {
 
 export function WhyChooseUs() {
   return (
-    <section id="why-choose-us" className="py-20 bg-white">
+    <section id="why-choose-us" className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -76,10 +76,10 @@ export function WhyChooseUs() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl">
+          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
             Why Choose Us
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Experience Sri Lanka with confidence and comfort
           </p>
         </motion.div>
@@ -103,7 +103,7 @@ export function WhyChooseUs() {
                     <CardTitle className="text-xl">{feature.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-slate-600">{feature.description}</p>
+                    <p className="text-muted-foreground">{feature.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>

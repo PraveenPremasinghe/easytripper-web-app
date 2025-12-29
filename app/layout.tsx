@@ -4,6 +4,11 @@ import "./globals.css";
 import { TopBar } from "@/components/header/TopBar";
 import { MainNav } from "@/components/header/MainNav";
 import { Footer } from "@/components/sections/Footer";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { WhatsAppButton } from "@/components/ui/whatsapp-button";
+import { ExitIntentPopup } from "@/components/ui/exit-intent-popup";
+import { StickyInquiryBar } from "@/components/ui/sticky-inquiry-bar";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -64,12 +69,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="antialiased">
-        <TopBar />
-        <MainNav />
-        <main className="pt-[141px]">{children}</main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <TopBar />
+          <MainNav />
+          <main className="pt-[141px]">{children}</main>
+          <Footer />
+          <WhatsAppButton />
+          <ExitIntentPopup />
+          <StickyInquiryBar />
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

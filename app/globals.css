@@ -65,6 +65,45 @@
   --success-foreground: #ffffff;
 }
 
+.dark {
+  /* Dark Mode - Maintains brand colors but with dark backgrounds */
+  --background: #0F172A;
+  --foreground: #F8FAFC;
+  
+  /* Primary colors remain vibrant in dark mode */
+  --primary: #14B8A6;
+  --primary-foreground: #ffffff;
+  --primary-hover: #0D9488;
+  
+  /* Supporting Colors */
+  --secondary: #1E293B;
+  --secondary-foreground: #F8FAFC;
+  --muted: #1E293B;
+  --muted-foreground: #94A3B8;
+  
+  /* Accent colors */
+  --accent: #FBBF24;
+  --accent-foreground: #0F172A;
+  --accent-hover: #F59E0B;
+  
+  /* UI Colors */
+  --border: #334155;
+  --input: #334155;
+  --ring: #14B8A6;
+  
+  /* Component Colors */
+  --popover: #1E293B;
+  --popover-foreground: #F8FAFC;
+  --card: #1E293B;
+  --card-foreground: #F8FAFC;
+  
+  /* Status Colors */
+  --destructive: #EF4444;
+  --destructive-foreground: #ffffff;
+  --success: #10B981;
+  --success-foreground: #ffffff;
+}
+
 * {
   border-color: var(--border);
 }
@@ -73,11 +112,18 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  /* Grid pattern for background beams */
+  .bg-grid-white\/\[0\.02\] {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   }
   
   /* Smooth scroll behavior */
@@ -91,16 +137,16 @@ body {
   }
   
   ::-webkit-scrollbar-track {
-    background: #FAF8F3;
+    background: var(--background);
   }
   
   ::-webkit-scrollbar-thumb {
-    background: #0D9488;
+    background: var(--primary);
     border-radius: 5px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: #0F766E;
+    background: var(--primary-hover);
   }
 }
 
@@ -128,4 +174,83 @@ body {
 
 .animate-accordion-up {
   animation: accordion-up 0.2s ease-out;
+}
+
+/* Infinite Moving Cards Animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 1rem));
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--animation-duration, 40s) linear infinite;
+  animation-direction: var(--animation-direction, forwards);
+}
+
+.scroller {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    var(--background) 20%,
+    var(--background) 80%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    var(--background) 20%,
+    var(--background) 80%,
+    transparent
+  );
+}
+
+/* Premium animations */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
+
+/* Premium card hover effects */
+.card-hover-effect {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

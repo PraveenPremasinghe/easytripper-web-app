@@ -103,11 +103,11 @@ export function CurrencyConverter() {
         </div>
 
         <div className="rounded-lg bg-primary/10 p-4 text-center">
-          <p className="text-sm text-slate-600">Result</p>
+          <p className="text-sm text-muted-foreground">Result</p>
           <p className="text-2xl font-bold text-primary">
             {result} {toCurrency}
           </p>
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-1 text-xs text-muted-foreground">
             *Approximate rates. Check current rates before travel.
           </p>
         </div>
@@ -115,4 +115,7 @@ export function CurrencyConverter() {
     </Card>
   );
 }
+
+
+
 

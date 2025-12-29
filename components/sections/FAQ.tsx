@@ -11,7 +11,7 @@ import { faqs } from "@/lib/data";
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-20 bg-gradient-to-br from-slate-50 to-sky-50">
+    <section id="faq" className="py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
       <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -20,10 +20,10 @@ export function FAQ() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold text-slate-900 sm:text-4xl md:text-5xl">
+          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
             Frequently Asked Questions
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Everything you need to know about traveling to Sri Lanka
           </p>
         </motion.div>
@@ -39,12 +39,12 @@ export function FAQ() {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="rounded-xl border bg-white px-6"
+                className="rounded-xl border border-border bg-card px-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <AccordionTrigger className="text-left font-semibold text-slate-900 hover:no-underline">
+                <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-slate-700">
+                <AccordionContent className="text-muted-foreground">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>

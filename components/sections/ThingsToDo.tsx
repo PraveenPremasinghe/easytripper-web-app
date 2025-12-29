@@ -50,7 +50,7 @@ export function ThingsToDo() {
   const [activeTab, setActiveTab] = useState<string>("Culture");
 
   return (
-    <section id="things-to-do" className="py-20 bg-[#FAF8F3]">
+    <section id="things-to-do" className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

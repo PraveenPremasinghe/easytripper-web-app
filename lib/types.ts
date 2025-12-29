@@ -73,3 +73,31 @@ export type TopTravelPlace = {
   emoji?: string;
 };
 
+export type Vehicle = {
+  id: string;
+  name: string;
+  type: "Car" | "Van" | "Luxury" | "4x4" | "Bus";
+  passengers: number;
+  image: string;
+  features: string[];
+  idealFor: string[];
+  airConditioned: boolean;
+  description: string;
+  priceRange?: string;
+};
+
+export type BlogPost = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  image: string;
+  author: string;
+  publishedAt: string;
+  category: "Travel Guide" | "Destination" | "Culture" | "Wildlife" | "Food" | "Tips";
+  tags: string[];
+  readTime: number; // minutes
+  seoKeywords?: string[];
+};
+

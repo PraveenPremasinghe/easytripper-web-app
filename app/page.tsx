@@ -9,6 +9,7 @@ import { TravelStories } from "@/components/sections/TravelStories";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { CurrencyConverter } from "@/components/ui/currency-converter";
+import { LocalBusinessSchema, TouristTripSchemas, FAQSchema } from "@/components/seo/structured-data";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,11 +18,14 @@ import { ArrowRight, MapPin, Calendar, BookOpen, HelpCircle } from "lucide-react
 export default function Home() {
   return (
     <>
+      <LocalBusinessSchema />
+      <TouristTripSchemas />
+      <FAQSchema />
       <Hero />
       <AboutSriLanka />
       <AboutMe />
       <WhyChooseUs />
-      <section className="py-20 bg-[#FAF8F3]">
+      <section className="py-20 bg-background">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
@@ -38,13 +42,13 @@ export default function Home() {
       <Testimonials />
       
       {/* Helpful Tools Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-[#FAF8F3] to-primary/5">
+      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-[#1C1917] sm:text-4xl">
+            <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
               Helpful Travel Tools
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-[#57534E]">
+            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
               Essential resources to help you plan your perfect Sri Lanka adventure
             </p>
           </div>
@@ -55,10 +59,10 @@ export default function Home() {
                 <div className="mb-4 rounded-lg bg-primary/10 p-3 w-fit">
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-[#1C1917]">
+                <h3 className="mb-2 text-xl font-semibold text-foreground">
                   Destinations
                 </h3>
-                <p className="mb-4 text-[#57534E]">
+                <p className="mb-4 text-muted-foreground">
                   Explore all the amazing places Sri Lanka has to offer
                 </p>
                 <Button asChild variant="ghost" className="group-hover:text-primary">
@@ -74,10 +78,10 @@ export default function Home() {
                 <div className="mb-4 rounded-lg bg-primary/10 p-3 w-fit">
                   <Calendar className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-[#1C1917]">
+                <h3 className="mb-2 text-xl font-semibold text-foreground">
                   Tours & Packages
                 </h3>
-                <p className="mb-4 text-[#57534E]">
+                <p className="mb-4 text-muted-foreground">
                   Curated itineraries for every type of traveler
                 </p>
                 <Button asChild variant="ghost" className="group-hover:text-primary">
@@ -93,10 +97,10 @@ export default function Home() {
                 <div className="mb-4 rounded-lg bg-primary/10 p-3 w-fit">
                   <BookOpen className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-[#1C1917]">
+                <h3 className="mb-2 text-xl font-semibold text-foreground">
                   Travel Tips
                 </h3>
-                <p className="mb-4 text-[#57534E]">
+                <p className="mb-4 text-muted-foreground">
                   Everything you need to know before your trip
                 </p>
                 <Button asChild variant="ghost" className="group-hover:text-primary">
@@ -112,10 +116,10 @@ export default function Home() {
                 <div className="mb-4 rounded-lg bg-primary/10 p-3 w-fit">
                   <HelpCircle className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="mb-2 text-xl font-semibold text-[#1C1917]">
+                <h3 className="mb-2 text-xl font-semibold text-foreground">
                   FAQ
                 </h3>
-                <p className="mb-4 text-[#57534E]">
+                <p className="mb-4 text-muted-foreground">
                   Answers to common questions about visiting Sri Lanka
                 </p>
                 <Button asChild variant="ghost" className="group-hover:text-primary">

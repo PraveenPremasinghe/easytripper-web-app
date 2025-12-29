@@ -13,13 +13,13 @@ export const metadata: Metadata = {
 
 export default function DestinationsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50/30 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/5">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-slate-900 sm:text-5xl md:text-6xl">
+          <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
             All Destinations
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Discover the diverse beauty of Sri Lanka across all regions
           </p>
         </div>
@@ -44,10 +44,10 @@ export default function DestinationsPage() {
                   </Badge>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="mb-2 text-xl font-semibold text-slate-900">
+                  <h3 className="mb-2 text-xl font-semibold text-foreground">
                     {destination.name}
                   </h3>
-                  <p className="mb-4 text-slate-600 line-clamp-2">
+                  <p className="mb-4 text-muted-foreground line-clamp-2">
                     {destination.excerpt}
                   </p>
                   <div className="flex items-center text-primary group-hover:underline">

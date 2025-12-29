@@ -22,7 +22,7 @@ const itemVariants = {
 
 export function AboutSriLanka() {
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-20 bg-background">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -31,10 +31,10 @@ export function AboutSriLanka() {
           transition={{ duration: 0.6 }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold text-[#1C1917] sm:text-4xl md:text-5xl">
+          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
             About Sri Lanka
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-[#57534E]">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             A tropical paradise rich in culture, history, and natural beauty
           </p>
         </motion.div>
@@ -49,13 +49,13 @@ export function AboutSriLanka() {
             className="space-y-6"
           >
             <motion.div variants={itemVariants}>
-              <p className="mb-4 text-lg leading-relaxed text-[#57534E]">
+              <p className="mb-4 text-lg leading-relaxed text-muted-foreground">
                 Sri Lanka, known as the &quot;Pearl of the Indian Ocean,&quot; is a stunning island
                 nation located off the southern coast of India. With over 2,500 years of
                 recorded history, it boasts ancient cities, sacred temples, pristine
                 beaches, lush tea plantations, and incredible wildlife.
               </p>
-              <p className="text-lg leading-relaxed text-[#57534E]">
+              <p className="text-lg leading-relaxed text-muted-foreground">
                 From the misty highlands of the central mountains to the golden beaches
                 of the coast, Sri Lanka offers diverse landscapes and experiences that
                 captivate every traveler. The country is home to eight UNESCO World
@@ -68,7 +68,7 @@ export function AboutSriLanka() {
             <motion.div variants={itemVariants}>
               <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
                 <CardContent className="p-6">
-                  <h3 className="mb-4 text-xl font-semibold text-[#1C1917]">
+                  <h3 className="mb-4 text-xl font-semibold text-foreground">
                     Quick Facts
                   </h3>
                   <div className="space-y-3">
@@ -85,10 +85,10 @@ export function AboutSriLanka() {
                       >
                         <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
                         <div>
-                          <span className="font-medium text-[#1C1917]">
+                          <span className="font-medium text-foreground">
                             {fact.label}:
                           </span>{" "}
-                          <span className="text-[#57534E]">{fact.value}</span>
+                          <span className="text-muted-foreground">{fact.value}</span>
                         </div>
                       </div>
                     ))}

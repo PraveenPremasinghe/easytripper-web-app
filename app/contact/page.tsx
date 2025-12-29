@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50/30 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/5">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-slate-900 sm:text-5xl md:text-6xl">
+          <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
             Contact Us
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-slate-600">
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Let&apos;s plan your perfect Sri Lanka adventure together
           </p>
         </div>
@@ -34,10 +34,10 @@ export default function ContactPage() {
                     <Phone className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900">Phone</p>
+                    <p className="font-semibold text-foreground">Phone</p>
                     <a
                       href="tel:+94771234567"
-                      className="text-slate-600 hover:text-primary"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       +94 77 123 4567
                     </a>
@@ -49,10 +49,10 @@ export default function ContactPage() {
                     <Mail className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900">Email</p>
+                    <p className="font-semibold text-foreground">Email</p>
                     <a
                       href="mailto:info@easytripper.lk"
-                      className="text-slate-600 hover:text-primary"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       info@easytripper.lk
                     </a>
@@ -64,8 +64,8 @@ export default function ContactPage() {
                     <MapPin className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900">Location</p>
-                    <p className="text-slate-600">Sri Lanka</p>
+                    <p className="font-semibold text-foreground">Location</p>
+                    <p className="text-muted-foreground">Sri Lanka</p>
                   </div>
                 </div>
               </CardContent>
@@ -76,7 +76,7 @@ export default function ContactPage() {
                 <CardTitle>Response Time</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-slate-600">
+                <p className="text-muted-foreground">
                   We typically respond to inquiries within 24 hours. For urgent
                   matters, please call us directly.
                 </p>
