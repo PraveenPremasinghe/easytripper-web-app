@@ -1,96 +1,94 @@
-import { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { stories } from "@/lib/data";
-
-export const metadata: Metadata = {
-  title: "Travel Stories",
-  description: "Real adventures and experiences from our travelers in Sri Lanka",
-};
+import { StoryModal } from "@/components/stories/StoryModal";
+import { Calendar } from "lucide-react";
+import type { Story } from "@/lib/types";
 
 export default function StoriesPage() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/5">
-      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
-            Travel Stories
-          </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Real adventures from our travelers exploring Sri Lanka
-          </p>
-        </div>
+  const [selectedStory, setSelectedStory] = useState<Story | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {stories.map((story) => (
-            <Card
-              key={story.id}
-              className="group h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-            >
-              <Dialog>
-                <DialogTrigger asChild>
-                  <div className="cursor-pointer">
-                    <div className="relative aspect-video overflow-hidden">
-                      <Image
-                        src={story.cover}
-                        alt={story.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    </div>
-                    <CardContent className="p-6">
-                      <div className="mb-2 flex flex-wrap gap-2">
-                        {story.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                      <h3 className="mb-2 text-xl font-semibold text-foreground">
-                        {story.title}
-                      </h3>
-                      <p className="mb-4 text-muted-foreground line-clamp-2">
-                        {story.excerpt}
-                      </p>
-                      {story.date && (
-                        <p className="text-sm text-muted-foreground">{story.date}</p>
-                      )}
-                    </CardContent>
-                  </div>
-                </DialogTrigger>
-                <DialogContent className="max-w-4xl">
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-bold text-foreground">{story.title}</h3>
-                    <p className="text-muted-foreground">{story.excerpt}</p>
-                    {story.date && (
-                      <p className="text-sm text-muted-foreground">{story.date}</p>
-                    )}
-                    <div className="grid grid-cols-2 gap-4">
-                      {story.gallery.map((image, index) => (
-                        <div
-                          key={index}
-                          className="relative aspect-video overflow-hidden rounded-lg"
+  const handleStoryClick = (story: Story) => {
+    setSelectedStory(story);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedStory(null), 300);
+  };
+
+  return (
+    <>
+      <div className="min-h-screen bg-background">
+        <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
+              Travel Stories
+            </h1>
+            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+              Real adventures from our travelers exploring Sri Lanka
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {stories.map((story) => (
+              <Card
+                key={story.id}
+                className="group h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                onClick={() => handleStoryClick(story)}
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <Image
+                    src={story.cover}
+                    alt={story.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {story.tags.slice(0, 2).map((tag) => (
+                        <Badge
+                          key={tag}
+                          className="bg-white/20 text-white border-white/30 backdrop-blur-sm"
                         >
-                          <Image
-                            src={image}
-                            alt={`${story.title} - Image ${index + 1}`}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
+                          {tag}
+                        </Badge>
                       ))}
                     </div>
+                    <h3 className="text-xl font-bold text-white mb-1">
+                      {story.title}
+                    </h3>
                   </div>
-                </DialogContent>
-              </Dialog>
-            </Card>
-          ))}
+                </div>
+                <CardContent className="p-6">
+                  <p className="mb-4 text-muted-foreground line-clamp-2">
+                    {story.excerpt}
+                  </p>
+                  {story.date && (
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      <span>{story.date}</span>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+
+      <StoryModal
+        story={selectedStory}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
+    </>
   );
 }
-

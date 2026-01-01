@@ -1,5 +1,9 @@
-import { Metadata } from "next";
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { 
   Plane, 
   DollarSign, 
@@ -10,19 +14,23 @@ import {
   Heart,
   AlertCircle,
   CheckCircle2,
-  Info
+  Info,
+  ArrowRight,
+  Globe,
+  Clock,
+  Zap,
+  Phone,
+  Building2
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-
-export const metadata: Metadata = {
-  title: "Travel Tips & Guide",
-  description: "Essential travel information and tips for visiting Sri Lanka - visa, currency, culture, and more",
-};
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import Link from "next/link";
 
 const travelTips = [
   {
     category: "Before You Go",
     icon: Plane,
+    color: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
     tips: [
       {
         title: "Visa Requirements",
@@ -45,6 +53,7 @@ const travelTips = [
   {
     category: "Money & Currency",
     icon: DollarSign,
+    color: "bg-green-500/10 text-green-600 dark:text-green-400",
     tips: [
       {
         title: "Currency",
@@ -67,6 +76,7 @@ const travelTips = [
   {
     category: "Getting Around",
     icon: MapPin,
+    color: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
     tips: [
       {
         title: "Transportation Options",
@@ -85,6 +95,7 @@ const travelTips = [
   {
     category: "Communication",
     icon: Smartphone,
+    color: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
     tips: [
       {
         title: "SIM Cards & Internet",
@@ -103,6 +114,7 @@ const travelTips = [
   {
     category: "Culture & Etiquette",
     icon: Heart,
+    color: "bg-pink-500/10 text-pink-600 dark:text-pink-400",
     tips: [
       {
         title: "Temple Etiquette",
@@ -125,6 +137,7 @@ const travelTips = [
   {
     category: "Food & Dining",
     icon: Utensils,
+    color: "bg-red-500/10 text-red-600 dark:text-red-400",
     tips: [
       {
         title: "Local Cuisine",
@@ -147,6 +160,7 @@ const travelTips = [
   {
     category: "Health & Safety",
     icon: AlertCircle,
+    color: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
     tips: [
       {
         title: "Water",
@@ -169,6 +183,7 @@ const travelTips = [
   {
     category: "Shopping & Souvenirs",
     icon: Camera,
+    color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
     tips: [
       {
         title: "What to Buy",
@@ -187,73 +202,227 @@ const travelTips = [
 ];
 
 const quickFacts = [
-  { label: "Capital", value: "Colombo / Sri Jayawardenepura Kotte" },
-  { label: "Population", value: "~22 million" },
-  { label: "Languages", value: "Sinhala, Tamil, English" },
-  { label: "Religion", value: "Buddhism (70%), Hinduism, Islam, Christianity" },
-  { label: "Time Zone", value: "IST (UTC+5:30)" },
-  { label: "Electricity", value: "230V, 50Hz (Type D, G plugs)" },
-  { label: "Country Code", value: "+94" },
-  { label: "Internet Domain", value: ".lk" }
+  { label: "Capital", value: "Colombo / Sri Jayawardenepura Kotte", icon: Building2 },
+  { label: "Population", value: "~22 million", icon: Globe },
+  { label: "Languages", value: "Sinhala, Tamil, English", icon: Globe },
+  { label: "Religion", value: "Buddhism (70%), Hinduism, Islam, Christianity", icon: Heart },
+  { label: "Time Zone", value: "IST (UTC+5:30)", icon: Clock },
+  { label: "Electricity", value: "230V, 50Hz (Type D, G plugs)", icon: Zap },
+  { label: "Country Code", value: "+94", icon: Phone },
+  { label: "Internet Domain", value: ".lk", icon: Globe }
+];
+
+const reminders = [
+  "Keep copies of important documents (passport, visa, insurance) separate from originals",
+  "Register with your embassy if staying for extended periods",
+  "Respect local customs and traditions - Sri Lankans are very welcoming and appreciate respectful visitors",
+  "Carry cash for emergencies - not all places accept cards",
+  "Download offline maps and translation apps before arrival",
+  "Be flexible - things may not always go as planned, but that's part of the adventure!"
 ];
 
 export default function TravelTipsPage() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const factsRef = useRef<HTMLDivElement>(null);
+  const categoriesRef = useRef<HTMLDivElement>(null);
+  const remindersRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Header animation
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Quick Facts animation
+      if (factsRef.current) {
+        const items = factsRef.current.children;
+        gsap.fromTo(
+          items,
+          { opacity: 0, y: 30, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: factsRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Categories animation
+      if (categoriesRef.current) {
+        const cards = categoriesRef.current.children;
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 50, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: categoriesRef.current,
+              start: "top 75%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Reminders animation
+      if (remindersRef.current) {
+        gsap.fromTo(
+          remindersRef.current,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: remindersRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // CTA animation
+      if (ctaRef.current) {
+        gsap.fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 30, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ctaRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/5">
-      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
+    <main ref={sectionRef} className="min-h-screen bg-background">
+      <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
+        <div ref={headerRef} className="mb-16 text-center">
+          <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
             Travel Tips & Guide
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          <p className="mx-auto max-w-3xl text-lg md:text-xl text-muted-foreground leading-relaxed">
             Everything you need to know for a smooth and enjoyable trip to Sri Lanka
           </p>
         </div>
 
         {/* Quick Facts */}
-        <Card className="mb-12">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Info className="h-5 w-5 text-primary" />
-              Quick Facts About Sri Lanka
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {quickFacts.map((fact, index) => (
-                <div key={index} className="space-y-1">
-                  <p className="text-sm font-semibold text-foreground">{fact.label}</p>
-                  <p className="text-sm text-muted-foreground">{fact.value}</p>
-                </div>
-              ))}
+        <div ref={factsRef} className="mb-16">
+          <div className="mb-8 flex items-center gap-3">
+            <div className="rounded-lg bg-primary/10 p-2">
+              <Info className="h-6 w-6 text-primary" />
             </div>
-          </CardContent>
-        </Card>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              Quick Facts About Sri Lanka
+            </h2>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {quickFacts.map((fact, index) => {
+              const Icon = fact.icon;
+              return (
+                <Card key={index} className="border-2 hover:border-primary/30 transition-all duration-300 hover:shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="mb-3 flex items-center gap-3">
+                      <div className="rounded-lg bg-primary/10 p-2">
+                        <Icon className="h-5 w-5 text-primary" />
+                      </div>
+                      <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+                        {fact.label}
+                      </p>
+                    </div>
+                    <p className="text-base font-semibold text-foreground leading-relaxed">
+                      {fact.value}
+                    </p>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </div>
 
         {/* Travel Tips by Category */}
-        <div className="space-y-8">
+        <div ref={categoriesRef} className="space-y-6 mb-16">
           {travelTips.map((category, categoryIndex) => {
             const Icon = category.icon;
             return (
-              <Card key={categoryIndex}>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <div className="rounded-lg bg-primary/10 p-2">
-                      <Icon className="h-6 w-6 text-primary" />
+              <Card 
+                key={categoryIndex} 
+                className="border-2 hover:border-primary/30 transition-all duration-300 hover:shadow-xl overflow-hidden"
+              >
+                <CardHeader className="bg-gradient-to-r from-background to-muted/30 border-b">
+                  <CardTitle className="flex items-center gap-4">
+                    <div className={`rounded-xl ${category.color} p-3`}>
+                      <Icon className="h-7 w-7" />
                     </div>
-                    {category.category}
+                    <div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-foreground">
+                        {category.category}
+                      </h3>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {category.tips.length} essential tips
+                      </p>
+                    </div>
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-6">
                   <Accordion type="single" collapsible className="w-full">
                     {category.tips.map((tip, tipIndex) => (
-                      <AccordionItem key={tipIndex} value={`item-${categoryIndex}-${tipIndex}`}>
-                        <AccordionTrigger className="text-left font-semibold">
+                      <AccordionItem 
+                        key={tipIndex} 
+                        value={`item-${categoryIndex}-${tipIndex}`}
+                        className="border-b border-border/50"
+                      >
+                        <AccordionTrigger className="text-left font-semibold text-lg py-4 hover:no-underline hover:text-primary transition-colors">
                           {tip.title}
                         </AccordionTrigger>
-                        <AccordionContent className="text-foreground">
-                          {tip.content}
+                        <AccordionContent className="text-muted-foreground leading-relaxed text-base pt-2 pb-4">
+                          <p className="whitespace-pre-line">{tip.content}</p>
                         </AccordionContent>
                       </AccordionItem>
                     ))}
@@ -265,70 +434,59 @@ export default function TravelTipsPage() {
         </div>
 
         {/* Important Reminders */}
-        <Card className="mt-12 border-primary/20 bg-primary/5">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <CheckCircle2 className="h-5 w-5 text-primary" />
-              Important Reminders
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-3 text-foreground">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
-                <span>Keep copies of important documents (passport, visa, insurance) separate from originals</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
-                <span>Register with your embassy if staying for extended periods</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
-                <span>Respect local customs and traditions - Sri Lankans are very welcoming and appreciate respectful visitors</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
-                <span>Carry cash for emergencies - not all places accept cards</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
-                <span>Download offline maps and translation apps before arrival</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-success" />
-                <span>Be flexible - things may not always go as planned, but that&apos;s part of the adventure!</span>
-              </li>
-            </ul>
-          </CardContent>
-        </Card>
+        <div ref={remindersRef} className="mb-16">
+          <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-3">
+                <div className="rounded-lg bg-primary/10 p-2">
+                  <CheckCircle2 className="h-6 w-6 text-primary" />
+                </div>
+                <span className="text-2xl md:text-3xl font-bold text-foreground">
+                  Important Reminders
+                </span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {reminders.map((reminder, index) => (
+                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-background/50 hover:bg-background transition-colors">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <p className="text-foreground leading-relaxed">{reminder}</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* CTA */}
-        <Card className="mt-12 bg-gradient-to-r from-primary/10 via-background to-accent/10">
-          <CardContent className="p-8 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground">
-              Ready to Plan Your Trip?
-            </h2>
-            <p className="mb-6 text-lg text-muted-foreground">
-              Have questions or need personalized advice? Get in touch with us!
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 font-semibold text-white transition-colors hover:bg-primary/90"
-              >
-                Contact Us
-              </a>
-              <a
-                href="/tours"
-                className="inline-flex items-center justify-center rounded-lg border-2 border-primary px-6 py-3 font-semibold text-primary transition-colors hover:bg-primary/10"
-              >
-                View Tours
-              </a>
-            </div>
-          </CardContent>
-        </Card>
+        <div ref={ctaRef}>
+          <Card className="border-2 border-primary/30 bg-gradient-to-r from-primary/10 via-background to-accent/10">
+            <CardContent className="p-12 text-center">
+              <h2 className="mb-4 text-3xl md:text-4xl font-bold text-foreground">
+                Ready to Plan Your Trip?
+              </h2>
+              <p className="mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
+                Have questions or need personalized advice? Get in touch with us!
+              </p>
+              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+                <Button asChild size="lg">
+                  <Link href="/contact">
+                    Contact Us
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/tours">
+                    View Tours
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
-

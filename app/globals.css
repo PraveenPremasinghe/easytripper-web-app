@@ -157,6 +157,15 @@ body {
     scroll-behavior: smooth;
   }
 
+  /* Hide scrollbar for thumbnail gallery */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Custom scrollbar with gradient */
   ::-webkit-scrollbar {
     width: 12px;

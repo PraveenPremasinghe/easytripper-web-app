@@ -136,7 +136,7 @@ export function Hero() {
       {/* Full Background Image - Extends behind TopBar, Header, and Hero Only */}
       <div className="absolute top-0 left-0 right-0 bottom-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1920&h=1080&fit=crop"
+          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop"
           alt="Sri Lanka"
           fill
           className="object-cover"
