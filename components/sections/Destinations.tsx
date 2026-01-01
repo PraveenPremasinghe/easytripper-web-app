@@ -67,16 +67,27 @@ export function Destinations() {
   };
 
   return (
-    <section id="destinations" className="py-20 bg-gradient-to-br from-primary/5 via-background to-primary/5">
+    <section id="destinations" className="py-20 bg-gradient-to-b from-slate-50 via-background to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
+          className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-block mb-4"
+          >
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+              Destinations
+            </span>
+          </motion.div>
+          <h2 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl font-serif">
             Explore Sri Lanka&apos;s Top Destinations
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
@@ -112,7 +123,7 @@ export function Destinations() {
         >
           {filteredDestinations.map((destination) => (
             <motion.div key={destination.slug} variants={itemVariants}>
-              <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:scale-[1.02] border-2 hover:border-primary/20 relative">
+              <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] border border-border/50 hover:border-primary/30 relative bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900">
                 <div className="relative aspect-video overflow-hidden">
                   <Image
                     src={destination.image}

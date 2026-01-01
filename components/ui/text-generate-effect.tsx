@@ -29,9 +29,9 @@ export const TextGenerateEffect = ({
   }, [controls, duration]);
 
   return (
-    <div className={cn("font-bold", className)}>
+    <div className={cn("font-bold relative", className)}>
       <motion.div className="my-4">
-        <div className="dark:text-white text-black leading-relaxed">
+        <div className="leading-relaxed">
           {wordsArray.map((word, idx) => {
             return (
               <motion.span
@@ -39,7 +39,7 @@ export const TextGenerateEffect = ({
                 initial={{ opacity: 0 }}
                 animate={controls}
                 custom={idx}
-                className="dark:text-white text-black opacity-0"
+                className="opacity-0"
               >
                 {word}{" "}
               </motion.span>

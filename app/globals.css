@@ -2,25 +2,25 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Sri Lanka Brand Colors - 60-30-10 Rule */
-  /* 60% - Dominant: Warm Cream (beaches, temples, light) */
-  --color-dominant: #FAF8F3;
-  --color-dominant-light: #FFFBF5;
-  --color-dominant-dark: #F5F1E8;
+  /* Professional Brand Colors */
+  /* Background: White */
+  --color-dominant: #ffffff;
+  --color-dominant-light: #ffffff;
+  --color-dominant-dark: #f9fafb;
 
-  /* 30% - Secondary: Rich Emerald Green (tea plantations, nature) */
-  --color-primary: #0D9488;
-  --color-primary-deep: #0F766E;
-  --color-primary-light: #14B8A6;
+  /* Primary: Dark Teal #00534E */
+  --color-primary: #00534E;
+  --color-primary-deep: #003d39;
+  --color-primary-light: #006b65;
 
-  /* 10% - Accent: Golden Amber (temples, sunsets, spices) */
-  --color-accent: #F59E0B;
-  --color-accent-deep: #D97706;
-  --color-accent-light: #FBBF24;
+  /* Accent: Golden Yellow #FFBE29 */
+  --color-accent: #FFBE29;
+  --color-accent-deep: #e6a825;
+  --color-accent-light: #ffd166;
 
-  --color-text: #1C1917;
-  --color-text-muted: #57534E;
-  --color-muted-bg: #F5F5F4;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b7280;
+  --color-muted-bg: #f5f5f5;
 
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-serif: var(--font-playfair), Georgia, serif;
@@ -40,78 +40,82 @@
 }
 
 :root {
-  /* 60% - Dominant Background Colors */
-  --background: 38 33% 97%;
-  /* #FAF8F3 converted to HSL for better opacity handling if needed, but keeping hex for now or using hex directly if tailwind 4 supports it well. Let's stick to the hex values provided but ensure they are consistent. */
-  --background: #FAF8F3;
-  --foreground: #1C1917;
+  /* Professional Color Palette */
+  
+  /* Background: White */
+  --background: #ffffff;
+  --foreground: #1a1a1a;
 
-  /* 30% - Secondary/Primary Colors (Emerald Green) */
-  --primary: #0D9488;
+  /* Primary: Dark Teal #00534E */
+  --primary: #00534E;
   --primary-foreground: #ffffff;
-  --primary-hover: #0F766E;
+  --primary-hover: #003d39;
+  --primary-light: #006b65;
+  --primary-dark: #003d39;
+
+  /* Accent: Golden Yellow #FFBE29 */
+  --accent: #FFBE29;
+  --accent-foreground: #1a1a1a;
+  --accent-hover: #e6a825;
+  --accent-light: #ffd166;
+
 
   /* Supporting Colors */
-  --secondary: #F0FDFA;
-  --secondary-foreground: #0F766E;
-  --muted: #F5F5F4;
-  --muted-foreground: #57534E;
-
-  /* 10% - Accent Colors (Golden Amber) */
-  --accent: #F59E0B;
-  --accent-foreground: #ffffff;
-  --accent-hover: #D97706;
+  --muted: #f5f5f5;
+  --muted-foreground: #6b7280;
 
   /* UI Colors */
-  --border: #E7E5E4;
-  --input: #E7E5E4;
-  --ring: #0D9488;
-  --radius: 1rem;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #00534E;
+  --radius: 0.75rem;
 
   /* Component Colors */
   --popover: #ffffff;
-  --popover-foreground: #1C1917;
+  --popover-foreground: #1a1a1a;
   --card: #ffffff;
-  --card-foreground: #1C1917;
+  --card-foreground: #1a1a1a;
 
   /* Status Colors */
-  --destructive: #EF4444;
+  --destructive: #DC2626;
   --destructive-foreground: #ffffff;
-  --success: #10B981;
+  --success: #059669;
   --success-foreground: #ffffff;
 }
 
 .dark {
-  /* Dark Mode - Maintains brand colors but with dark backgrounds */
-  --background: #0F172A;
-  --foreground: #F8FAFC;
+  /* Dark Mode */
+  --background: #0f172a;
+  --foreground: #f8fafc;
   
-  /* Primary colors remain vibrant in dark mode */
-  --primary: #14B8A6;
+  /* Primary - Dark Teal (lighter for dark mode) */
+  --primary: #006b65;
   --primary-foreground: #ffffff;
-  --primary-hover: #0D9488;
+  --primary-hover: #00534E;
+  --primary-light: #00857d;
+  --primary-dark: #003d39;
+  
+  /* Accent - Golden Yellow (lighter for dark mode) */
+  --accent: #ffd166;
+  --accent-foreground: #0f172a;
+  --accent-hover: #FFBE29;
+  --accent-light: #ffe08a;
+  
   
   /* Supporting Colors */
-  --secondary: #1E293B;
-  --secondary-foreground: #F8FAFC;
-  --muted: #1E293B;
-  --muted-foreground: #94A3B8;
-  
-  /* Accent colors */
-  --accent: #FBBF24;
-  --accent-foreground: #0F172A;
-  --accent-hover: #F59E0B;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
   
   /* UI Colors */
   --border: #334155;
   --input: #334155;
-  --ring: #14B8A6;
+  --ring: #006b65;
   
   /* Component Colors */
-  --popover: #1E293B;
-  --popover-foreground: #F8FAFC;
-  --card: #1E293B;
-  --card-foreground: #F8FAFC;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
   
   /* Status Colors */
   --destructive: #EF4444;
@@ -129,6 +133,12 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   transition: background-color 0.3s ease, color 0.3s ease;
+  /* Subtle texture */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(0, 83, 78, 0.02) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(255, 190, 41, 0.02) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(0, 83, 78, 0.02) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(255, 190, 41, 0.02) 0px, transparent 50%);
 }
 
 @layer utilities {
@@ -147,9 +157,9 @@ body {
     scroll-behavior: smooth;
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar with gradient */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 12px;
   }
 
   ::-webkit-scrollbar-track {
@@ -157,12 +167,13 @@ body {
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 5px;
+    background: linear-gradient(to bottom, var(--primary), var(--accent));
+    border-radius: 6px;
+    border: 2px solid var(--background);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-hover);
+    background: linear-gradient(to bottom, var(--primary-hover), var(--accent-hover));
   }
 }
 

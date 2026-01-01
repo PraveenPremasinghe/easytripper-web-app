@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { blogPosts } from "@/lib/data";
-import { BlogCard } from "@/components/sections/BlogCard";
-import { motion } from "framer-motion";
-import { BookOpen, Search } from "lucide-react";
+import { BlogHero } from "@/components/sections/BlogHero";
+import { BlogGrid } from "@/components/sections/BlogGrid";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Travel Blog & Guides | Expert Sri Lanka Travel Tips & Destination Guides",
@@ -23,58 +23,16 @@ export const metadata: Metadata = {
   },
 };
 
-const categories = ["All", "Travel Guide", "Destination", "Culture", "Wildlife", "Food", "Tips"] as const;
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 export default function BlogPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary/10 via-background to-accent/5">
-        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <div className="mb-4 flex justify-center">
-              <BookOpen className="h-12 w-12 text-primary" />
-            </div>
-            <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-              Travel Blog & Guides
-            </h1>
-            <p className="mx-auto max-w-3xl text-lg text-muted-foreground sm:text-xl">
-              Expert insights, comprehensive guides, and insider tips to help you discover 
-              the best of Sri Lanka. From ancient heritage sites to wildlife encounters, 
-              we share everything you need to plan an unforgettable journey.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <BlogHero />
 
       {/* Blog Posts Grid */}
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {blogPosts.map((post) => (
-              <BlogCard key={post.id} post={post} />
-            ))}
-          </motion.div>
+          <BlogGrid posts={blogPosts} />
         </div>
       </section>
 
@@ -121,18 +79,24 @@ export default function BlogPage() {
             and local insights. Contact us to start planning your perfect Sri Lanka adventure.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-accent px-8 py-4 text-base font-semibold text-white hover:bg-accent/90 shadow-lg hover:shadow-xl transition-all"
+            <Button
+              asChild
+              size="lg"
             >
-              Plan Your Trip
-            </Link>
-            <Link
-              href="/tours"
-              className="inline-flex items-center justify-center rounded-full border-2 border-white px-8 py-4 text-base font-semibold text-white hover:bg-white/10 transition-all"
+              <Link href="/contact">
+                Plan Your Trip
+              </Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-2 border-white bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 hover:border-white/50 hover:text-white"
             >
-              View Tour Packages
-            </Link>
+              <Link href="/tours">
+                View Tour Packages
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

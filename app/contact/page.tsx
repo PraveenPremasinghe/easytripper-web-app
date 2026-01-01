@@ -1,96 +1,152 @@
+"use client";
+
 import { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageSquare } from "lucide-react";
 import { InquiryForm } from "@/components/sections/InquiryForm";
-
-export const metadata: Metadata = {
-  title: "Contact Us",
-  description: "Get in touch with Jagath Premasinghe to plan your Sri Lanka adventure",
-};
+import { motion } from "framer-motion";
 
 export default function ContactPage() {
+  const contactInfo = [
+    {
+      icon: Phone,
+      title: "Phone",
+      content: "+94 77 123 4567",
+      href: "tel:+94771234567",
+      color: "from-blue-500 to-cyan-500",
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      content: "info@easytripper.lk",
+      href: "mailto:info@easytripper.lk",
+      color: "from-purple-500 to-pink-500",
+    },
+    {
+      icon: MapPin,
+      title: "Location",
+      content: "Sri Lanka",
+      href: "#",
+      color: "from-green-500 to-emerald-500",
+    },
+    {
+      icon: Clock,
+      title: "Response Time",
+      content: "Within 24 hours",
+      href: "#",
+      color: "from-amber-500 to-orange-500",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/5">
+    <div className="min-h-screen bg-white dark:bg-black">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-16 text-center"
+        >
+          <h1 className="mb-4 text-4xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-5xl md:text-6xl">
             Contact Us
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          <p className="mx-auto max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
             Let&apos;s plan your perfect Sri Lanka adventure together
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
-          {/* Contact Info */}
-          <div className="lg:col-span-1 space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Get in Touch</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
+        <div className="grid gap-8 lg:grid-cols-3 mb-12">
+          {/* Contact Info Cards */}
+          <div className="lg:col-span-1 space-y-4">
+            {contactInfo.map((info, index) => {
+              const Icon = info.icon;
+              return (
+                <motion.div
+                  key={info.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Card className="group hover:shadow-xl transition-all duration-300 border-neutral-200 dark:border-neutral-800">
+                    <CardContent className="p-6">
                 <div className="flex items-start gap-4">
-                  <div className="rounded-lg bg-primary/10 p-3">
-                    <Phone className="h-5 w-5 text-primary" />
+                        <div className={`rounded-xl bg-gradient-to-br ${info.color} p-3 group-hover:scale-110 transition-transform`}>
+                          <Icon className="h-5 w-5 text-white" />
                   </div>
-                  <div>
-                    <p className="font-semibold text-foreground">Phone</p>
+                        <div className="flex-1">
+                          <p className="font-semibold text-neutral-800 dark:text-neutral-200 mb-1">
+                            {info.title}
+                          </p>
+                          {info.href !== "#" ? (
                     <a
-                      href="tel:+94771234567"
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                              href={info.href}
+                              className="text-neutral-600 dark:text-neutral-400 hover:text-primary transition-colors"
                     >
-                      +94 77 123 4567
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="rounded-lg bg-primary/10 p-3">
-                    <Mail className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">Email</p>
-                    <a
-                      href="mailto:info@easytripper.lk"
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      info@easytripper.lk
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="rounded-lg bg-primary/10 p-3">
-                    <MapPin className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-foreground">Location</p>
-                    <p className="text-muted-foreground">Sri Lanka</p>
+                              {info.content}
+                            </a>
+                          ) : (
+                            <p className="text-neutral-600 dark:text-neutral-400">{info.content}</p>
+                          )}
                   </div>
                 </div>
               </CardContent>
             </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Response Time</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  We typically respond to inquiries within 24 hours. For urgent
-                  matters, please call us directly.
-                </p>
-              </CardContent>
-            </Card>
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Inquiry Form */}
-          <div className="lg:col-span-2">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-2"
+          >
             <InquiryForm />
-          </div>
+          </motion.div>
         </div>
+
+        {/* Additional Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid md:grid-cols-2 gap-6"
+        >
+          <Card className="border-neutral-200 dark:border-neutral-800">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <MessageSquare className="h-5 w-5" />
+                Quick Response
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-neutral-600 dark:text-neutral-400">
+                We typically respond to inquiries within 24 hours. For urgent matters, 
+                please call us directly or use WhatsApp for instant communication.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-neutral-200 dark:border-neutral-800">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Clock className="h-5 w-5" />
+                Business Hours
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-neutral-600 dark:text-neutral-400">
+                Monday - Sunday: 8:00 AM - 8:00 PM (Sri Lanka Time)
+                <br />
+                Available 24/7 for emergencies
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
       </div>
     </div>
   );
 }
-

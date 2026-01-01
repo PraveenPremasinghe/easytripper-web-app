@@ -6,7 +6,6 @@ import { MainNav } from "@/components/header/MainNav";
 import { Footer } from "@/components/sections/Footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
-import { ExitIntentPopup } from "@/components/ui/exit-intent-popup";
 import { StickyInquiryBar } from "@/components/ui/sticky-inquiry-bar";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -85,10 +84,9 @@ export default function RootLayout({
         >
           <TopBar />
           <MainNav />
-          <main className="pt-[141px]">{children}</main>
+          <main className="pt-[97px]">{children}</main>
           <Footer />
           <WhatsAppButton />
-          <ExitIntentPopup />
           <StickyInquiryBar />
           <Toaster />
         </ThemeProvider>

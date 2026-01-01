@@ -1,3 +1,5 @@
+"use client";
+
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,49 +7,53 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { destinations } from "@/lib/data";
-
-export const metadata: Metadata = {
-  title: "Destinations",
-  description: "Explore all destinations in Sri Lanka - from ancient cities to pristine beaches",
-};
+import { motion } from "framer-motion";
 
 export default function DestinationsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-primary/5">
+    <div className="min-h-screen bg-white dark:bg-black">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-16 text-center"
+        >
+          <h1 className="mb-4 text-4xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-5xl md:text-6xl">
             All Destinations
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+          <p className="mx-auto max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
             Discover the diverse beauty of Sri Lanka across all regions
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {destinations.map((destination) => (
-            <Card
+          {destinations.map((destination, index) => (
+            <motion.div
               key={destination.slug}
-              className="group h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
             >
+              <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-neutral-200 dark:border-neutral-800">
               <Link href={`/destinations/${destination.slug}`}>
                 <div className="relative aspect-video overflow-hidden">
                   <Image
                     src={destination.image}
                     alt={destination.name}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <Badge className="absolute right-4 top-4">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                    <Badge className="absolute right-4 top-4 bg-white/90 text-neutral-900">
                     {destination.region}
                   </Badge>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="mb-2 text-xl font-semibold text-foreground">
+                    <h3 className="mb-2 text-xl font-semibold text-neutral-800 dark:text-neutral-200 group-hover:text-primary transition-colors">
                     {destination.name}
                   </h3>
-                  <p className="mb-4 text-muted-foreground line-clamp-2">
+                    <p className="mb-4 text-neutral-600 dark:text-neutral-400 line-clamp-2">
                     {destination.excerpt}
                   </p>
                   <div className="flex items-center text-primary group-hover:underline">
@@ -57,10 +63,10 @@ export default function DestinationsPage() {
                 </CardContent>
               </Link>
             </Card>
+            </motion.div>
           ))}
         </div>
       </div>
     </div>
   );
 }
-

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { vehicles } from "@/lib/data";
-import { VehicleCard } from "@/components/sections/VehicleCard";
-import { motion } from "framer-motion";
+import { VehiclesHero } from "@/components/sections/VehiclesHero";
+import { VehiclesGrid } from "@/components/sections/VehiclesGrid";
 import { Car, Users, Wind, Shield, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -22,39 +22,11 @@ export const metadata: Metadata = {
   },
 };
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
 export default function VehiclesPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32 bg-gradient-to-br from-primary/10 via-background to-accent/5">
-        <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center"
-          >
-            <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-              Vehicles & Transport
-            </h1>
-            <p className="mx-auto max-w-3xl text-lg text-muted-foreground sm:text-xl">
-              Travel in comfort and safety with our professional fleet of vehicles. 
-              From compact cars to luxury vehicles and safari jeeps—we have the perfect 
-              transport solution for your Sri Lanka adventure.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <VehiclesHero />
 
       {/* Trust Indicators */}
       <section className="py-12 bg-muted/30">
@@ -95,16 +67,7 @@ export default function VehiclesPage() {
       {/* Vehicle Grid */}
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {vehicles.map((vehicle) => (
-              <VehicleCard key={vehicle.id} vehicle={vehicle} />
-            ))}
-          </motion.div>
+          <VehiclesGrid vehicles={vehicles} />
         </div>
       </section>
 

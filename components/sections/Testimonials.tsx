@@ -31,24 +31,41 @@ export function Testimonials() {
   }));
 
   return (
-    <section id="testimonials" className="py-20 bg-background dark:bg-slate-900">
+    <section id="testimonials" className="py-20 bg-gradient-to-br from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
+          className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
-            What Our Travelers Say
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-block mb-4"
+          >
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+              Testimonials
+            </span>
+          </motion.div>
+          <h2 className="mb-4 text-4xl font-bold text-foreground sm:text-5xl md:text-6xl font-serif">
+            People Love Us
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Trusted by travelers from around the world
+          <p className="mx-auto max-w-2xl text-lg text-muted-foreground mb-8">
+            Easy Tripper is loved by thousands of people across the world, be part of the community and join us.
           </p>
 
-          {/* Aggregate Rating */}
-          <div className="mt-6 flex items-center justify-center gap-2">
+          {/* Aggregate Rating - Modern Design */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 backdrop-blur-sm"
+          >
             <div className="flex items-center gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star
@@ -61,13 +78,13 @@ export function Testimonials() {
                 />
               ))}
             </div>
-            <span className="text-lg font-semibold text-foreground">
+            <span className="text-xl font-bold text-foreground">
               {aggregateRating.toFixed(1)} / 5.0
             </span>
             <span className="text-sm text-muted-foreground">
               ({testimonials.length} reviews)
             </span>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Infinite Moving Cards */}
