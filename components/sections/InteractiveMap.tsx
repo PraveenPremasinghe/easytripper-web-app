@@ -1,17 +1,37 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MapPin, ArrowRight } from "lucide-react";
-import { destinations } from "@/lib/data";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-
-const popularDestinations = destinations.slice(0, 6);
+import type { Destination } from "@/lib/types";
 
 export function InteractiveMap() {
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [loading, setLoading] = useState(true);
   const [hoveredDestination, setHoveredDestination] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchDestinations();
+  }, []);
+
+  const fetchDestinations = async () => {
+    try {
+      const res = await fetch("/api/firebase/destinations");
+      const { success, data } = await res.json();
+      if (success) {
+        setDestinations(data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch destinations:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const popularDestinations = destinations.slice(0, 6);
 
   return (
     <section className="py-20 bg-muted/20 dark:bg-slate-800/30 relative overflow-hidden">
@@ -31,20 +51,29 @@ export function InteractiveMap() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Map Preview */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative h-[500px] rounded-2xl overflow-hidden bg-muted border border-border shadow-lg"
-          >
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop')] bg-cover bg-center opacity-30" />
-            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]" />
-            
-            {/* Interactive Points */}
-            {popularDestinations.map((dest, index) => {
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Loading destinations...</p>
+          </div>
+        ) : popularDestinations.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No destinations available yet.</p>
+          </div>
+        ) : (
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Map Preview */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative h-[500px] rounded-2xl overflow-hidden bg-muted border border-border shadow-lg"
+            >
+              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop')] bg-cover bg-center opacity-30" />
+              <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]" />
+              
+              {/* Interactive Points */}
+              {popularDestinations.map((dest, index) => {
               const positions = [
                 { top: "20%", left: "30%" },
                 { top: "40%", left: "50%" },
@@ -135,6 +164,7 @@ export function InteractiveMap() {
             ))}
           </div>
         </div>
+        )}
       </div>
     </section>
   );

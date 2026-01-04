@@ -1,23 +1,43 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Users, MapPin, ArrowRight, Check } from "lucide-react";
-import { tours } from "@/lib/data";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import type { Tour } from "@/lib/types";
 
 export function ToursShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const linkRef = useRef<HTMLDivElement>(null);
+  const [tours, setTours] = useState<Tour[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    fetchTours();
+  }, []);
+
+  const fetchTours = async () => {
+    try {
+      const res = await fetch("/api/firebase/tours");
+      const { success, data } = await res.json();
+      if (success) {
+        setTours(data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch tours:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!sectionRef.current || loading) return;
 
     const ctx = gsap.context(() => {
       // Header animation
@@ -86,7 +106,7 @@ export function ToursShowcase() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [loading]);
 
   return (
     <section ref={sectionRef} className="py-20 bg-muted/20">
@@ -100,8 +120,17 @@ export function ToursShowcase() {
           </p>
         </div>
 
-        <div ref={gridRef} className="grid gap-8 lg:grid-cols-2">
-          {tours.slice(0, 4).map((tour) => (
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Loading tours...</p>
+          </div>
+        ) : tours.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No tours available yet.</p>
+          </div>
+        ) : (
+          <div ref={gridRef} className="grid gap-8 lg:grid-cols-2">
+            {tours.slice(0, 4).map((tour) => (
             <div key={tour.id}>
               <Card className="group overflow-hidden border border-border hover:border-primary/50 bg-card hover:shadow-xl transition-all duration-300 h-full hover:-translate-y-1">
                 <div className="relative aspect-video overflow-hidden">
@@ -196,10 +225,12 @@ export function ToursShowcase() {
                 </CardContent>
               </Card>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        <div ref={linkRef} className="mt-12 text-center">
+        {!loading && tours.length > 0 && (
+          <div ref={linkRef} className="mt-12 text-center">
           <Button asChild variant="outline" size="lg">
             <Link href="/tours">
               View All Tours
@@ -207,6 +238,7 @@ export function ToursShowcase() {
             </Link>
           </Button>
         </div>
+        )}
       </div>
     </section>
   );

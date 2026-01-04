@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { blogPosts } from "@/lib/data";
 import { BlogHero } from "@/components/sections/BlogHero";
 import { BlogGrid } from "@/components/sections/BlogGrid";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { BlogPageClient } from "./client";
 
 export const metadata: Metadata = {
   title: "Travel Blog & Guides | Expert Sri Lanka Travel Tips & Destination Guides",
@@ -32,7 +32,7 @@ export default function BlogPage() {
       {/* Blog Posts Grid */}
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-          <BlogGrid posts={blogPosts} />
+          <BlogPageClient />
         </div>
       </section>
 

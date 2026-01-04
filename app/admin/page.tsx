@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,13 +16,22 @@ import {
   Plus,
   Edit,
   Trash2,
-  Database
+  Database,
+  LogOut
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function AdminDashboard() {
+  const { data: session } = useSession();
+  const router = useRouter();
   const [migrating, setMigrating] = useState(false);
   const [migrationStatus, setMigrationStatus] = useState<string | null>(null);
+
+  const handleLogout = async () => {
+    await signOut({ redirect: false });
+    router.push("/admin/login");
+    router.refresh();
+  };
 
   const handleMigrate = async () => {
     if (!confirm("This will migrate existing data from lib/data.ts to JSON files. Continue?")) return;
@@ -54,15 +65,30 @@ export default function AdminDashboard() {
                 Manage your tours, destinations, vehicles, blog posts, stories, and places
               </p>
             </div>
-            <Button
-              onClick={handleMigrate}
-              disabled={migrating}
-              variant="outline"
-              className="flex items-center gap-2"
-            >
-              <Database className="h-4 w-4" />
-              {migrating ? "Migrating..." : "Migrate Data"}
-            </Button>
+            <div className="flex items-center gap-3">
+              {session && (
+                <div className="text-sm text-muted-foreground">
+                  Logged in as <span className="font-semibold text-foreground">{session.user?.name || "Admin"}</span>
+                </div>
+              )}
+              <Button
+                onClick={handleMigrate}
+                disabled={migrating}
+                variant="outline"
+                className="flex items-center gap-2"
+              >
+                <Database className="h-4 w-4" />
+                {migrating ? "Migrating..." : "Migrate Data"}
+              </Button>
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Logout
+              </Button>
+            </div>
           </div>
           {migrationStatus && (
             <div className={`p-4 rounded-lg ${migrationStatus.includes("✅") ? "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400" : "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400"}`}>

@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { provinces, Place } from "@/lib/places";
+import { Place, Province } from "@/lib/places";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -41,13 +41,36 @@ const InteractiveMap = dynamic(() => import("./InteractiveMap"), {
 });
 
 export function TripPlanner() {
+  const [provinces, setProvinces] = useState<Province[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedPlaces, setSelectedPlaces] = useState<Place[]>([]);
-  const [activeProvince, setActiveProvince] = useState<string>(provinces[0].id);
+  const [activeProvince, setActiveProvince] = useState<string>("");
   const [isSaveDialogOpen, setIsSaveDialogOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const tabsScrollRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
+
+  useEffect(() => {
+    fetchProvinces();
+  }, []);
+
+  const fetchProvinces = async () => {
+    try {
+      const res = await fetch("/api/firebase/places");
+      const { success, data } = await res.json();
+      if (success && Array.isArray(data)) {
+        setProvinces(data);
+        if (data.length > 0) {
+          setActiveProvince(data[0].id);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to fetch provinces:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const currentProvince = useMemo(
     () => provinces.find((p) => p.id === activeProvince),
@@ -120,6 +143,27 @@ export function TripPlanner() {
       behavior: 'smooth'
     });
   };
+
+  if (loading) {
+    return (
+      <div className="w-full space-y-6 pb-8">
+        <div className="text-center py-12">
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
+          <p className="mt-4 text-muted-foreground">Loading trip planner...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (provinces.length === 0) {
+    return (
+      <div className="w-full space-y-6 pb-8">
+        <div className="text-center py-12">
+          <p className="text-muted-foreground">No provinces available. Please add provinces and places in the admin dashboard.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full space-y-6 pb-8">

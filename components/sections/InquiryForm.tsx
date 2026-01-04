@@ -16,7 +16,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { sendInquiry } from "@/app/actions/sendInquiry";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "@/components/ui/toaster";
 import { DatePicker } from "@/components/ui/date-picker";
@@ -59,14 +58,40 @@ export function InquiryForm() {
 
     setIsSubmitting(true);
     try {
-      await sendInquiry(data);
-      setIsSuccess(true);
-      reset();
-      toast.success(
-        "Inquiry Sent Successfully!",
-        "We've received your inquiry and will get back to you within 24 hours."
-      );
-      setTimeout(() => setIsSuccess(false), 5000);
+      const response = await fetch("/api/send-inquiry-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          startDate: data.startDate,
+          endDate: data.endDate,
+          travelers: data.travelers,
+          budget: data.budget,
+          interests: data.interests,
+          message: data.message || undefined,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setIsSuccess(true);
+        reset();
+        toast.success(
+          "Inquiry Sent Successfully!",
+          "We've received your inquiry and will get back to you within 24 hours."
+        );
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        toast.error(
+          "Submission Failed",
+          result.error || "Something went wrong. Please try again or contact us directly."
+        );
+      }
     } catch (error) {
       console.error("Error submitting inquiry:", error);
       toast.error(

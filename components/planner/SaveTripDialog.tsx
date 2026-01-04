@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, CheckCircle } from "lucide-react";
+import { toast } from "@/components/ui/toaster";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -50,16 +51,35 @@ export function SaveTripDialog({ isOpen, onClose, selectedPlaces }: SaveTripDial
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    console.log("Trip Saved:", {
-      userDetails: data,
-      itinerary: selectedPlaces,
-    });
+    try {
+      const response = await fetch("/api/send-trip-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          notes: data.notes || undefined,
+          places: selectedPlaces,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
+      const result = await response.json();
+
+      if (result.success) {
+        toast.success("Trip Plan Sent!", "Your trip plan has been sent successfully. We'll contact you soon!");
+        setIsSuccess(true);
+      } else {
+        toast.error("Error", result.error || "Failed to send trip plan. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting trip plan:", error);
+      toast.error("Error", "Failed to send trip plan. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {

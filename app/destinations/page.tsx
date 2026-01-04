@@ -1,15 +1,36 @@
 "use client";
 
-import { Metadata } from "next";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
-import { destinations } from "@/lib/data";
 import { motion } from "framer-motion";
+import type { Destination } from "@/lib/types";
 
 export default function DestinationsPage() {
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDestinations();
+  }, []);
+
+  const fetchDestinations = async () => {
+    try {
+      const res = await fetch("/api/firebase/destinations");
+      const { success, data } = await res.json();
+      if (success) {
+        setDestinations(data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch destinations:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-black">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
@@ -27,8 +48,17 @@ export default function DestinationsPage() {
           </p>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {destinations.map((destination, index) => (
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Loading destinations...</p>
+          </div>
+        ) : destinations.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No destinations available yet.</p>
+          </div>
+        ) : (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {destinations.map((destination, index) => (
             <motion.div
               key={destination.slug}
               initial={{ opacity: 0, y: 20 }}
@@ -64,8 +94,9 @@ export default function DestinationsPage() {
               </Link>
             </Card>
             </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

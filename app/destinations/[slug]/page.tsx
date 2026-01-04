@@ -5,8 +5,8 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, MapPin, Calendar, Clock, Thermometer } from "lucide-react";
-import { destinations, thingsToDo } from "@/lib/data";
 import { InquiryForm } from "@/components/sections/InquiryForm";
+import type { Destination } from "@/lib/types";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -14,7 +14,20 @@ type Props = {
 
 export const revalidate = 86400; // ISR: Revalidate every 24 hours
 
+async function getDestinations(): Promise<Destination[]> {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/firebase/destinations`, { next: { revalidate: 3600 } });
+    const { success, data } = await res.json();
+    return success ? (data || []) : [];
+  } catch (error) {
+    console.error("Failed to fetch destinations:", error);
+    return [];
+  }
+}
+
 export async function generateStaticParams() {
+  const destinations = await getDestinations();
   return destinations.map((destination) => ({
     slug: destination.slug,
   }));
@@ -22,6 +35,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  const destinations = await getDestinations();
   const destination = destinations.find((d) => d.slug === slug);
 
   if (!destination) {
@@ -43,11 +57,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function DestinationPage({ params }: Props) {
   const { slug } = await params;
+  const destinations = await getDestinations();
   const destination = destinations.find((d) => d.slug === slug);
 
   if (!destination) {
     notFound();
   }
+
+  // Things to do is now empty, so we'll skip that section
+  const destinationActivities: any[] = [];
 
   return (
     <div className="min-h-screen bg-background">
@@ -139,45 +157,36 @@ export default async function DestinationPage({ params }: Props) {
               </div>
 
               {/* Things to Do in this Destination */}
-              {(() => {
-                const destinationActivities = thingsToDo.filter(
-                  (activity) => activity.location?.toLowerCase() === destination.name.toLowerCase()
-                );
-                
-                if (destinationActivities.length > 0) {
-                  return (
-                    <div className="mt-8">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">
-                        Things to Do in {destination.name}
-                      </h2>
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        {destinationActivities.map((activity) => (
-                          <Card key={activity.id} className="overflow-hidden">
-                            <div className="relative aspect-video">
-                              <Image
-                                src={activity.image}
-                                alt={activity.title}
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                            <CardContent className="p-4">
-                              <div className="mb-2 flex items-center justify-between">
-                                <Badge variant="secondary">{activity.category}</Badge>
-                              </div>
-                              <h3 className="mb-2 font-semibold text-foreground">
-                                {activity.title}
-                              </h3>
-                              <p className="text-sm text-muted-foreground">{activity.description}</p>
-                            </CardContent>
-                          </Card>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-                return null;
-              })()}
+              {destinationActivities.length > 0 && (
+                <div className="mt-8">
+                  <h2 className="mb-4 text-2xl font-bold text-foreground">
+                    Things to Do in {destination.name}
+                  </h2>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {destinationActivities.map((activity) => (
+                      <Card key={activity.id} className="overflow-hidden">
+                        <div className="relative aspect-video">
+                          <Image
+                            src={activity.image}
+                            alt={activity.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <CardContent className="p-4">
+                          <div className="mb-2 flex items-center justify-between">
+                            <Badge variant="secondary">{activity.category}</Badge>
+                          </div>
+                          <h3 className="mb-2 font-semibold text-foreground">
+                            {activity.title}
+                          </h3>
+                          <p className="text-sm text-muted-foreground">{activity.description}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Travel Tips for this Destination */}
               <div className="mt-8">
@@ -219,40 +228,37 @@ export default async function DestinationPage({ params }: Props) {
                   .filter((d) => d.slug !== destination.slug && d.region === destination.region)
                   .slice(0, 3);
                 
-                if (relatedDestinations.length > 0) {
-                  return (
-                    <div className="mt-8">
-                      <h2 className="mb-4 text-2xl font-bold text-foreground">
-                        Explore More in {destination.region}
-                      </h2>
-                      <div className="grid gap-4 sm:grid-cols-3">
-                        {relatedDestinations.map((related) => (
-                          <Link key={related.slug} href={`/destinations/${related.slug}`}>
-                            <Card className="group h-full transition-all hover:shadow-lg hover:-translate-y-1">
-                              <div className="relative aspect-video overflow-hidden">
-                                <Image
-                                  src={related.image}
-                                  alt={related.name}
-                                  fill
-                                  className="object-cover transition-transform duration-300 group-hover:scale-110"
-                                />
-                              </div>
-                              <CardContent className="p-4">
-                                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                                  {related.name}
-                                </h3>
-                                <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                                  {related.excerpt}
-                                </p>
-                              </CardContent>
-                            </Card>
-                          </Link>
-                        ))}
-                      </div>
+                return relatedDestinations.length > 0 ? (
+                  <div className="mt-8">
+                    <h2 className="mb-4 text-2xl font-bold text-foreground">
+                      Explore More in {destination.region}
+                    </h2>
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      {relatedDestinations.map((related) => (
+                        <Link key={related.slug} href={`/destinations/${related.slug}`}>
+                          <Card className="group h-full transition-all hover:shadow-lg hover:-translate-y-1">
+                            <div className="relative aspect-video overflow-hidden">
+                              <Image
+                                src={related.image}
+                                alt={related.name}
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-110"
+                              />
+                            </div>
+                            <CardContent className="p-4">
+                              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                                {related.name}
+                              </h3>
+                              <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
+                                {related.excerpt}
+                              </p>
+                            </CardContent>
+                          </Card>
+                        </Link>
+                      ))}
                     </div>
-                  );
-                }
-                return null;
+                  </div>
+                ) : null;
               })()}
             </div>
           </div>

@@ -1,38 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, MapPin, Award, Users, Calendar } from "lucide-react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { Marquee } from "@/components/ui/marquee";
-import { provinces } from "@/lib/places";
 import { cn } from "@/lib/utils";
+import type { Destination } from "@/lib/types";
 
-// Get all places from all provinces for the Marquee
-const allPlaces = provinces.flatMap(province => province.places);
-
-// Duplicate places to ensure we have enough for 5 rows (at least 3-4 items per row)
-const duplicatedPlaces = [...allPlaces, ...allPlaces, ...allPlaces];
-
-// Create rows for 3D Marquee - ensure each row has at least 3 items
-const itemsPerRow = Math.max(3, Math.ceil(duplicatedPlaces.length / 5));
-const firstRow = duplicatedPlaces.slice(0, itemsPerRow);
-const secondRow = duplicatedPlaces.slice(itemsPerRow, itemsPerRow * 2);
-const thirdRow = duplicatedPlaces.slice(itemsPerRow * 2, itemsPerRow * 3);
-const fourthRow = duplicatedPlaces.slice(itemsPerRow * 3, itemsPerRow * 4);
-const fifthRow = duplicatedPlaces.slice(itemsPerRow * 4, itemsPerRow * 5);
-
-// Place Card Component for Marquee
-const PlaceCard = ({
+// Destination Card Component for Marquee
+const DestinationCard = ({
   image,
   name,
-  province,
+  region,
 }: {
   image: string;
   name: string;
-  province: string;
+  region: string;
 }) => {
   return (
     <figure
@@ -55,7 +41,7 @@ const PlaceCard = ({
           <figcaption className="text-sm font-semibold text-white mb-1">
             {name}
           </figcaption>
-          <p className="text-xs text-white/80">{province}</p>
+          <p className="text-xs text-white/80">{region}</p>
         </div>
       </div>
     </figure>
@@ -63,7 +49,18 @@ const PlaceCard = ({
 };
 
 // Marquee 3D Component
-const Marquee3D = () => {
+const Marquee3D = ({ destinations }: { destinations: Destination[] }) => {
+  // Duplicate destinations to ensure we have enough for 5 rows (at least 3-4 items per row)
+  const duplicatedDestinations = [...destinations, ...destinations, ...destinations];
+
+  // Create rows for 3D Marquee - ensure each row has at least 3 items
+  const itemsPerRow = Math.max(3, Math.ceil(duplicatedDestinations.length / 5));
+  const firstRow = duplicatedDestinations.slice(0, itemsPerRow);
+  const secondRow = duplicatedDestinations.slice(itemsPerRow, itemsPerRow * 2);
+  const thirdRow = duplicatedDestinations.slice(itemsPerRow * 2, itemsPerRow * 3);
+  const fourthRow = duplicatedDestinations.slice(itemsPerRow * 3, itemsPerRow * 4);
+  const fifthRow = duplicatedDestinations.slice(itemsPerRow * 4, itemsPerRow * 5);
+
   return (
     <div className="relative flex h-full w-full flex-row items-center justify-center gap-4 overflow-hidden [perspective:300px]">
       <div
@@ -74,32 +71,31 @@ const Marquee3D = () => {
         }}
       >
         <Marquee pauseOnHover vertical className="[--duration:20s]">
-          {firstRow.map((place) => (
-            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          {firstRow.map((destination) => (
+            <DestinationCard key={destination.slug} image={destination.image} name={destination.name} region={destination.region} />
           ))}
         </Marquee>
         <Marquee reverse pauseOnHover className="[--duration:20s]" vertical>
-          {secondRow.map((place) => (
-            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          {secondRow.map((destination) => (
+            <DestinationCard key={destination.slug} image={destination.image} name={destination.name} region={destination.region} />
           ))}
         </Marquee>
         <Marquee reverse pauseOnHover className="[--duration:20s]" vertical>
-          {thirdRow.map((place) => (
-            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          {thirdRow.map((destination) => (
+            <DestinationCard key={destination.slug} image={destination.image} name={destination.name} region={destination.region} />
           ))}
         </Marquee>
         <Marquee pauseOnHover className="[--duration:20s]" vertical>
-          {fourthRow.map((place) => (
-            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          {fourthRow.map((destination) => (
+            <DestinationCard key={destination.slug} image={destination.image} name={destination.name} region={destination.region} />
           ))}
         </Marquee>
         <Marquee reverse pauseOnHover className="[--duration:20s]" vertical>
-          {fifthRow.map((place) => (
-            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          {fifthRow.map((destination) => (
+            <DestinationCard key={destination.slug} image={destination.image} name={destination.name} region={destination.region} />
           ))}
         </Marquee>
       </div>
-
     </div>
   );
 };
@@ -113,6 +109,23 @@ export function Hero() {
   const subheadingRef = useRef<HTMLParagraphElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+
+  useEffect(() => {
+    fetchDestinations();
+  }, []);
+
+  const fetchDestinations = async () => {
+    try {
+      const res = await fetch("/api/firebase/destinations");
+      const { success, data } = await res.json();
+      if (success && Array.isArray(data)) {
+        setDestinations(data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch destinations:", error);
+    }
+  };
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -233,7 +246,7 @@ export function Hero() {
       <div className="relative z-10  mx-auto h-screen">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-20 lg:py-0">
           {/* Left Content Section */}
-          <div ref={contentRef} className="flex flex-col justify-center space-y-8 lg:space-y-10 order-2 lg:order-1 px-20">
+          <div ref={contentRef} className="flex flex-col justify-center space-y-8 lg:space-y-10 order-2 lg:order-1 px-20 ">
             {/* Tagline */}
            
 
@@ -315,7 +328,16 @@ export function Hero() {
 
           {/* Right Marquee 3D Section */}
           <div ref={marqueeRef} className="relative order-1 lg:order-2 h-[90vh] overflow-hidden">
-            <Marquee3D />
+            {destinations.length > 0 ? (
+              <Marquee3D destinations={destinations} />
+            ) : (
+              <div className="flex h-full items-center justify-center">
+                <div className="text-center">
+                  <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent mb-4"></div>
+                  <p className="text-muted-foreground">Loading destinations...</p>
+                </div>
+              </div>
+            )}
             {/* Fade Gradients - All Sides - Subtle */}
             {/* <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div> */}
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div>

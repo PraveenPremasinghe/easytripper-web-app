@@ -43,11 +43,17 @@ export default function PlacesAdminPage() {
 
   const fetchProvinces = async () => {
     try {
-      const res = await fetch("/api/provinces");
-      const data = await res.json();
-      setProvinces(data);
+      const res = await fetch("/api/firebase/places");
+      const { success, data } = await res.json();
+      if (success) {
+        setProvinces(data || []);
+      } else {
+        console.error("Failed to fetch provinces");
+        setProvinces([]);
+      }
     } catch (error) {
       console.error("Failed to fetch provinces:", error);
+      setProvinces([]);
     } finally {
       setLoading(false);
     }
@@ -57,12 +63,12 @@ export default function PlacesAdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const dataToSubmit = editingProvince 
-        ? provinceFormData 
-        : { ...provinceFormData, id: generateId('province') };
-      
-      const url = editingProvince ? `/api/provinces/${editingProvince.id}` : "/api/provinces";
+      const url = "/api/firebase/places";
       const method = editingProvince ? "PUT" : "POST";
+      
+      const dataToSubmit = editingProvince 
+        ? { action: "updateProvince", id: editingProvince.id, ...provinceFormData }
+        : { action: "createProvince", ...provinceFormData };
       
       const res = await fetch(url, {
         method,
@@ -70,10 +76,13 @@ export default function PlacesAdminPage() {
         body: JSON.stringify(dataToSubmit),
       });
 
-      if (res.ok) {
+      const { success } = await res.json();
+      if (success) {
         await fetchProvinces();
         setIsProvinceDialogOpen(false);
         resetProvinceForm();
+      } else {
+        console.error("Failed to save province");
       }
     } catch (error) {
       console.error("Failed to save province:", error);
@@ -88,32 +97,35 @@ export default function PlacesAdminPage() {
     setSaving(true);
 
     try {
-      const dataToSubmit = editingPlace 
-        ? placeFormData 
-        : { ...placeFormData, id: generateId('place') };
+      const url = "/api/firebase/places";
+      const method = editingPlace ? "PUT" : "POST";
       
-      if (editingPlace) {
-        const res = await fetch(`/api/provinces/${selectedProvince}/places/${editingPlace.id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(dataToSubmit),
-        });
-        if (res.ok) {
-          await fetchProvinces();
-          setIsPlaceDialogOpen(false);
-          resetPlaceForm();
-        }
+      const dataToSubmit = editingPlace 
+        ? {
+            action: "updatePlace",
+            provinceId: selectedProvince,
+            placeId: editingPlace.id,
+            place: { ...placeFormData, id: editingPlace.id },
+          }
+        : {
+            action: "addPlace",
+            provinceId: selectedProvince,
+            place: { ...placeFormData, id: generateId('place') },
+          };
+      
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataToSubmit),
+      });
+
+      const { success } = await res.json();
+      if (success) {
+        await fetchProvinces();
+        setIsPlaceDialogOpen(false);
+        resetPlaceForm();
       } else {
-        const res = await fetch(`/api/provinces/${selectedProvince}/places`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(dataToSubmit),
-        });
-        if (res.ok) {
-          await fetchProvinces();
-          setIsPlaceDialogOpen(false);
-          resetPlaceForm();
-        }
+        console.error("Failed to save place");
       }
     } catch (error) {
       console.error("Failed to save place:", error);
@@ -126,9 +138,12 @@ export default function PlacesAdminPage() {
     if (!confirm("Are you sure you want to delete this province?")) return;
     
     try {
-      const res = await fetch(`/api/provinces/${id}`, { method: "DELETE" });
-      if (res.ok) {
+      const res = await fetch(`/api/firebase/places?action=deleteProvince&id=${id}`, { method: "DELETE" });
+      const { success } = await res.json();
+      if (success) {
         await fetchProvinces();
+      } else {
+        console.error("Failed to delete province");
       }
     } catch (error) {
       console.error("Failed to delete province:", error);
@@ -139,9 +154,12 @@ export default function PlacesAdminPage() {
     if (!confirm("Are you sure you want to delete this place?")) return;
     
     try {
-      const res = await fetch(`/api/provinces/${provinceId}/places/${placeId}`, { method: "DELETE" });
-      if (res.ok) {
+      const res = await fetch(`/api/firebase/places?action=deletePlace&provinceId=${provinceId}&placeId=${placeId}`, { method: "DELETE" });
+      const { success } = await res.json();
+      if (success) {
         await fetchProvinces();
+      } else {
+        console.error("Failed to delete place");
       }
     } catch (error) {
       console.error("Failed to delete place:", error);

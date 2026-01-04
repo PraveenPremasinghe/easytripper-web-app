@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Calendar } from "lucide-react";
-import { stories } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { StoryModal } from "@/components/stories/StoryModal";
@@ -14,6 +13,26 @@ import type { Story } from "@/lib/types";
 export function TravelStories() {
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [stories, setStories] = useState<Story[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchStories();
+  }, []);
+
+  const fetchStories = async () => {
+    try {
+      const res = await fetch("/api/firebase/stories");
+      const { success, data } = await res.json();
+      if (success) {
+        setStories(data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch stories:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Display first 6 stories on home page
   const displayedStories = stories.slice(0, 6);
@@ -46,7 +65,11 @@ export function TravelStories() {
           </p>
         </motion.div>
 
-        {displayedStories.length === 0 ? (
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Loading stories...</p>
+          </div>
+        ) : displayedStories.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-muted-foreground">No travel stories available yet.</p>
             <Link 

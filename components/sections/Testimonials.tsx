@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, MessageSquarePlus } from "lucide-react";
-import { testimonials } from "@/lib/data";
 import { Marquee } from "@/components/ui/marquee";
 import { Button } from "@/components/ui/button";
 import { FeedbackForm } from "./FeedbackForm";
 import { cn } from "@/lib/utils";
+import { toast } from "@/components/ui/toaster";
+import type { Testimonial } from "@/lib/types";
 
 // Country flag emoji mapping
 const countryFlags: Record<string, string> = {
@@ -78,49 +79,39 @@ const ReviewCard = ({
   );
 };
 
-interface UserFeedback {
-  id: string;
-  name: string;
-  country: string;
-  comment: string;
-  rating: number;
-  timestamp: number;
-}
-
 export function Testimonials() {
   const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
-  const [userFeedbacks, setUserFeedbacks] = useState<UserFeedback[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
-  // Load user feedbacks from localStorage
+  // Fetch testimonials from Firebase
   useEffect(() => {
-    const stored = localStorage.getItem("userFeedbacks");
-    if (stored) {
-      try {
-        setUserFeedbacks(JSON.parse(stored));
-      } catch (e) {
-        console.error("Error loading feedbacks:", e);
-      }
-    }
+    fetchTestimonials();
   }, []);
 
-  // Combine original testimonials with user feedbacks
-  const allTestimonials = [
-    ...testimonials,
-    ...userFeedbacks.map((fb) => ({
-      id: fb.id,
-      name: fb.name,
-      country: fb.country,
-      comment: fb.comment,
-      rating: fb.rating,
-    })),
-  ];
+  const fetchTestimonials = async () => {
+    try {
+      const res = await fetch("/api/firebase/testimonials");
+      const { success, data } = await res.json();
+      if (success) {
+        setTestimonials(data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch testimonials:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Calculate aggregate rating
   const aggregateRating =
-    allTestimonials.reduce((sum, t) => sum + t.rating, 0) / allTestimonials.length;
+    testimonials.length > 0
+      ? testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length
+      : 0;
 
   // Transform testimonials to match Magic UI pattern
-  const reviews = allTestimonials.map((testimonial) => {
+  const reviews = testimonials.map((testimonial) => {
     const flag = countryFlags[testimonial.country] || "";
     return {
       name: testimonial.name,
@@ -136,24 +127,34 @@ export function Testimonials() {
   const secondRow = reviews.slice(Math.ceil(reviews.length / 2));
 
   // Handle feedback submission
-  const handleFeedbackSubmit = (data: {
+  const handleFeedbackSubmit = async (data: {
     name: string;
     country: string;
     comment: string;
     rating: number;
   }) => {
-    const newFeedback: UserFeedback = {
-      id: `user-${Date.now()}`,
-      name: data.name,
-      country: data.country,
-      comment: data.comment,
-      rating: data.rating,
-      timestamp: Date.now(),
-    };
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/firebase/testimonials", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
 
-    const updatedFeedbacks = [...userFeedbacks, newFeedback];
-    setUserFeedbacks(updatedFeedbacks);
-    localStorage.setItem("userFeedbacks", JSON.stringify(updatedFeedbacks));
+      const result = await res.json();
+      if (result.success) {
+        toast.success("Thank you!", "Your feedback has been submitted successfully.");
+        await fetchTestimonials(); // Refresh testimonials
+        setIsFeedbackOpen(false);
+      } else {
+        toast.error("Error", result.error || "Failed to submit feedback. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      toast.error("Error", "Failed to submit feedback. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -207,10 +208,10 @@ export function Testimonials() {
                 ))}
               </div>
               <span className="text-xl font-bold text-foreground">
-                {aggregateRating.toFixed(1)} / 5.0
+                {aggregateRating > 0 ? aggregateRating.toFixed(1) : "0.0"} / 5.0
               </span>
               <span className="text-sm text-muted-foreground">
-                ({allTestimonials.length} reviews)
+                ({testimonials.length} {testimonials.length === 1 ? "review" : "reviews"})
               </span>
             </div>
             <Button
@@ -225,8 +226,20 @@ export function Testimonials() {
         </motion.div>
 
         {/* Magic UI Marquee - Two Rows with improved spacing */}
-     
-        {reviews.length > 0 && (
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent mb-4"></div>
+            <p className="text-muted-foreground">Loading testimonials...</p>
+          </div>
+        ) : reviews.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground mb-4">No testimonials yet. Be the first to share your experience!</p>
+            <Button onClick={() => setIsFeedbackOpen(true)} className="gap-2">
+              <MessageSquarePlus className="h-5 w-5" />
+              Add Your Feedback
+            </Button>
+          </div>
+        ) : reviews.length > 0 && (
           <div className="relative flex w-full flex-col items-center justify-center gap-4 overflow-hidden rounded-lg py-4">
             {/* First Row - Left to Right */}
             <div className="relative w-full">
@@ -271,6 +284,7 @@ export function Testimonials() {
           isOpen={isFeedbackOpen}
           onClose={() => setIsFeedbackOpen(false)}
           onSubmit={handleFeedbackSubmit}
+          isSubmitting={submitting}
         />
       </div>
     </section>

@@ -1,17 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { stories } from "@/lib/data";
 import { StoryModal } from "@/components/stories/StoryModal";
 import { Calendar } from "lucide-react";
 import type { Story } from "@/lib/types";
 
 export default function StoriesPage() {
+  const [stories, setStories] = useState<Story[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    fetchStories();
+  }, []);
+
+  const fetchStories = async () => {
+    try {
+      const res = await fetch("/api/firebase/stories");
+      const { success, data } = await res.json();
+      if (success) {
+        setStories(data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch stories:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleStoryClick = (story: Story) => {
     setSelectedStory(story);
@@ -36,8 +55,17 @@ export default function StoriesPage() {
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {stories.map((story) => (
+          {loading ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Loading stories...</p>
+            </div>
+          ) : stories.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">No travel stories available yet.</p>
+            </div>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {stories.map((story) => (
               <Card
                 key={story.id}
                 className="group h-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
@@ -79,8 +107,9 @@ export default function StoriesPage() {
                   )}
                 </CardContent>
               </Card>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

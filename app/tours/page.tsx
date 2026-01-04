@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,13 +8,34 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowRight, Calendar, Users, MapPin, Check, X } from "lucide-react";
-import { tours } from "@/lib/data";
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { ItineraryTimeline } from "@/components/sections/ItineraryTimeline";
 import { motion } from "framer-motion";
+import type { Tour } from "@/lib/types";
 
 export default function ToursPage() {
+  const [tours, setTours] = useState<Tour[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  useEffect(() => {
+    fetchTours();
+  }, []);
+
+  const fetchTours = async () => {
+    try {
+      const res = await fetch("/api/firebase/tours");
+      const { success, data } = await res.json();
+      if (success) {
+        setTours(data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch tours:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const categories = ["All", ...Array.from(new Set(tours.map((t) => t.category)))];
 
   const filteredTours =
@@ -64,14 +85,23 @@ export default function ToursPage() {
         </motion.div>
 
         {/* Tours Grid */}
-        <motion.div
-          key={selectedCategory}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="grid gap-8 lg:grid-cols-2"
-        >
-          {filteredTours.map((tour, index) => (
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Loading tours...</p>
+          </div>
+        ) : filteredTours.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No tours available yet.</p>
+          </div>
+        ) : (
+          <motion.div
+            key={selectedCategory}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="grid gap-8 lg:grid-cols-2"
+          >
+            {filteredTours.map((tour, index) => (
             <motion.div
               key={tour.id}
               initial={{ opacity: 0, y: 20 }}
@@ -164,90 +194,168 @@ export default function ToursPage() {
                         View Details
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-                      <DialogHeader>
-                        <DialogTitle className="text-3xl">{tour.name}</DialogTitle>
+                    <DialogContent className="max-w-4xl max-h-[95vh] overflow-hidden flex flex-col p-0">
+                      <DialogHeader className="sr-only">
+                        <DialogTitle>{tour.name}</DialogTitle>
                         <DialogDescription>{tour.description}</DialogDescription>
                       </DialogHeader>
-                      <div className="space-y-6">
-                        <div>
-                            <div className="flex flex-wrap gap-4 text-sm text-neutral-600 dark:text-neutral-400">
-                            <div className="flex items-center gap-2">
+                      {/* Tour Image Header */}
+                      <div className="relative h-64 w-full overflow-hidden">
+                        <Image
+                          src={tour.image}
+                          alt={tour.name}
+                          fill
+                          className="object-cover"
+                          priority
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                        <div className="absolute bottom-0 left-0 right-0 p-6">
+                          <div className="flex flex-wrap items-center gap-3 mb-3">
+                            <Badge className="bg-white/90 text-neutral-900">{tour.category}</Badge>
+                            {tour.difficulty && (
+                              <Badge variant="secondary" className="bg-white/90">{tour.difficulty}</Badge>
+                            )}
+                            <div className="flex items-center gap-2 text-white text-sm">
                               <Calendar className="h-4 w-4" />
                               <span>{tour.duration}</span>
                             </div>
                             {tour.groupSize && (
-                              <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-2 text-white text-sm">
                                 <Users className="h-4 w-4" />
                                 <span>{tour.groupSize}</span>
                               </div>
                             )}
-                            {tour.difficulty && (
-                              <Badge variant="secondary">{tour.difficulty}</Badge>
+                          </div>
+                          <h2 className="text-3xl font-bold text-white mb-2">{tour.name}</h2>
+                          <p className="text-white/90 text-base">
+                            {tour.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Scrollable Content */}
+                      <div className="flex-1 overflow-y-auto p-6">
+                        <div className="space-y-6">
+                          {/* Price Section */}
+                          <div className="flex items-baseline gap-3 pb-4 border-b">
+                            <span className="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+                              {tour.price}
+                            </span>
+                            {tour.priceNote && (
+                              <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                                {tour.priceNote}
+                              </span>
                             )}
-                            <Badge>{tour.category}</Badge>
                           </div>
-                        </div>
 
-                        <div>
-                            <h3 className="mb-4 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
-                              Itinerary
-                            </h3>
-                          <ItineraryTimeline itinerary={tour.itinerary} />
-                        </div>
-
-                        <div className="grid gap-4 md:grid-cols-2">
-                          <div>
-                              <h3 className="mb-2 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
-                                Includes
-                              </h3>
-                            <ul className="space-y-1">
-                              {tour.includes.map((item, index) => (
-                                  <li
-                                    key={index}
-                                    className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300"
-                                  >
-                                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
-                                  <span>{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          {tour.excludes && tour.excludes.length > 0 && (
+                          {/* Highlights Section */}
+                          {tour.highlights && tour.highlights.length > 0 && (
                             <div>
-                                <h3 className="mb-2 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
-                                  Excludes
-                                </h3>
-                              <ul className="space-y-1">
-                                {tour.excludes.map((item, index) => (
-                                    <li
-                                      key={index}
-                                      className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300"
-                                    >
-                                      <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-500" />
-                                    <span>{item}</span>
+                              <h3 className="mb-3 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+                                Tour Highlights
+                              </h3>
+                              <ul className="grid gap-2 sm:grid-cols-2">
+                                {tour.highlights.map((highlight, idx) => (
+                                  <li key={idx} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+                                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
+                                    <span>{highlight}</span>
                                   </li>
                                 ))}
                               </ul>
                             </div>
                           )}
-                        </div>
 
-                        <div>
-                            <h3 className="mb-2 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
-                              Best Time to Visit
-                            </h3>
-                            <p className="text-neutral-600 dark:text-neutral-400">{tour.bestTime}</p>
-                        </div>
+                          {/* Destinations Section */}
+                          {tour.destinations && tour.destinations.length > 0 && (
+                            <div>
+                              <h3 className="mb-3 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+                                Destinations
+                              </h3>
+                              <div className="flex flex-wrap gap-2">
+                                {tour.destinations.map((dest) => (
+                                  <Badge
+                                    key={dest}
+                                    variant="outline"
+                                    className="text-sm border-neutral-300 dark:border-neutral-700"
+                                  >
+                                    <MapPin className="mr-1 h-3 w-3" />
+                                    {dest}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
 
-                        <div className="flex gap-3 pt-4">
-                            <Button asChild className="flex-1 group/btn">
+                          {/* Itinerary Section */}
+                          {tour.itinerary && tour.itinerary.length > 0 && (
+                            <div>
+                              <h3 className="mb-4 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+                                Detailed Itinerary
+                              </h3>
+                              <ItineraryTimeline itinerary={tour.itinerary} />
+                            </div>
+                          )}
+
+                          {/* Includes & Excludes */}
+                          <div className="grid gap-6 md:grid-cols-2">
+                            <div>
+                              <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                                What's Included
+                              </h3>
+                              <ul className="space-y-2">
+                                {tour.includes.map((item, index) => (
+                                  <li
+                                    key={index}
+                                    className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300"
+                                  >
+                                    <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
+                                    <span>{item}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            {tour.excludes && tour.excludes.length > 0 && (
+                              <div>
+                                <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                                  What's Not Included
+                                </h3>
+                                <ul className="space-y-2">
+                                  {tour.excludes.map((item, index) => (
+                                    <li
+                                      key={index}
+                                      className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300"
+                                    >
+                                      <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-500" />
+                                      <span>{item}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Best Time to Visit */}
+                          {tour.bestTime && (
+                            <div className="p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg">
+                              <h3 className="mb-2 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                                Best Time to Visit
+                              </h3>
+                              <p className="text-neutral-600 dark:text-neutral-400">{tour.bestTime}</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Fixed Footer with Action Buttons */}
+                      <div className="border-t p-6 bg-white dark:bg-black">
+                        <div className="flex gap-3">
+                          <Button asChild className="flex-1 group/btn" size="lg">
                             <Link href="/contact">
                               Book This Tour
-                                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
+                              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
                             </Link>
                           </Button>
-                          <Button asChild variant="outline" className="flex-1">
+                          <Button asChild variant="outline" className="flex-1" size="lg">
                             <Link href="/contact">Customize Tour</Link>
                           </Button>
                         </div>
@@ -265,8 +373,9 @@ export default function ToursPage() {
               </CardContent>
             </Card>
             </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
+        )}
 
         {/* Custom Tour CTA */}
         <motion.div

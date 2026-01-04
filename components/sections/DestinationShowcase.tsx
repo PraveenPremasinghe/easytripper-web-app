@@ -1,23 +1,43 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { destinations } from "@/lib/data";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { Button } from "@/components/ui/button";
-
-const featuredDestinations = destinations.slice(0, 12);
+import type { Destination } from "@/lib/types";
 
 export function DestinationShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null);
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const featuredDestinations = destinations.slice(0, 12);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    fetchDestinations();
+  }, []);
+
+  const fetchDestinations = async () => {
+    try {
+      const res = await fetch("/api/firebase/destinations");
+      const { success, data } = await res.json();
+      if (success) {
+        setDestinations(data || []);
+      }
+    } catch (error) {
+      console.error("Failed to fetch destinations:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!sectionRef.current || loading) return;
 
     const ctx = gsap.context(() => {
       // Header animation
@@ -87,7 +107,7 @@ export function DestinationShowcase() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [loading]);
 
   return (
     <section ref={sectionRef} className="py-24 bg-background">
@@ -103,8 +123,17 @@ export function DestinationShowcase() {
           </p>
         </div>
 
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {featuredDestinations.map((destination) => (
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">Loading destinations...</p>
+          </div>
+        ) : featuredDestinations.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No destinations available yet.</p>
+          </div>
+        ) : (
+          <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {featuredDestinations.map((destination) => (
             <div
               key={destination.slug}
               className="group relative overflow-hidden rounded-2xl bg-card border border-border hover:border-primary/50 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
@@ -129,10 +158,12 @@ export function DestinationShowcase() {
                 </div>
               </Link>
             </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        <div ref={buttonRef} className="mt-16 text-center">
+        {!loading && featuredDestinations.length > 0 && (
+          <div ref={buttonRef} className="mt-16 text-center">
           <Button
             asChild
             size="lg"
@@ -143,6 +174,7 @@ export function DestinationShowcase() {
             </Link>
           </Button>
         </div>
+        )}
       </div>
     </section>
   );

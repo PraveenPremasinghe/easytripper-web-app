@@ -39,11 +39,17 @@ export default function VehiclesAdminPage() {
 
   const fetchVehicles = async () => {
     try {
-      const res = await fetch("/api/vehicles");
-      const data = await res.json();
-      setVehicles(data);
+      const res = await fetch("/api/firebase/vehicles");
+      const { success, data } = await res.json();
+      if (success) {
+        setVehicles(data || []);
+      } else {
+        console.error("Failed to fetch vehicles");
+        setVehicles([]);
+      }
     } catch (error) {
       console.error("Failed to fetch vehicles:", error);
+      setVehicles([]);
     } finally {
       setLoading(false);
     }
@@ -53,12 +59,12 @@ export default function VehiclesAdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const dataToSubmit = editingVehicle 
-        ? formData 
-        : { ...formData, id: generateId('vehicle') };
-      
-      const url = editingVehicle ? `/api/vehicles/${editingVehicle.id}` : "/api/vehicles";
+      const url = "/api/firebase/vehicles";
       const method = editingVehicle ? "PUT" : "POST";
+      
+      const dataToSubmit = editingVehicle 
+        ? { id: editingVehicle.id, ...formData }
+        : formData;
       
       const res = await fetch(url, {
         method,
@@ -66,10 +72,13 @@ export default function VehiclesAdminPage() {
         body: JSON.stringify(dataToSubmit),
       });
 
-      if (res.ok) {
+      const { success } = await res.json();
+      if (success) {
         await fetchVehicles();
         setIsDialogOpen(false);
         resetForm();
+      } else {
+        console.error("Failed to save vehicle");
       }
     } catch (error) {
       console.error("Failed to save vehicle:", error);
@@ -82,9 +91,12 @@ export default function VehiclesAdminPage() {
     if (!confirm("Are you sure you want to delete this vehicle?")) return;
     
     try {
-      const res = await fetch(`/api/vehicles/${id}`, { method: "DELETE" });
-      if (res.ok) {
+      const res = await fetch(`/api/firebase/vehicles?id=${id}`, { method: "DELETE" });
+      const { success } = await res.json();
+      if (success) {
         await fetchVehicles();
+      } else {
+        console.error("Failed to delete vehicle");
       }
     } catch (error) {
       console.error("Failed to delete vehicle:", error);

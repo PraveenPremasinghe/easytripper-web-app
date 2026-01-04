@@ -41,11 +41,17 @@ export default function BlogAdminPage() {
 
   const fetchPosts = async () => {
     try {
-      const res = await fetch("/api/blog");
-      const data = await res.json();
-      setPosts(data);
+      const res = await fetch("/api/firebase/blog");
+      const { success, data } = await res.json();
+      if (success) {
+        setPosts(data || []);
+      } else {
+        console.error("Failed to fetch blog posts");
+        setPosts([]);
+      }
     } catch (error) {
       console.error("Failed to fetch blog posts:", error);
+      setPosts([]);
     } finally {
       setLoading(false);
     }
@@ -55,16 +61,16 @@ export default function BlogAdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
+      const url = "/api/firebase/blog";
+      const method = editingPost ? "PUT" : "POST";
+      
       const dataToSubmit = editingPost 
-        ? formData 
+        ? { slug: editingPost.slug, ...formData }
         : { 
             ...formData, 
             id: generateId('blog'),
             slug: generateSlug(formData.title || 'blog-post')
           };
-      
-      const url = editingPost ? `/api/blog/${editingPost.slug}` : "/api/blog";
-      const method = editingPost ? "PUT" : "POST";
       
       const res = await fetch(url, {
         method,
@@ -72,10 +78,13 @@ export default function BlogAdminPage() {
         body: JSON.stringify(dataToSubmit),
       });
 
-      if (res.ok) {
+      const { success } = await res.json();
+      if (success) {
         await fetchPosts();
         setIsDialogOpen(false);
         resetForm();
+      } else {
+        console.error("Failed to save blog post");
       }
     } catch (error) {
       console.error("Failed to save blog post:", error);
@@ -88,9 +97,12 @@ export default function BlogAdminPage() {
     if (!confirm("Are you sure you want to delete this blog post?")) return;
     
     try {
-      const res = await fetch(`/api/blog/${slug}`, { method: "DELETE" });
-      if (res.ok) {
+      const res = await fetch(`/api/firebase/blog?slug=${slug}`, { method: "DELETE" });
+      const { success } = await res.json();
+      if (success) {
         await fetchPosts();
+      } else {
+        console.error("Failed to delete blog post");
       }
     } catch (error) {
       console.error("Failed to delete blog post:", error);

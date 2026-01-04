@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { vehicles } from "@/lib/data";
 import { VehiclesHero } from "@/components/sections/VehiclesHero";
 import { VehiclesGrid } from "@/components/sections/VehiclesGrid";
-import { Car, Users, Wind, Shield, MapPin } from "lucide-react";
+import { Users, Wind, Shield, MapPin } from "lucide-react";
+import { VehiclesPageClient } from "./client";
 
 export const metadata: Metadata = {
   title: "Vehicles & Transport Options | Professional Tour Guide Services in Sri Lanka",
@@ -67,7 +67,7 @@ export default function VehiclesPage() {
       {/* Vehicle Grid */}
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-          <VehiclesGrid vehicles={vehicles} />
+          <VehiclesPageClient />
         </div>
       </section>
 

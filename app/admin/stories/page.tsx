@@ -51,12 +51,12 @@ export default function StoriesAdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      const dataToSubmit = editingStory 
-        ? formData 
-        : { ...formData, id: generateId('story') };
-      
-      const url = editingStory ? `/api/stories/${editingStory.id}` : "/api/stories";
+      const url = "/api/firebase/stories";
       const method = editingStory ? "PUT" : "POST";
+      
+      const dataToSubmit = editingStory 
+        ? { id: editingStory.id, ...formData }
+        : formData;
       
       const res = await fetch(url, {
         method,
@@ -64,10 +64,13 @@ export default function StoriesAdminPage() {
         body: JSON.stringify(dataToSubmit),
       });
 
-      if (res.ok) {
+      const { success } = await res.json();
+      if (success) {
         await fetchStories();
         setIsDialogOpen(false);
         resetForm();
+      } else {
+        console.error("Failed to save story");
       }
     } catch (error) {
       console.error("Failed to save story:", error);
@@ -80,9 +83,12 @@ export default function StoriesAdminPage() {
     if (!confirm("Are you sure you want to delete this story?")) return;
     
     try {
-      const res = await fetch(`/api/stories/${id}`, { method: "DELETE" });
-      if (res.ok) {
+      const res = await fetch(`/api/firebase/stories?id=${id}`, { method: "DELETE" });
+      const { success } = await res.json();
+      if (success) {
         await fetchStories();
+      } else {
+        console.error("Failed to delete story");
       }
     } catch (error) {
       console.error("Failed to delete story:", error);

@@ -44,11 +44,17 @@ export default function ToursAdminPage() {
 
   const fetchTours = async () => {
     try {
-      const res = await fetch("/api/tours");
-      const data = await res.json();
-      setTours(data);
+      const res = await fetch("/api/firebase/tours");
+      const { success, data } = await res.json();
+      if (success) {
+        setTours(data || []);
+      } else {
+        console.error("Failed to fetch tours");
+        setTours([]);
+      }
     } catch (error) {
       console.error("Failed to fetch tours:", error);
+      setTours([]);
     } finally {
       setLoading(false);
     }
@@ -58,13 +64,13 @@ export default function ToursAdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
-      // Auto-generate ID if creating new tour
-      const dataToSubmit = editingTour 
-        ? formData 
-        : { ...formData, id: generateId('tour') };
-      
-      const url = editingTour ? `/api/tours/${editingTour.id}` : "/api/tours";
+      const url = "/api/firebase/tours";
       const method = editingTour ? "PUT" : "POST";
+      
+      // For Firebase, don't include id when creating (it's auto-generated)
+      const dataToSubmit = editingTour 
+        ? { id: editingTour.id, ...formData }
+        : formData;
       
       const res = await fetch(url, {
         method,
@@ -72,10 +78,13 @@ export default function ToursAdminPage() {
         body: JSON.stringify(dataToSubmit),
       });
 
-      if (res.ok) {
+      const { success } = await res.json();
+      if (success) {
         await fetchTours();
         setIsDialogOpen(false);
         resetForm();
+      } else {
+        console.error("Failed to save tour");
       }
     } catch (error) {
       console.error("Failed to save tour:", error);
@@ -88,9 +97,12 @@ export default function ToursAdminPage() {
     if (!confirm("Are you sure you want to delete this tour?")) return;
     
     try {
-      const res = await fetch(`/api/tours/${id}`, { method: "DELETE" });
-      if (res.ok) {
+      const res = await fetch(`/api/firebase/tours?id=${id}`, { method: "DELETE" });
+      const { success } = await res.json();
+      if (success) {
         await fetchTours();
+      } else {
+        console.error("Failed to delete tour");
       }
     } catch (error) {
       console.error("Failed to delete tour:", error);

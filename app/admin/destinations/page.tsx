@@ -37,11 +37,17 @@ export default function DestinationsAdminPage() {
 
   const fetchDestinations = async () => {
     try {
-      const res = await fetch("/api/destinations");
-      const data = await res.json();
-      setDestinations(data);
+      const res = await fetch("/api/firebase/destinations");
+      const { success, data } = await res.json();
+      if (success) {
+        setDestinations(data || []);
+      } else {
+        console.error("Failed to fetch destinations");
+        setDestinations([]);
+      }
     } catch (error) {
       console.error("Failed to fetch destinations:", error);
+      setDestinations([]);
     } finally {
       setLoading(false);
     }
@@ -51,13 +57,13 @@ export default function DestinationsAdminPage() {
     e.preventDefault();
     setSaving(true);
     try {
+      const url = "/api/firebase/destinations";
+      const method = editingDestination ? "PUT" : "POST";
+      
       // Auto-generate slug if creating new destination
       const dataToSubmit = editingDestination 
-        ? formData 
-                    : { ...formData, slug: generateSlug(formData.name || 'destination') };
-      
-      const url = editingDestination ? `/api/destinations/${editingDestination.slug}` : "/api/destinations";
-      const method = editingDestination ? "PUT" : "POST";
+        ? { slug: editingDestination.slug, ...formData }
+        : { ...formData, slug: generateSlug(formData.name || 'destination') };
       
       const res = await fetch(url, {
         method,
@@ -65,10 +71,13 @@ export default function DestinationsAdminPage() {
         body: JSON.stringify(dataToSubmit),
       });
 
-      if (res.ok) {
+      const { success } = await res.json();
+      if (success) {
         await fetchDestinations();
         setIsDialogOpen(false);
         resetForm();
+      } else {
+        console.error("Failed to save destination");
       }
     } catch (error) {
       console.error("Failed to save destination:", error);
@@ -81,9 +90,12 @@ export default function DestinationsAdminPage() {
     if (!confirm("Are you sure you want to delete this destination?")) return;
     
     try {
-      const res = await fetch(`/api/destinations/${slug}`, { method: "DELETE" });
-      if (res.ok) {
+      const res = await fetch(`/api/firebase/destinations?slug=${slug}`, { method: "DELETE" });
+      const { success } = await res.json();
+      if (success) {
         await fetchDestinations();
+      } else {
+        console.error("Failed to delete destination");
       }
     } catch (error) {
       console.error("Failed to delete destination:", error);

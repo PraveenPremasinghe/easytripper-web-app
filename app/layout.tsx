@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { TopBar } from "@/components/header/TopBar";
-import { MainNav } from "@/components/header/MainNav";
-import { Footer } from "@/components/sections/Footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { WhatsAppButton } from "@/components/ui/whatsapp-button";
-import { StickyInquiryBar } from "@/components/ui/sticky-inquiry-bar";
+import { AuthSessionProvider } from "@/components/providers/session-provider";
+import { ConditionalLayout } from "@/components/layout/conditional-layout";
 import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
@@ -76,20 +73,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TopBar />
-          <MainNav />
-          <main className="pt-[97px]">{children}</main>
-          <Footer />
-          <WhatsAppButton />
-          <StickyInquiryBar />
-          <Toaster />
-        </ThemeProvider>
+        <AuthSessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ConditionalLayout>{children}</ConditionalLayout>
+            <Toaster />
+          </ThemeProvider>
+        </AuthSessionProvider>
       </body>
     </html>
   );
