@@ -152,7 +152,10 @@ export function MultiImageUpload({
             ))}
             {previews.length < maxImages && (
               <div
-                onClick={() => fileInputRef.current?.click()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  fileInputRef.current?.click();
+                }}
                 className={cn(
                   "aspect-square border-2 border-dashed rounded-lg flex flex-col items-center justify-center cursor-pointer transition-colors",
                   isDragging 
@@ -205,23 +208,24 @@ export function MultiImageUpload({
                   <Upload className="h-4 w-4 mr-2" />
                   Browse Files
                 </Button>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  multiple
-                  onChange={handleFileSelect}
-                  className="hidden"
-                  onClick={(e) => {
-                    // Allow multiple file selection
-                    (e.target as HTMLInputElement).value = '';
-                  }}
-                />
               </>
             )}
           </div>
         )}
       </div>
+      {/* File input always available, not conditionally rendered */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        multiple
+        onChange={handleFileSelect}
+        className="hidden"
+        onClick={(e) => {
+          // Reset input to allow selecting the same files again
+          (e.target as HTMLInputElement).value = '';
+        }}
+      />
     </div>
   );
 }

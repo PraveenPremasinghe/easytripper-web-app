@@ -14,8 +14,8 @@ export function TopBar() {
     <div className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
       shouldUseLightBackground
-        ? "bg-neutral-50 dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800"
-        : "bg-black/20 backdrop-blur-lg border-b border-white/10"
+        ? "bg-primary  dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800"
+        : "bg-black/90 backdrop-blur-lg border-b border-white/10"
     )}>
       <div className="mx-auto max-w-7xl px-4 py-2.5 md:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-2 text-sm md:flex-row">
@@ -25,7 +25,7 @@ export function TopBar() {
               className={cn(
                 "flex items-center gap-2 transition-all duration-200 hover:scale-105 font-medium",
                 shouldUseLightBackground
-                  ? "text-neutral-700 dark:text-neutral-300 hover:text-foreground"
+                  ? "text-white dark:text-neutral-300 hover:text-foreground"
                   : "text-white/95 hover:text-white"
               )}
               aria-label="Call us"
@@ -38,7 +38,7 @@ export function TopBar() {
               className={cn(
                 "flex items-center gap-2 transition-all duration-200 hover:scale-105 font-medium",
                 shouldUseLightBackground
-                  ? "text-neutral-700 dark:text-neutral-300 hover:text-foreground"
+                  ? "text-white dark:text-neutral-300 hover:text-foreground"
                   : "text-white/95 hover:text-white"
               )}
               aria-label="Email us"
@@ -50,7 +50,7 @@ export function TopBar() {
           <div className={cn(
             "font-semibold tracking-wide",
             shouldUseLightBackground
-              ? "text-neutral-700 dark:text-neutral-300"
+              ? "text-white dark:text-neutral-300"
               : "text-white/95"
           )}>
             Your trusted guide to Sri Lanka

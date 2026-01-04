@@ -76,10 +76,12 @@ export function SaveTripDialog({ isOpen, onClose, selectedPlaces }: SaveTripDial
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>{isSuccess ? "Trip Saved Successfully!" : "Save Your Trip Plan"}</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-2xl font-bold">
+            {isSuccess ? "Trip Saved Successfully!" : "Save Your Trip Plan"}
+          </DialogTitle>
+          <DialogDescription className="text-base mt-2">
             {isSuccess
               ? "We have received your itinerary. One of our travel experts will contact you shortly to finalize your dream vacation."
               : "Enter your details below to save this itinerary. We'll get back to you with a custom quote."}
@@ -87,11 +89,11 @@ export function SaveTripDialog({ isOpen, onClose, selectedPlaces }: SaveTripDial
         </DialogHeader>
 
         {isSuccess ? (
-          <div className="flex flex-col items-center justify-center py-6 space-y-4">
-            <div className="rounded-full bg-green-100 p-3">
-              <CheckCircle className="h-12 w-12 text-green-600" />
+          <div className="flex flex-col items-center justify-center py-8 space-y-4">
+            <div className="rounded-full bg-green-100 dark:bg-green-900/30 p-4">
+              <CheckCircle className="h-16 w-16 text-green-600 dark:text-green-400" />
             </div>
-            <p className="text-center text-muted-foreground">
+            <p className="text-center text-muted-foreground text-base">
               Thank you for choosing Easy Tripper!
             </p>
             <Button onClick={handleClose} className="w-full mt-4">
@@ -99,45 +101,80 @@ export function SaveTripDialog({ isOpen, onClose, selectedPlaces }: SaveTripDial
             </Button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 py-2">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 px-6 pb-6">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
-              <Input id="name" placeholder="John Doe" {...register("name")} />
+              <Label htmlFor="name" className="text-sm font-medium">
+                Full Name
+              </Label>
+              <Input 
+                id="name" 
+                placeholder="John Doe" 
+                {...register("name")}
+                className="h-10"
+              />
               {errors.name && (
-                <p className="text-sm text-destructive">{errors.name.message}</p>
+                <p className="text-sm text-destructive mt-1">{errors.name.message}</p>
               )}
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="john@example.com" {...register("email")} />
+              <Label htmlFor="email" className="text-sm font-medium">
+                Email
+              </Label>
+              <Input 
+                id="email" 
+                type="email" 
+                placeholder="john@example.com" 
+                {...register("email")}
+                className="h-10"
+              />
               {errors.email && (
-                <p className="text-sm text-destructive">{errors.email.message}</p>
+                <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
               )}
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="phone">Phone Number</Label>
-              <Input id="phone" placeholder="+1 234 567 8900" {...register("phone")} />
+              <Label htmlFor="phone" className="text-sm font-medium">
+                Phone Number
+              </Label>
+              <Input 
+                id="phone" 
+                placeholder="+1 234 567 8900" 
+                {...register("phone")}
+                className="h-10"
+              />
               {errors.phone && (
-                <p className="text-sm text-destructive">{errors.phone.message}</p>
+                <p className="text-sm text-destructive mt-1">{errors.phone.message}</p>
               )}
             </div>
             
             <div className="space-y-2">
-              <Label htmlFor="notes">Additional Notes (Optional)</Label>
+              <Label htmlFor="notes" className="text-sm font-medium">
+                Additional Notes <span className="text-muted-foreground font-normal">(Optional)</span>
+              </Label>
               <Textarea 
                 id="notes" 
                 placeholder="Any specific requirements, dates, or preferences?" 
-                {...register("notes")} 
+                {...register("notes")}
+                className="min-h-[100px] resize-none"
               />
             </div>
 
-            <DialogFooter className="pt-4">
-              <Button type="button" variant="outline" onClick={handleClose} disabled={isSubmitting}>
+            <DialogFooter className="pt-4 pb-0">
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={handleClose} 
+                disabled={isSubmitting}
+                className="w-full sm:w-auto"
+              >
                 Cancel
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
+              <Button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="w-full sm:w-auto"
+              >
                 {isSubmitting ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

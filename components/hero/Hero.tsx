@@ -13,11 +13,16 @@ import { cn } from "@/lib/utils";
 // Get all places from all provinces for the Marquee
 const allPlaces = provinces.flatMap(province => province.places);
 
-// Create rows for 3D Marquee
-const firstRow = allPlaces.slice(0, Math.ceil(allPlaces.length / 4));
-const secondRow = allPlaces.slice(Math.ceil(allPlaces.length / 4), Math.ceil(allPlaces.length / 2));
-const thirdRow = allPlaces.slice(Math.ceil(allPlaces.length / 2), Math.ceil(allPlaces.length * 3 / 4));
-const fourthRow = allPlaces.slice(Math.ceil(allPlaces.length * 3 / 4));
+// Duplicate places to ensure we have enough for 5 rows (at least 3-4 items per row)
+const duplicatedPlaces = [...allPlaces, ...allPlaces, ...allPlaces];
+
+// Create rows for 3D Marquee - ensure each row has at least 3 items
+const itemsPerRow = Math.max(3, Math.ceil(duplicatedPlaces.length / 5));
+const firstRow = duplicatedPlaces.slice(0, itemsPerRow);
+const secondRow = duplicatedPlaces.slice(itemsPerRow, itemsPerRow * 2);
+const thirdRow = duplicatedPlaces.slice(itemsPerRow * 2, itemsPerRow * 3);
+const fourthRow = duplicatedPlaces.slice(itemsPerRow * 3, itemsPerRow * 4);
+const fifthRow = duplicatedPlaces.slice(itemsPerRow * 4, itemsPerRow * 5);
 
 // Place Card Component for Marquee
 const PlaceCard = ({
@@ -32,8 +37,8 @@ const PlaceCard = ({
   return (
     <figure
       className={cn(
-        "relative h-64 w-48 sm:h-80 sm:w-56 cursor-pointer overflow-hidden rounded-xl border shadow-none",
-        "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
+        "relative h-80 w-60 sm:h-96 sm:w-72 md:h-[28rem] md:w-80 lg:h-[32rem] lg:w-96 cursor-pointer overflow-hidden rounded-xl border shadow-none",
+        "border-gray-950/[.1] ]",
         "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
         "group transition-all duration-300 hover:scale-105"
       )}
@@ -85,6 +90,11 @@ const Marquee3D = () => {
         </Marquee>
         <Marquee pauseOnHover className="[--duration:20s]" vertical>
           {fourthRow.map((place) => (
+            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          ))}
+        </Marquee>
+        <Marquee reverse pauseOnHover className="[--duration:20s]" vertical>
+          {fifthRow.map((place) => (
             <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
           ))}
         </Marquee>
@@ -219,18 +229,13 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen w-full overflow-hidden -mt-[97px] pt-[97px] bg-gradient-to-br from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="relative z-10 container mx-auto ">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen py-20 lg:py-0">
+    <section ref={sectionRef} className="relative  w-full overflow-hidden -mt-[97px] pt-[97px] bg-gradient-to-br from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      <div className="relative z-10  mx-auto h-screen">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-20 lg:py-0">
           {/* Left Content Section */}
-          <div ref={contentRef} className="flex flex-col justify-center space-y-8 lg:space-y-10 order-2 lg:order-1">
+          <div ref={contentRef} className="flex flex-col justify-center space-y-8 lg:space-y-10 order-2 lg:order-1 px-20">
             {/* Tagline */}
-            <p
-              ref={taglineRef}
-              className="text-base md:text-lg text-primary font-semibold uppercase tracking-wider"
-            >
-              Your Trusted Guide to Sri Lanka
-            </p>
+           
 
             {/* Main Heading */}
             <h1
@@ -309,7 +314,7 @@ export function Hero() {
           </div>
 
           {/* Right Marquee 3D Section */}
-          <div ref={marqueeRef} className="relative order-1 lg:order-2 h-[100vh] overflow-hidden">
+          <div ref={marqueeRef} className="relative order-1 lg:order-2 h-[90vh] overflow-hidden">
             <Marquee3D />
             {/* Fade Gradients - All Sides - Subtle */}
             {/* <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div> */}

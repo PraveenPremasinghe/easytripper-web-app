@@ -289,15 +289,17 @@ export const NavbarButton = ({
   | React.ComponentPropsWithoutRef<"button">
 )) => {
   const baseStyles =
-    "px-4 py-2 rounded-md bg-card text-card-foreground text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
+    "px-4 py-2 rounded-md text-sm font-medium relative cursor-pointer transition-all duration-200 inline-block text-center border";
 
   const variantStyles = {
     primary:
-      "shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:shadow-[0_0_24px_rgba(0,_0,_0,_0.3)]",
-    secondary: "bg-transparent shadow-none text-foreground dark:text-foreground",
-    dark: "bg-foreground text-background shadow-lg",
+      "bg-primary text-white border-primary hover:bg-primary/90 hover:border-primary/90 active:bg-primary-dark active:border-primary-dark",
+    secondary: 
+      "bg-transparent border-border text-foreground hover:bg-muted hover:border-border/80",
+    dark: 
+      "bg-foreground text-background border-foreground hover:bg-foreground/90 hover:border-foreground/90",
     gradient:
-      "bg-gradient-to-b from-primary to-primary-deep text-primary-foreground shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]",
+      "bg-primary text-white border-primary hover:bg-primary/90 hover:border-primary/90 active:bg-primary-dark active:border-primary-dark",
   };
 
   return (

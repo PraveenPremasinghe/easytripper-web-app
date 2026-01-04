@@ -218,7 +218,8 @@ export default function PlacesAdminPage() {
                     {editingProvince ? "Update province details below" : "Fill in the details to create a new province"}
                   </DialogDescription>
                 </DialogHeader>
-                <form onSubmit={handleProvinceSubmit} className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth">
+                <form onSubmit={handleProvinceSubmit} className="flex flex-col flex-1 min-h-0">
+                  <div className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth">
                   {editingProvince && (
                     <div className="p-3 bg-muted rounded-lg">
                       <p className="text-sm text-muted-foreground">
@@ -234,7 +235,8 @@ export default function PlacesAdminPage() {
                       required
                     />
                   </div>
-                  <DialogFooter className="border-t pt-4 mt-6 sticky bottom-0 bg-white dark:bg-gray-900">
+                  </div>
+                  <DialogFooter>
                     <Button
                       type="button"
                       variant="outline"
@@ -317,7 +319,8 @@ export default function PlacesAdminPage() {
                           {editingPlace ? "Update place details below" : "Fill in the details to create a new place"}
                         </DialogDescription>
                       </DialogHeader>
-                      <form onSubmit={handlePlaceSubmit} className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth">
+                      <form onSubmit={handlePlaceSubmit} className="flex flex-col flex-1 min-h-0">
+                        <div className="flex-1 overflow-y-auto p-6 space-y-4 scroll-smooth">
                         {editingPlace && (
                           <div className="p-3 bg-muted rounded-lg">
                             <p className="text-sm text-muted-foreground">
@@ -380,7 +383,8 @@ export default function PlacesAdminPage() {
                             rows={4}
                           />
                         </div>
-                        <DialogFooter className="border-t pt-4 mt-6 sticky bottom-0 bg-white dark:bg-gray-900">
+                        </div>
+                        <DialogFooter>
                           <Button
                             type="button"
                             variant="outline"

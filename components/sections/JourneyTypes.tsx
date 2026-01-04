@@ -162,14 +162,14 @@ export function JourneyTypes() {
           {/* Navigation Arrows */}
           <button
             onClick={goPrev}
-            className="swiper-button-prev-journey absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary/95 hover:bg-primary text-white flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm border-2 border-white/20"
+            className="swiper-button-prev-journey absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium"
             aria-label="Previous slide"
           >
             <ChevronLeft className="w-6 h-6 md:w-7 md:h-7" />
           </button>
           <button
             onClick={goNext}
-            className="swiper-button-next-journey absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary/95 hover:bg-primary text-white flex items-center justify-center shadow-2xl transition-all hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm border-2 border-white/20"
+            className="swiper-button-next-journey absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium"
             aria-label="Next slide"
           >
             <ChevronRight className="w-6 h-6 md:w-7 md:h-7" />

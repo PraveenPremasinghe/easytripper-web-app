@@ -19,6 +19,7 @@ import {
 import { sendInquiry } from "@/app/actions/sendInquiry";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "@/components/ui/toaster";
+import { DatePicker } from "@/components/ui/date-picker";
 
 const inquirySchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -159,10 +160,11 @@ export function InquiryForm() {
               <Label htmlFor="startDate">
                 Start Date <span className="text-red-500">*</span>
               </Label>
-              <Input
-                id="startDate"
-                type="date"
-                {...register("startDate")}
+              <DatePicker
+                value={watch("startDate")}
+                onChange={(value) => setValue("startDate", value, { shouldValidate: true })}
+                placeholder="Select start date"
+                required
               />
               {errors.startDate && (
                 <p className="mt-1 text-sm text-red-500">
@@ -175,10 +177,11 @@ export function InquiryForm() {
               <Label htmlFor="endDate">
                 End Date <span className="text-red-500">*</span>
               </Label>
-              <Input
-                id="endDate"
-                type="date"
-                {...register("endDate")}
+              <DatePicker
+                value={watch("endDate")}
+                onChange={(value) => setValue("endDate", value, { shouldValidate: true })}
+                placeholder="Select end date"
+                required
               />
               {errors.endDate && (
                 <p className="mt-1 text-sm text-red-500">

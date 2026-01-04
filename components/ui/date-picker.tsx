@@ -25,15 +25,32 @@ export function DatePicker({
   placeholder = "Pick a date",
   required = false 
 }: DatePickerProps) {
-  const date = value ? new Date(value) : undefined;
+  const [open, setOpen] = React.useState(false);
+  
+  // Parse date string (yyyy-MM-dd) as local date to avoid timezone issues
+  const date = React.useMemo(() => {
+    if (!value) return undefined;
+    const parts = value.split('-');
+    if (parts.length === 3) {
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1; // Month is 0-indexed
+      const day = parseInt(parts[2], 10);
+      if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
+        return new Date(year, month, day);
+      }
+    }
+    return undefined;
+  }, [value]);
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
           variant="outline"
+          data-empty={!date}
           className={cn(
-            "w-full justify-start text-left font-normal h-11",
+            "w-full justify-start text-left font-normal",
+            "hover:bg-transparent hover:border-border hover:text-foreground",
             !date && "text-muted-foreground"
           )}
         >
@@ -41,19 +58,25 @@ export function DatePicker({
           {date ? format(date, "PPP") : <span>{placeholder}</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0 bg-white dark:bg-gray-900" align="start">
+      <PopoverContent className="w-auto overflow-hidden p-0" align="start">
         <Calendar
           mode="single"
           selected={date}
+          captionLayout="dropdown"
+          fromYear={1900}
+          toYear={2100}
           onSelect={(selectedDate) => {
             if (selectedDate) {
-              onChange(format(selectedDate, "yyyy-MM-dd"));
+              // Format as yyyy-MM-dd for storage
+              const year = selectedDate.getFullYear();
+              const month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+              const day = String(selectedDate.getDate()).padStart(2, '0');
+              onChange(`${year}-${month}-${day}`);
+              setOpen(false);
             }
           }}
-          initialFocus
         />
       </PopoverContent>
     </Popover>
   );
 }
-
