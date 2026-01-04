@@ -11,6 +11,7 @@ import {
   serverTimestamp,
   Timestamp,
   orderBy,
+  Firestore,
 } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "./config";
 import { Tour, Destination, Vehicle, BlogPost, Story, Testimonial } from "../types";
@@ -27,19 +28,20 @@ const COLLECTIONS = {
   TESTIMONIALS: "testimonials",
 } as const;
 
-// Helper function to check Firebase configuration
-function checkFirebase() {
+// Helper function to check Firebase configuration and return non-null db
+function checkFirebase(): Firestore {
   if (!isFirebaseConfigured || !db) {
     throw new Error("Firebase is not configured. Please check your environment variables.");
   }
+  return db;
 }
 
 // ==================== TOURS ====================
 
 export async function getTours(): Promise<Tour[]> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const toursRef = collection(db, COLLECTIONS.TOURS);
+    const toursRef = collection(firestore, COLLECTIONS.TOURS);
     const querySnapshot = await getDocs(query(toursRef, orderBy("name")));
     return querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -52,9 +54,9 @@ export async function getTours(): Promise<Tour[]> {
 }
 
 export async function getTour(id: string): Promise<Tour | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const tourRef = doc(db, COLLECTIONS.TOURS, id);
+    const tourRef = doc(firestore, COLLECTIONS.TOURS, id);
     const tourSnap = await getDoc(tourRef);
     if (!tourSnap.exists()) return null;
     return { id: tourSnap.id, ...tourSnap.data() } as Tour;
@@ -65,9 +67,9 @@ export async function getTour(id: string): Promise<Tour | null> {
 }
 
 export async function createTour(tour: Omit<Tour, "id">): Promise<Tour> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const tourRef = doc(collection(db, COLLECTIONS.TOURS));
+    const tourRef = doc(collection(firestore, COLLECTIONS.TOURS));
     const newTour: Tour = {
       id: tourRef.id,
       ...tour,
@@ -85,9 +87,9 @@ export async function createTour(tour: Omit<Tour, "id">): Promise<Tour> {
 }
 
 export async function updateTour(id: string, tour: Partial<Tour>): Promise<Tour | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const tourRef = doc(db, COLLECTIONS.TOURS, id);
+    const tourRef = doc(firestore, COLLECTIONS.TOURS, id);
     await updateDoc(tourRef, {
       ...tour,
       updatedAt: serverTimestamp(),
@@ -100,9 +102,9 @@ export async function updateTour(id: string, tour: Partial<Tour>): Promise<Tour 
 }
 
 export async function deleteTour(id: string): Promise<boolean> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const tourRef = doc(db, COLLECTIONS.TOURS, id);
+    const tourRef = doc(firestore, COLLECTIONS.TOURS, id);
     await deleteDoc(tourRef);
     return true;
   } catch (error) {
@@ -114,9 +116,9 @@ export async function deleteTour(id: string): Promise<boolean> {
 // ==================== DESTINATIONS ====================
 
 export async function getDestinations(): Promise<Destination[]> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const destRef = collection(db, COLLECTIONS.DESTINATIONS);
+    const destRef = collection(firestore, COLLECTIONS.DESTINATIONS);
     const querySnapshot = await getDocs(query(destRef, orderBy("name")));
     return querySnapshot.docs.map((doc) => ({
       slug: doc.id,
@@ -129,9 +131,9 @@ export async function getDestinations(): Promise<Destination[]> {
 }
 
 export async function getDestination(slug: string): Promise<Destination | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const destRef = doc(db, COLLECTIONS.DESTINATIONS, slug);
+    const destRef = doc(firestore, COLLECTIONS.DESTINATIONS, slug);
     const destSnap = await getDoc(destRef);
     if (!destSnap.exists()) return null;
     return { slug: destSnap.id, ...destSnap.data() } as Destination;
@@ -142,9 +144,9 @@ export async function getDestination(slug: string): Promise<Destination | null> 
 }
 
 export async function createDestination(destination: Destination): Promise<Destination> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const destRef = doc(db, COLLECTIONS.DESTINATIONS, destination.slug);
+    const destRef = doc(firestore, COLLECTIONS.DESTINATIONS, destination.slug);
     await setDoc(destRef, {
       ...destination,
       createdAt: serverTimestamp(),
@@ -161,9 +163,9 @@ export async function updateDestination(
   slug: string,
   destination: Partial<Destination>
 ): Promise<Destination | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const destRef = doc(db, COLLECTIONS.DESTINATIONS, slug);
+    const destRef = doc(firestore, COLLECTIONS.DESTINATIONS, slug);
     await updateDoc(destRef, {
       ...destination,
       updatedAt: serverTimestamp(),
@@ -176,9 +178,9 @@ export async function updateDestination(
 }
 
 export async function deleteDestination(slug: string): Promise<boolean> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const destRef = doc(db, COLLECTIONS.DESTINATIONS, slug);
+    const destRef = doc(firestore, COLLECTIONS.DESTINATIONS, slug);
     await deleteDoc(destRef);
     return true;
   } catch (error) {
@@ -190,9 +192,9 @@ export async function deleteDestination(slug: string): Promise<boolean> {
 // ==================== VEHICLES ====================
 
 export async function getVehicles(): Promise<Vehicle[]> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const vehiclesRef = collection(db, COLLECTIONS.VEHICLES);
+    const vehiclesRef = collection(firestore, COLLECTIONS.VEHICLES);
     const querySnapshot = await getDocs(query(vehiclesRef, orderBy("name")));
     return querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -205,9 +207,9 @@ export async function getVehicles(): Promise<Vehicle[]> {
 }
 
 export async function getVehicle(id: string): Promise<Vehicle | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const vehicleRef = doc(db, COLLECTIONS.VEHICLES, id);
+    const vehicleRef = doc(firestore, COLLECTIONS.VEHICLES, id);
     const vehicleSnap = await getDoc(vehicleRef);
     if (!vehicleSnap.exists()) return null;
     return { id: vehicleSnap.id, ...vehicleSnap.data() } as Vehicle;
@@ -218,9 +220,9 @@ export async function getVehicle(id: string): Promise<Vehicle | null> {
 }
 
 export async function createVehicle(vehicle: Omit<Vehicle, "id">): Promise<Vehicle> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const vehicleRef = doc(collection(db, COLLECTIONS.VEHICLES));
+    const vehicleRef = doc(collection(firestore, COLLECTIONS.VEHICLES));
     const newVehicle: Vehicle = {
       id: vehicleRef.id,
       ...vehicle,
@@ -238,9 +240,9 @@ export async function createVehicle(vehicle: Omit<Vehicle, "id">): Promise<Vehic
 }
 
 export async function updateVehicle(id: string, vehicle: Partial<Vehicle>): Promise<Vehicle | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const vehicleRef = doc(db, COLLECTIONS.VEHICLES, id);
+    const vehicleRef = doc(firestore, COLLECTIONS.VEHICLES, id);
     await updateDoc(vehicleRef, {
       ...vehicle,
       updatedAt: serverTimestamp(),
@@ -253,9 +255,9 @@ export async function updateVehicle(id: string, vehicle: Partial<Vehicle>): Prom
 }
 
 export async function deleteVehicle(id: string): Promise<boolean> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const vehicleRef = doc(db, COLLECTIONS.VEHICLES, id);
+    const vehicleRef = doc(firestore, COLLECTIONS.VEHICLES, id);
     await deleteDoc(vehicleRef);
     return true;
   } catch (error) {
@@ -267,9 +269,9 @@ export async function deleteVehicle(id: string): Promise<boolean> {
 // ==================== BLOG POSTS ====================
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const postsRef = collection(db, COLLECTIONS.BLOG_POSTS);
+    const postsRef = collection(firestore, COLLECTIONS.BLOG_POSTS);
     const querySnapshot = await getDocs(
       query(postsRef, orderBy("publishedAt", "desc"))
     );
@@ -285,9 +287,9 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const postRef = doc(db, COLLECTIONS.BLOG_POSTS, slug);
+    const postRef = doc(firestore, COLLECTIONS.BLOG_POSTS, slug);
     const postSnap = await getDoc(postRef);
     if (!postSnap.exists()) return null;
     return { id: postSnap.id, slug: postSnap.id, ...postSnap.data() } as BlogPost;
@@ -298,9 +300,9 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export async function createBlogPost(post: BlogPost): Promise<BlogPost> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const postRef = doc(db, COLLECTIONS.BLOG_POSTS, post.slug);
+    const postRef = doc(firestore, COLLECTIONS.BLOG_POSTS, post.slug);
     await setDoc(postRef, {
       ...post,
       createdAt: serverTimestamp(),
@@ -317,9 +319,9 @@ export async function updateBlogPost(
   slug: string,
   post: Partial<BlogPost>
 ): Promise<BlogPost | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const postRef = doc(db, COLLECTIONS.BLOG_POSTS, slug);
+    const postRef = doc(firestore, COLLECTIONS.BLOG_POSTS, slug);
     await updateDoc(postRef, {
       ...post,
       updatedAt: serverTimestamp(),
@@ -332,9 +334,9 @@ export async function updateBlogPost(
 }
 
 export async function deleteBlogPost(slug: string): Promise<boolean> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const postRef = doc(db, COLLECTIONS.BLOG_POSTS, slug);
+    const postRef = doc(firestore, COLLECTIONS.BLOG_POSTS, slug);
     await deleteDoc(postRef);
     return true;
   } catch (error) {
@@ -346,9 +348,9 @@ export async function deleteBlogPost(slug: string): Promise<boolean> {
 // ==================== STORIES ====================
 
 export async function getStories(): Promise<Story[]> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const storiesRef = collection(db, COLLECTIONS.STORIES);
+    const storiesRef = collection(firestore, COLLECTIONS.STORIES);
     const querySnapshot = await getDocs(query(storiesRef, orderBy("date", "desc")));
     return querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -361,9 +363,9 @@ export async function getStories(): Promise<Story[]> {
 }
 
 export async function getStory(id: string): Promise<Story | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const storyRef = doc(db, COLLECTIONS.STORIES, id);
+    const storyRef = doc(firestore, COLLECTIONS.STORIES, id);
     const storySnap = await getDoc(storyRef);
     if (!storySnap.exists()) return null;
     return { id: storySnap.id, ...storySnap.data() } as Story;
@@ -374,9 +376,9 @@ export async function getStory(id: string): Promise<Story | null> {
 }
 
 export async function createStory(story: Omit<Story, "id">): Promise<Story> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const storyRef = doc(collection(db, COLLECTIONS.STORIES));
+    const storyRef = doc(collection(firestore, COLLECTIONS.STORIES));
     const newStory: Story = {
       id: storyRef.id,
       ...story,
@@ -394,9 +396,9 @@ export async function createStory(story: Omit<Story, "id">): Promise<Story> {
 }
 
 export async function updateStory(id: string, story: Partial<Story>): Promise<Story | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const storyRef = doc(db, COLLECTIONS.STORIES, id);
+    const storyRef = doc(firestore, COLLECTIONS.STORIES, id);
     await updateDoc(storyRef, {
       ...story,
       updatedAt: serverTimestamp(),
@@ -409,9 +411,9 @@ export async function updateStory(id: string, story: Partial<Story>): Promise<St
 }
 
 export async function deleteStory(id: string): Promise<boolean> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const storyRef = doc(db, COLLECTIONS.STORIES, id);
+    const storyRef = doc(firestore, COLLECTIONS.STORIES, id);
     await deleteDoc(storyRef);
     return true;
   } catch (error) {
@@ -423,9 +425,9 @@ export async function deleteStory(id: string): Promise<boolean> {
 // ==================== PROVINCES & PLACES ====================
 
 export async function getProvinces(): Promise<Province[]> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const provincesRef = collection(db, COLLECTIONS.PROVINCES);
+    const provincesRef = collection(firestore, COLLECTIONS.PROVINCES);
     const querySnapshot = await getDocs(query(provincesRef, orderBy("name")));
     return querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -438,9 +440,9 @@ export async function getProvinces(): Promise<Province[]> {
 }
 
 export async function getProvince(id: string): Promise<Province | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const provinceRef = doc(db, COLLECTIONS.PROVINCES, id);
+    const provinceRef = doc(firestore, COLLECTIONS.PROVINCES, id);
     const provinceSnap = await getDoc(provinceRef);
     if (!provinceSnap.exists()) return null;
     return { id: provinceSnap.id, ...provinceSnap.data() } as Province;
@@ -451,9 +453,9 @@ export async function getProvince(id: string): Promise<Province | null> {
 }
 
 export async function createProvince(province: Omit<Province, "id">): Promise<Province> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const provinceRef = doc(collection(db, COLLECTIONS.PROVINCES));
+    const provinceRef = doc(collection(firestore, COLLECTIONS.PROVINCES));
     const newProvince: Province = {
       id: provinceRef.id,
       ...province,
@@ -474,9 +476,9 @@ export async function updateProvince(
   id: string,
   province: Partial<Province>
 ): Promise<Province | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const provinceRef = doc(db, COLLECTIONS.PROVINCES, id);
+    const provinceRef = doc(firestore, COLLECTIONS.PROVINCES, id);
     await updateDoc(provinceRef, {
       ...province,
       updatedAt: serverTimestamp(),
@@ -489,9 +491,9 @@ export async function updateProvince(
 }
 
 export async function deleteProvince(id: string): Promise<boolean> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const provinceRef = doc(db, COLLECTIONS.PROVINCES, id);
+    const provinceRef = doc(firestore, COLLECTIONS.PROVINCES, id);
     await deleteDoc(provinceRef);
     return true;
   } catch (error) {
@@ -560,9 +562,9 @@ export async function deletePlaceFromProvince(
 // ==================== TESTIMONIALS ====================
 
 export async function getTestimonials(): Promise<Testimonial[]> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const testimonialsRef = collection(db, COLLECTIONS.TESTIMONIALS);
+    const testimonialsRef = collection(firestore, COLLECTIONS.TESTIMONIALS);
     // Try to order by timestamp, but fallback to createdAt if timestamp doesn't exist
     let querySnapshot;
     try {
@@ -591,9 +593,9 @@ export async function getTestimonials(): Promise<Testimonial[]> {
 }
 
 export async function getTestimonial(id: string): Promise<Testimonial | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const testimonialRef = doc(db, COLLECTIONS.TESTIMONIALS, id);
+    const testimonialRef = doc(firestore, COLLECTIONS.TESTIMONIALS, id);
     const testimonialSnap = await getDoc(testimonialRef);
     if (!testimonialSnap.exists()) return null;
     return { id: testimonialSnap.id, ...testimonialSnap.data() } as Testimonial;
@@ -606,9 +608,9 @@ export async function getTestimonial(id: string): Promise<Testimonial | null> {
 export async function createTestimonial(
   testimonial: Omit<Testimonial, "id">
 ): Promise<Testimonial> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const testimonialRef = doc(collection(db, COLLECTIONS.TESTIMONIALS));
+    const testimonialRef = doc(collection(firestore, COLLECTIONS.TESTIMONIALS));
     const timestamp = Date.now();
     const newTestimonial: Testimonial = {
       id: testimonialRef.id,
@@ -647,9 +649,9 @@ export async function updateTestimonial(
   id: string,
   testimonial: Partial<Testimonial>
 ): Promise<Testimonial | null> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const testimonialRef = doc(db, COLLECTIONS.TESTIMONIALS, id);
+    const testimonialRef = doc(firestore, COLLECTIONS.TESTIMONIALS, id);
     
     // Remove undefined values - Firestore doesn't allow undefined
     const updateData: any = {
@@ -673,9 +675,9 @@ export async function updateTestimonial(
 }
 
 export async function deleteTestimonial(id: string): Promise<boolean> {
-  checkFirebase();
+  const firestore = checkFirebase();
   try {
-    const testimonialRef = doc(db, COLLECTIONS.TESTIMONIALS, id);
+    const testimonialRef = doc(firestore, COLLECTIONS.TESTIMONIALS, id);
     await deleteDoc(testimonialRef);
     return true;
   } catch (error) {
