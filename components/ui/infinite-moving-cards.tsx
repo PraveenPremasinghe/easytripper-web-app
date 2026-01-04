@@ -19,7 +19,7 @@ export const InfiniteMovingCards = ({
     rating?: number;
   }[];
   direction?: "left" | "right";
-  speed?: "fast" | "normal" | "slow";
+  speed?: "fast" | "normal" | "slow" | "very-slow";
   pauseOnHover?: boolean;
   className?: string;
 }) => {
@@ -70,8 +70,11 @@ export const InfiniteMovingCards = ({
         containerRef.current.style.setProperty("--animation-duration", "20s");
       } else if (speed === "normal") {
         containerRef.current.style.setProperty("--animation-duration", "40s");
-      } else {
+      } else if (speed === "slow") {
         containerRef.current.style.setProperty("--animation-duration", "80s");
+      } else {
+        // very-slow - extremely slow for maximum readability (100 minutes per cycle)
+        containerRef.current.style.setProperty("--animation-duration", "6000s");
       }
     }
   };

@@ -146,6 +146,11 @@ body {
     text-wrap: balance;
   }
   
+  /* Cursor pointer for all clickable elements */
+  a, button, [role="button"], [onclick], [tabindex="0"] {
+    cursor: pointer;
+  }
+  
   /* Grid pattern for background beams */
   .bg-grid-white\/\[0\.02\] {
     background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
@@ -291,4 +296,51 @@ body {
 .dark .glass {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Marquee animations */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+@keyframes marquee-reverse {
+  from {
+    transform: translateX(calc(-100% - var(--gap, 1rem)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse var(--duration, 40s) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 40s) linear infinite;
+}
+
+/* Pause on hover for marquee */
+.group[data-pause-on-hover="true"]:hover .animate-marquee,
+.group[data-pause-on-hover="true"]:hover .animate-marquee-reverse,
+.group[data-pause-on-hover="true"]:hover .animate-marquee-vertical {
+  animation-play-state: paused;
 }

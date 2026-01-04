@@ -11,7 +11,7 @@ interface WhatsAppButtonProps {
 }
 
 export function WhatsAppButton({
-  phoneNumber = "+94771234567", // Update with actual number
+  phoneNumber = "+94756433267", // Update with actual number
   message = "Hello! I'm interested in planning a trip to Sri Lanka.",
   className,
 }: WhatsAppButtonProps) {
@@ -29,7 +29,7 @@ export function WhatsAppButton({
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex items-center gap-3 rounded-full bg-[#25D366] px-6 py-4 shadow-lg transition-all hover:scale-110 hover:shadow-xl"
+        className="group flex items-center gap-3 rounded-full bg-[#25D366] px-6 py-4 shadow-lg transition-all hover:scale-110 hover:shadow-xl cursor-pointer"
         aria-label="Contact us on WhatsApp"
       >
         <MessageCircle className="h-6 w-6 text-white" />

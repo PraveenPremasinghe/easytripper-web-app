@@ -7,7 +7,7 @@ export function LocalBusinessSchema() {
     name: "Easy Tripper - Sri Lanka Tour Guide",
     description: "Professional tour guide and vehicle service in Sri Lanka. Expert local guide offering personalized tours, cultural experiences, wildlife safaris, and transportation services across the island.",
     url: "https://easytripper.lk",
-    telephone: "+94-XXX-XXXXXXX", // Update with actual phone
+    telephone: "+94-75-643-3267", // Update with actual phone
     address: {
       "@type": "PostalAddress",
       addressCountry: "LK",

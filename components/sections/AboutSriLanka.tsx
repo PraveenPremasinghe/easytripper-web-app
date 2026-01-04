@@ -94,7 +94,7 @@ export function AboutSriLanka() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Slogan */}
           <div ref={leftRef} className="space-y-2">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] tracking-[-0.02em]">
+            <h2 className="text-5xl md:text-6xl lg:text-8xl font-bold text-foreground leading-[1.3] tracking-[-0.02em]">
               Discover
               <br />
               <span className="text-primary">Extraordinary</span>

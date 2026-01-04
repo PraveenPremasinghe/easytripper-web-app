@@ -6,11 +6,98 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Award, Users, Calendar } from "lucide-react";
 import Image from "next/image";
 import { gsap } from "@/lib/gsap";
+import { Marquee } from "@/components/ui/marquee";
+import { provinces } from "@/lib/places";
+import { cn } from "@/lib/utils";
+
+// Get all places from all provinces for the Marquee
+const allPlaces = provinces.flatMap(province => province.places);
+
+// Create rows for 3D Marquee
+const firstRow = allPlaces.slice(0, Math.ceil(allPlaces.length / 4));
+const secondRow = allPlaces.slice(Math.ceil(allPlaces.length / 4), Math.ceil(allPlaces.length / 2));
+const thirdRow = allPlaces.slice(Math.ceil(allPlaces.length / 2), Math.ceil(allPlaces.length * 3 / 4));
+const fourthRow = allPlaces.slice(Math.ceil(allPlaces.length * 3 / 4));
+
+// Place Card Component for Marquee
+const PlaceCard = ({
+  image,
+  name,
+  province,
+}: {
+  image: string;
+  name: string;
+  province: string;
+}) => {
+  return (
+    <figure
+      className={cn(
+        "relative h-64 w-48 sm:h-80 sm:w-56 cursor-pointer overflow-hidden rounded-xl border shadow-none",
+        "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
+        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
+        "group transition-all duration-300 hover:scale-105"
+      )}
+    >
+      <div className="relative h-full w-full">
+        <Image
+          src={image}
+          alt={name}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <figcaption className="text-sm font-semibold text-white mb-1">
+            {name}
+          </figcaption>
+          <p className="text-xs text-white/80">{province}</p>
+        </div>
+      </div>
+    </figure>
+  );
+};
+
+// Marquee 3D Component
+const Marquee3D = () => {
+  return (
+    <div className="relative flex h-full w-full flex-row items-center justify-center gap-4 overflow-hidden [perspective:300px]">
+      <div
+        className="flex flex-row items-center gap-4"
+        style={{
+          transform:
+            "translateX(-100px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg)",
+        }}
+      >
+        <Marquee pauseOnHover vertical className="[--duration:20s]">
+          {firstRow.map((place) => (
+            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          ))}
+        </Marquee>
+        <Marquee reverse pauseOnHover className="[--duration:20s]" vertical>
+          {secondRow.map((place) => (
+            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          ))}
+        </Marquee>
+        <Marquee reverse pauseOnHover className="[--duration:20s]" vertical>
+          {thirdRow.map((place) => (
+            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          ))}
+        </Marquee>
+        <Marquee pauseOnHover className="[--duration:20s]" vertical>
+          {fourthRow.map((place) => (
+            <PlaceCard key={place.id} image={place.image} name={place.name} province={place.province} />
+          ))}
+        </Marquee>
+      </div>
+
+    </div>
+  );
+};
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const marqueeRef = useRef<HTMLDivElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subheadingRef = useRef<HTMLParagraphElement>(null);
@@ -40,10 +127,10 @@ export function Hero() {
         );
       }
 
-      // Image animation
-      if (imageRef.current) {
+      // Marquee animation
+      if (marqueeRef.current) {
         gsap.fromTo(
-          imageRef.current,
+          marqueeRef.current,
           { opacity: 0, x: 50, scale: 0.95 },
           {
             opacity: 1,
@@ -52,7 +139,7 @@ export function Hero() {
             duration: 1.2,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: imageRef.current,
+              trigger: marqueeRef.current,
               start: "top 80%",
               toggleActions: "play none none none",
             },
@@ -132,26 +219,15 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen w-full overflow-hidden -mt-[97px] pt-[97px]">
-      {/* Full Background Image - Extends behind TopBar, Header, and Hero Only */}
-      <div className="absolute top-0 left-0 right-0 bottom-0 z-0">
-        <Image
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop"
-          alt="Sri Lanka"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40" />
-      </div>
-        <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8">
+    <section ref={sectionRef} className="relative min-h-screen w-full overflow-hidden -mt-[97px] pt-[97px] bg-gradient-to-br from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      <div className="relative z-10 container mx-auto ">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen py-20 lg:py-0">
-          {/* Content Section */}
+          {/* Left Content Section */}
           <div ref={contentRef} className="flex flex-col justify-center space-y-8 lg:space-y-10 order-2 lg:order-1">
             {/* Tagline */}
             <p
               ref={taglineRef}
-              className="text-base md:text-lg text-white/90 font-semibold uppercase tracking-wider"
+              className="text-base md:text-lg text-primary font-semibold uppercase tracking-wider"
             >
               Your Trusted Guide to Sri Lanka
             </p>
@@ -159,17 +235,17 @@ export function Hero() {
             {/* Main Heading */}
             <h1
               ref={headingRef}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight"
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight"
             >
               Your Home, Your Journey,
               <br />
-              <span className="text-accent">Your Hospitality Haven</span>
+              <span className="text-primary">Your Hospitality Haven</span>
             </h1>
 
             {/* Subheading */}
             <p
               ref={subheadingRef}
-              className="text-lg md:text-xl text-white/90 max-w-xl leading-relaxed"
+              className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
             >
               Paradise. Where else do you find perfect beaches, ancient history, vibrant culture, 
               exotic cuisine and exciting wilderness in one tiny island? Come, let&apos;s explore Sri Lanka.
@@ -194,7 +270,7 @@ export function Hero() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="group border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:border-white/50"
+                className="group"
               >
                 <Link href="/destinations">
                   <MapPin className="mr-2 h-5 w-5" />
@@ -206,105 +282,40 @@ export function Hero() {
             {/* Stats */}
             <div
               ref={statsRef}
-              className="grid grid-cols-3 gap-6 pt-8 border-t border-white/20"
+              className="grid grid-cols-3 gap-6 pt-8 border-t border-border"
             >
               <div className="flex flex-col">
                 <div className="flex items-center gap-2 mb-1">
-                  <Award className="h-5 w-5 text-accent" />
-                  <span className="text-2xl md:text-3xl font-bold text-white">15+</span>
+                  <Award className="h-5 w-5 text-primary" />
+                  <span className="text-2xl md:text-3xl font-bold text-foreground">15+</span>
                 </div>
-                <p className="text-sm text-white/80">Years Experience</p>
+                <p className="text-sm text-muted-foreground">Years Experience</p>
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-2 mb-1">
-                  <Users className="h-5 w-5 text-accent" />
-                  <span className="text-2xl md:text-3xl font-bold text-white">5000+</span>
+                  <Users className="h-5 w-5 text-primary" />
+                  <span className="text-2xl md:text-3xl font-bold text-foreground">5000+</span>
                 </div>
-                <p className="text-sm text-white/80">Happy Travelers</p>
+                <p className="text-sm text-muted-foreground">Happy Travelers</p>
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-2 mb-1">
-                  <Calendar className="h-5 w-5 text-accent" />
-                  <span className="text-2xl md:text-3xl font-bold text-white">1000+</span>
+                  <Calendar className="h-5 w-5 text-primary" />
+                  <span className="text-2xl md:text-3xl font-bold text-foreground">1000+</span>
                 </div>
-                <p className="text-sm text-white/80">Tours Completed</p>
+                <p className="text-sm text-muted-foreground">Tours Completed</p>
               </div>
             </div>
           </div>
 
-          {/* Guide Image Section */}
-          <div ref={imageRef} className="relative order-1 lg:order-2">
-            <div className="relative aspect-[4/5] lg:aspect-square rounded-2xl overflow-hidden shadow-2xl">
-              {/* Main Guide Image */}
-              <Image
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop"
-                alt="Jagath Premasinghe - Your Trusted Guide"
-                fill
-                className="object-cover"
-                priority
-              />
-              
-              {/* Overlay Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              
-              {/* Badge/Info Card */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-xl">
-                  <div className="flex items-center gap-3">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-primary">
-                      <Image
-                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
-                        alt="Jagath"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-foreground text-sm md:text-base">Jagath Premasinghe</h3>
-                      <p className="text-xs md:text-sm text-muted-foreground">Professional Tour Guide</p>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Award className="h-4 w-4 text-accent" />
-                      <span className="text-xs font-semibold text-foreground">15+ Years</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Decorative Elements */}
-              <div className="absolute top-6 right-6 w-16 h-16 bg-primary/10 backdrop-blur-sm rounded-full flex items-center justify-center border-2 border-primary/20">
-                <Award className="h-8 w-8 text-primary" />
-              </div>
-            </div>
-
-            {/* Floating Stats Cards */}
-            <div className="absolute -bottom-4 -left-4 hidden lg:block">
-              <div className="bg-white rounded-xl p-4 shadow-xl border border-border">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Users className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold text-foreground">5000+</p>
-                    <p className="text-xs text-muted-foreground">Happy Travelers</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute -top-4 -right-4 hidden lg:block">
-              <div className="bg-white rounded-xl p-4 shadow-xl border border-border">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
-                    <Calendar className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <p className="text-2xl font-bold text-foreground">1000+</p>
-                    <p className="text-xs text-muted-foreground">Tours</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Right Marquee 3D Section */}
+          <div ref={marqueeRef} className="relative order-1 lg:order-2 h-[100vh] overflow-hidden">
+            <Marquee3D />
+            {/* Fade Gradients - All Sides - Subtle */}
+            {/* <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div> */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div>
+            {/* <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div> */}
           </div>
         </div>
       </div>

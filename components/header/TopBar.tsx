@@ -21,7 +21,7 @@ export function TopBar() {
         <div className="flex flex-col items-center justify-between gap-2 text-sm md:flex-row">
           <div className="flex items-center gap-6">
             <Link
-              href="tel:+94771234567"
+              href="tel:+94756433267"
               className={cn(
                 "flex items-center gap-2 transition-all duration-200 hover:scale-105 font-medium",
                 shouldUseLightBackground
@@ -31,7 +31,7 @@ export function TopBar() {
               aria-label="Call us"
             >
               <Phone className="h-4 w-4" />
-              <span>+94 77 123 4567</span>
+              <span>+94 75 643 3267</span>
             </Link>
             <Link
               href="mailto:info@easytripper.lk"

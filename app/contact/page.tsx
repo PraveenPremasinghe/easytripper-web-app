@@ -11,8 +11,8 @@ export default function ContactPage() {
     {
       icon: Phone,
       title: "Phone",
-      content: "+94 77 123 4567",
-      href: "tel:+94771234567",
+      content: "+94 75 643 3267",
+      href: "tel:+94756433267",
       color: "from-blue-500 to-cyan-500",
     },
     {

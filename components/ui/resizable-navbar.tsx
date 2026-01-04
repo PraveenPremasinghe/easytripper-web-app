@@ -134,7 +134,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
             <a
               onMouseEnter={() => setHovered(idx)}
               onClick={onItemClick}
-              className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
+              className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 cursor-pointer"
               key={`link-${idx}`}
               href={item.link}
             >
@@ -153,7 +153,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
           <Link
             onMouseEnter={() => setHovered(idx)}
             onClick={onItemClick}
-            className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300"
+            className="relative px-4 py-2 text-neutral-600 dark:text-neutral-300 cursor-pointer"
             key={`link-${idx}`}
             href={item.link}
           >
@@ -250,9 +250,9 @@ export const MobileNavToggle = ({
   onClick: () => void;
 }) => {
   return isOpen ? (
-    <IconX className="text-black dark:text-white" onClick={onClick} />
+    <IconX className="text-black dark:text-white cursor-pointer" onClick={onClick} />
   ) : (
-    <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
+    <IconMenu2 className="text-black dark:text-white cursor-pointer" onClick={onClick} />
   );
 };
 
@@ -264,7 +264,7 @@ export const NavbarLogo = ({ children }: { children?: React.ReactNode }) => {
   return (
     <Link
       href="/"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black cursor-pointer"
     >
       <span className="font-medium text-black dark:text-white">Logo</span>
     </Link>

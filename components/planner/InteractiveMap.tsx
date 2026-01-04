@@ -40,11 +40,57 @@ function MapUpdater({ selectedPlaces }: { selectedPlaces: Place[] }) {
 export default function InteractiveMap({ selectedPlaces }: InteractiveMapProps) {
   const pathCoordinates = selectedPlaces.map((place) => [place.lat, place.lng] as [number, number]);
 
+  // Ensure Leaflet map panes have proper z-index
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const style = document.createElement("style");
+      style.id = "leaflet-z-index-fix";
+      style.textContent = `
+        .leaflet-container {
+          z-index: 0 !important;
+        }
+        .leaflet-pane {
+          z-index: 0 !important;
+        }
+        .leaflet-map-pane {
+          z-index: 0 !important;
+        }
+        .leaflet-tile-pane {
+          z-index: 0 !important;
+        }
+        .leaflet-overlay-pane {
+          z-index: 1 !important;
+        }
+        .leaflet-shadow-pane {
+          z-index: 2 !important;
+        }
+        .leaflet-marker-pane {
+          z-index: 3 !important;
+        }
+        .leaflet-tooltip-pane {
+          z-index: 4 !important;
+        }
+        .leaflet-popup-pane {
+          z-index: 5 !important;
+        }
+      `;
+      if (!document.getElementById("leaflet-z-index-fix")) {
+        document.head.appendChild(style);
+      }
+      return () => {
+        const existingStyle = document.getElementById("leaflet-z-index-fix");
+        if (existingStyle) {
+          document.head.removeChild(existingStyle);
+        }
+      };
+    }
+  }, []);
+
   return (
     <MapContainer
       center={[7.8731, 80.7718]}
       zoom={7}
-      style={{ height: "100%", width: "100%", borderRadius: "0.5rem" }}
+      style={{ height: "100%", width: "100%", borderRadius: "0.5rem", zIndex: 0 }}
       scrollWheelZoom={false}
     >
       <TileLayer
