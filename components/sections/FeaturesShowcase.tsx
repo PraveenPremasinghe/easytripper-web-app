@@ -10,7 +10,7 @@ const features = [
     title: "Local Expertise",
     description: "Born and raised in Sri Lanka with deep knowledge of hidden gems, local culture, and the best routes.",
     header: (
-      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 relative overflow-hidden border border-primary/20 dark:border-primary/30">
+      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 relative overflow-hidden border border-primary/20">
         <Image
           src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
           alt="Sri Lanka"
@@ -26,7 +26,7 @@ const features = [
     title: "Personalized Service",
     description: "Tailored itineraries based on your interests, pace, and preferences. Your trip, your way.",
     header: (
-      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 dark:from-accent/20 dark:to-accent/10 relative overflow-hidden border border-accent/20 dark:border-accent/30">
+      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 relative overflow-hidden border border-accent/20">
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]" />
       </div>
     ),
@@ -37,7 +37,7 @@ const features = [
     title: "24/7 Support",
     description: "Available throughout your journey. Emergency assistance and flexible itinerary adjustments.",
     header: (
-      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 dark:from-primary/20 dark:to-primary/10 relative overflow-hidden border border-primary/20 dark:border-primary/30">
+      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 relative overflow-hidden border border-primary/20">
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]" />
       </div>
     ),
@@ -48,7 +48,7 @@ const features = [
     title: "Small Groups",
     description: "Intimate group sizes ensure personalized attention and authentic local experiences.",
     header: (
-      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 dark:from-accent/20 dark:to-accent/10 relative overflow-hidden border border-accent/20 dark:border-accent/30">
+      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 relative overflow-hidden border border-accent/20">
         <Image
           src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
           alt="Group"
@@ -64,7 +64,7 @@ const features = [
 
 export function FeaturesShowcase() {
   return (
-    <section className="py-20 bg-background dark:bg-slate-900 relative overflow-hidden">
+    <section className="py-20 bg-background relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -96,7 +96,7 @@ export function JourneyTypes() {
   };
 
   return (
-    <section className="py-20 bg-background relative overflow-hidden min-h-[700px]">
+    <section className="py-12 sm:py-16 md:py-20 bg-background relative overflow-hidden min-h-[500px] sm:min-h-[600px] md:min-h-[700px]">
       {/* Background Image with Smooth Sliding Animation */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {journeyTypes.map((journey, index) => {
@@ -137,22 +137,22 @@ export function JourneyTypes() {
         })}
       </div>
       
-      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center md:text-left"
+          className="mb-8 sm:mb-12 md:mb-16 text-center md:text-left"
         >
-          <p className="text-lg mb-4 font-light text-white/90">
+          <p className="text-sm sm:text-base md:text-lg mb-3 sm:mb-4 font-light text-white/90">
             The paths are many - you choose.
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-4 text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight mb-3 sm:mb-4 text-white">
             What&apos;s your journey?
           </h2>
-          <p className="text-xl font-light text-white/90">
+          <p className="text-base sm:text-lg md:text-xl font-light text-white/90">
             Your adventure. Your way.
           </p>
         </motion.div>
@@ -162,21 +162,21 @@ export function JourneyTypes() {
           {/* Navigation Arrows */}
           <button
             onClick={goPrev}
-            className="swiper-button-prev-journey absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium"
+            className="swiper-button-prev-journey absolute left-0.5 sm:left-1 md:left-2 lg:left-4 top-1/2 -translate-y-1/2 z-40 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium touch-manipulation"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="w-6 h-6 md:w-7 md:h-7" />
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
           </button>
           <button
             onClick={goNext}
-            className="swiper-button-next-journey absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 md:w-14 md:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium"
+            className="swiper-button-next-journey absolute right-0.5 sm:right-1 md:right-2 lg:right-4 top-1/2 -translate-y-1/2 z-40 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium touch-manipulation"
             aria-label="Next slide"
           >
-            <ChevronRight className="w-6 h-6 md:w-7 md:h-7" />
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
           </button>
 
           {/* Swiper Wrapper */}
-          <div className="px-6 md:px-10 lg:px-12">
+          <div className="px-1 sm:px-2 md:px-4 lg:px-6 xl:px-10 2xl:px-12">
             <Swiper
               onSwiper={setSwiper}
               onSlideChange={handleSlideChange}
@@ -190,10 +190,18 @@ export function JourneyTypes() {
               watchSlidesProgress={true}
               breakpoints={{
                 320: {
+                  slidesPerView: 1.1,
+                  spaceBetween: 12,
+                },
+                375: {
                   slidesPerView: 1.2,
-                  spaceBetween: 20,
+                  spaceBetween: 16,
                 },
                 640: {
+                  slidesPerView: 1.8,
+                  spaceBetween: 20,
+                },
+                768: {
                   slidesPerView: 2.2,
                   spaceBetween: 24,
                 },
@@ -214,35 +222,39 @@ export function JourneyTypes() {
                 return (
                   <SwiperSlide 
                     key={journey.title} 
-                    className="!w-[200px] md:!w-[240px] lg:!w-[280px]"
+                    className="!w-[160px] xs:!w-[180px] sm:!w-[200px] md:!w-[240px] lg:!w-[280px]"
                   >
                   <div
-                    className="w-full cursor-pointer flex justify-center items-start pt-4 pb-6"
+                    className="w-full cursor-pointer flex justify-center items-start pt-2 sm:pt-4 pb-4 sm:pb-6"
                     onClick={() => handleCardClick(index)}
                   >
-                      <div className="flex flex-col items-center text-center w-full">
-                        {/* Circular Image Container */}
-                        <motion.div
-                          animate={{
-                            scale: isActive ? 1.4 : 0.8,
+                    <div className="flex flex-col items-center text-center w-full">
+                      {/* Circular Image Container */}
+                      <motion.div
+                        animate={{
+                          scale: isActive ? 1.4 : 0.8,
+                        }}
+                        transition={{ 
+                          duration: 0.6, 
+                          ease: [0.25, 0.46, 0.45, 0.94]
+                        }}
+                        className="relative mb-8 sm:mb-12 md:mb-16 lg:mb-20"
+                      >
+                        <div
+                          className={`relative rounded-full overflow-hidden border-2 md:border-4 border-white shadow-2xl transition-all duration-500 ${
+                            isActive 
+                              ? "ring-2 md:ring-4 ring-white/80 ring-offset-1 md:ring-offset-4 ring-offset-transparent" 
+                              : "opacity-65"
+                          }`}
+                          style={{
+                            width: isActive 
+                              ? "clamp(140px, 20vw, 260px)" 
+                              : "clamp(100px, 14vw, 150px)",
+                            height: isActive 
+                              ? "clamp(140px, 20vw, 260px)" 
+                              : "clamp(100px, 14vw, 150px)",
                           }}
-                          transition={{ 
-                            duration: 0.6, 
-                            ease: [0.25, 0.46, 0.45, 0.94]
-                          }}
-                          className="relative mb-20"
                         >
-                          <div
-                            className={`relative rounded-full overflow-hidden border-4 border-white shadow-2xl transition-all duration-500 ${
-                              isActive 
-                                ? "ring-4 ring-white/80 ring-offset-4 ring-offset-transparent" 
-                                : "opacity-65"
-                            }`}
-                            style={{
-                              width: isActive ? "260px" : "150px",
-                              height: isActive ? "260px" : "150px",
-                            }}
-                          >
                             <Image
                               src={journey.image}
                               alt={journey.title}
@@ -270,10 +282,10 @@ export function JourneyTypes() {
                             y: isActive ? 0 : 5,
                           }}
                           transition={{ duration: 0.4 }}
-                          className="w-full px-2 min-h-[80px] flex flex-col justify-start"
+                          className="w-full px-1 sm:px-2 min-h-[60px] sm:min-h-[70px] md:min-h-[80px] flex flex-col justify-start"
                         >
                           <h3
-                            className={`text-base md:text-lg lg:text-xl font-bold transition-all duration-300 leading-tight mb-2 ${
+                            className={`text-sm sm:text-base md:text-lg lg:text-xl font-bold transition-all duration-300 leading-tight mb-1.5 sm:mb-2 ${
                               isActive
                                 ? "text-white"
                                 : "text-white/75"
@@ -286,7 +298,7 @@ export function JourneyTypes() {
                             ))}
                           </h3>
                           <p
-                            className={`text-xs md:text-sm transition-all duration-300 leading-relaxed whitespace-normal mb-3 ${
+                            className={`text-[10px] sm:text-xs md:text-sm transition-all duration-300 leading-relaxed whitespace-normal mb-2 sm:mb-3 ${
                               isActive
                                 ? "text-white/95"
                                 : "text-white/65"
@@ -297,15 +309,15 @@ export function JourneyTypes() {
                           <Button
                             asChild
                             size="sm"
-                            className={`group transition-all duration-300 ${
+                            className={`group transition-all duration-300 text-xs sm:text-sm ${
                               isActive
                                 ? "bg-primary text-white hover:bg-primary-hover shadow-lg hover:shadow-xl"
                                 : "bg-primary/70 text-white/90 hover:bg-primary/90 opacity-70"
                             }`}
                           >
-                            <Link href={journey.href}>
-                              View More
-                              <ArrowRight className="ml-1.5 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                            <Link href={journey.href} className="flex items-center gap-1 sm:gap-1.5">
+                              <span className="whitespace-nowrap">View More</span>
+                              <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform group-hover:translate-x-1 flex-shrink-0" />
                             </Link>
                           </Button>
                         </motion.div>
@@ -328,7 +340,19 @@ export function JourneyTypes() {
         
         .journey-swiper .swiper-wrapper {
           align-items: flex-start;
-          padding: 40px 0 60px 0;
+          padding: 20px 0 40px 0;
+        }
+        
+        @media (min-width: 640px) {
+          .journey-swiper .swiper-wrapper {
+            padding: 30px 0 50px 0;
+          }
+        }
+        
+        @media (min-width: 1024px) {
+          .journey-swiper .swiper-wrapper {
+            padding: 40px 0 60px 0;
+          }
         }
         
         .journey-swiper .swiper-slide {

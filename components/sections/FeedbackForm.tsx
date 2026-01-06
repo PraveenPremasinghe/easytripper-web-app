@@ -80,9 +80,9 @@ export function FeedbackForm({ isOpen, onClose, onSubmit, isSubmitting: external
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[650px] max-h-[90vh] flex flex-col p-0 gap-0">
         {/* Header Section */}
-        <DialogHeader className="px-6 pt-6 pb-4 border-b bg-gradient-to-r from-primary/5 to-accent/5 dark:from-primary/10 dark:to-accent/10">
+        <DialogHeader className="px-6 pt-6 pb-4 border-b bg-gradient-to-r from-primary/5 to-accent/5">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 rounded-lg bg-primary/10 dark:bg-primary/20">
+            <div className="p-2 rounded-lg bg-primary/10">
               <MessageSquare className="h-5 w-5 text-primary" />
             </div>
             <DialogTitle className="text-2xl font-bold text-foreground">
@@ -114,7 +114,7 @@ export function FeedbackForm({ isOpen, onClose, onSubmit, isSubmitting: external
                         "cursor-pointer transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-full p-1",
                         selectedRating >= rating
                           ? "text-amber-500"
-                          : "text-gray-300 dark:text-gray-600"
+                          : "text-gray-300"
                       )}
                       aria-label={`Rate ${rating} out of 5`}
                     >

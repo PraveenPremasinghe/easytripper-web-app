@@ -102,7 +102,7 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <section id="why-choose-us" className="py-20 bg-gradient-to-b from-background to-slate-50 dark:to-slate-900">
+    <section id="why-choose-us" className="py-20 bg-gradient-to-b from-background to-slate-50">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

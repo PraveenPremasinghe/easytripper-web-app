@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -35,17 +34,17 @@ export function MainNav() {
       transition={{ duration: 0.3 }}
       className={cn(
         "fixed inset-x-0 top-[41px] z-50 w-full transition-all duration-300",
-        "bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800"
+        "bg-white border-b border-neutral-200"
       )}
     >
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-14 items-center justify-between">
+      <nav className="mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="flex h-12 sm:h-14 items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
             className="relative z-10 flex items-center space-x-2 transition-opacity hover:opacity-80 cursor-pointer"
           >
-            <span className="text-xl font-bold tracking-tight text-foreground transition-colors duration-300">
+            <span className="text-lg sm:text-xl font-bold tracking-tight text-foreground transition-colors duration-300">
               Easy Tripper
             </span>
           </Link>
@@ -62,7 +61,7 @@ export function MainNav() {
                   href={item.link}
                   className={cn(
                     "relative px-3 py-1.5 text-sm font-medium transition-all duration-200 rounded-lg cursor-pointer",
-                    "text-neutral-700 dark:text-neutral-300 hover:text-primary hover:bg-primary/10",
+                    "text-neutral-700 hover:text-primary hover:bg-primary/10",
                     isActive && "text-primary font-semibold bg-primary/10"
                   )}
                 >
@@ -81,12 +80,10 @@ export function MainNav() {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
-            <ThemeToggle />
-            
             <Button
               asChild
               size="sm"
-              className="hidden sm:flex transition-all duration-200"
+              className="hidden md:flex transition-all duration-200 text-xs sm:text-sm"
             >
               <Link href="/plan-your-trip">
                 Plan Your Trip

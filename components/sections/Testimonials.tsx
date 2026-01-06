@@ -35,22 +35,21 @@ const ReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative h-full w-100 flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border-2 p-6 mx-4",
-        "transition-all duration-300   hover:scale-[1.02]",
+        "relative h-full w-full sm:w-96 flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border-2 p-4 sm:p-6 mx-2 sm:mx-4",
+        "transition-all duration-300 hover:scale-[1.02]",
         // light styles - very visible background with strong contrast
-        "border-gray-300 bg-white  ",
+        "border-gray-300 bg-white",
         // dark styles - very visible background with strong contrast  
-        "dark:border-gray-600 dark:bg-gray-900 dark:hover:bg-gray-800"
       )}
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3 sm:gap-4">
         <div className="flex flex-col gap-2">
           <div className="flex items-start justify-between gap-2">
-            <div className="flex flex-col gap-1">
-              <figcaption className="text-base font-semibold text-foreground dark:text-white">
+            <div className="flex flex-col gap-1 min-w-0 flex-1">
+              <figcaption className="text-sm sm:text-base font-semibold text-foreground truncate">
                 {name}
               </figcaption>
-              <p className="text-sm font-medium text-muted-foreground dark:text-gray-300">
+              <p className="text-xs sm:text-sm font-medium text-muted-foreground truncate">
                 {username}
               </p>
             </div>
@@ -60,10 +59,10 @@ const ReviewCard = ({
                   <Star
                     key={i}
                     className={cn(
-                      "h-4 w-4 transition-colors",
+                      "h-3.5 w-3.5 sm:h-4 sm:w-4 transition-colors",
                       i < rating
                         ? "fill-amber-400 text-amber-400"
-                        : "text-gray-300 dark:text-gray-600"
+                        : "text-gray-300"
                     )}
                   />
                 ))}
@@ -71,7 +70,7 @@ const ReviewCard = ({
             )}
           </div>
         </div>
-        <blockquote className="text-sm leading-relaxed text-foreground dark:text-gray-200 line-clamp-4">
+        <blockquote className="text-xs sm:text-sm leading-relaxed text-foreground line-clamp-4">
           {body}
         </blockquote>
       </div>
@@ -158,7 +157,7 @@ export function Testimonials() {
   };
 
   return (
-    <section id="testimonials" className="py-20 bg-gradient-to-br from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <section id="testimonials" className="py-20 bg-gradient-to-br from-background via-slate-50 to-background">
       <div className="mx-auto  px-4 md:px-6 lg:px-8">
         {/* Header Section */}
         <motion.div
@@ -272,9 +271,9 @@ export function Testimonials() {
             </div>
             
             {/* Left fade - covers both rows */}
-            <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-1/4 bg-gradient-to-r from-slate-50 via-slate-50/90 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/90"></div>
+            <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-1/4 bg-gradient-to-r from-slate-50 via-slate-50/90 to-transparent z-20"></div>
             {/* Right fade - covers both rows */}
-            <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-1/4 bg-gradient-to-l from-slate-50 via-slate-50/90 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/90"></div>
+            <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-1/4 bg-gradient-to-l from-slate-50 via-slate-50/90 to-transparent z-20"></div>
           </div>
         )}
       

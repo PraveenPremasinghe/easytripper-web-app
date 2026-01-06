@@ -30,7 +30,7 @@ const travelTips = [
   {
     category: "Before You Go",
     icon: Plane,
-    color: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+    color: "bg-blue-500/10 text-blue-600",
     tips: [
       {
         title: "Visa Requirements",
@@ -53,7 +53,7 @@ const travelTips = [
   {
     category: "Money & Currency",
     icon: DollarSign,
-    color: "bg-green-500/10 text-green-600 dark:text-green-400",
+    color: "bg-green-500/10 text-green-600",
     tips: [
       {
         title: "Currency",
@@ -76,7 +76,7 @@ const travelTips = [
   {
     category: "Getting Around",
     icon: MapPin,
-    color: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
+    color: "bg-purple-500/10 text-purple-600",
     tips: [
       {
         title: "Transportation Options",
@@ -95,7 +95,7 @@ const travelTips = [
   {
     category: "Communication",
     icon: Smartphone,
-    color: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
+    color: "bg-orange-500/10 text-orange-600",
     tips: [
       {
         title: "SIM Cards & Internet",
@@ -114,7 +114,7 @@ const travelTips = [
   {
     category: "Culture & Etiquette",
     icon: Heart,
-    color: "bg-pink-500/10 text-pink-600 dark:text-pink-400",
+    color: "bg-pink-500/10 text-pink-600",
     tips: [
       {
         title: "Temple Etiquette",
@@ -137,7 +137,7 @@ const travelTips = [
   {
     category: "Food & Dining",
     icon: Utensils,
-    color: "bg-red-500/10 text-red-600 dark:text-red-400",
+    color: "bg-red-500/10 text-red-600",
     tips: [
       {
         title: "Local Cuisine",
@@ -160,7 +160,7 @@ const travelTips = [
   {
     category: "Health & Safety",
     icon: AlertCircle,
-    color: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
+    color: "bg-yellow-500/10 text-yellow-600",
     tips: [
       {
         title: "Water",
@@ -183,7 +183,7 @@ const travelTips = [
   {
     category: "Shopping & Souvenirs",
     icon: Camera,
-    color: "bg-indigo-500/10 text-indigo-600 dark:text-indigo-400",
+    color: "bg-indigo-500/10 text-indigo-600",
     tips: [
       {
         title: "What to Buy",

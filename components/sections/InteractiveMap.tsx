@@ -34,7 +34,7 @@ export function InteractiveMap() {
   const popularDestinations = destinations.slice(0, 6);
 
   return (
-    <section className="py-20 bg-muted/20 dark:bg-slate-800/30 relative overflow-hidden">
+    <section className="py-20 bg-muted/20 relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -109,7 +109,7 @@ export function InteractiveMap() {
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1 rounded-lg bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 text-sm font-medium shadow-lg border border-neutral-200 dark:border-neutral-800"
+                        className="absolute top-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1 rounded-lg bg-white text-neutral-900 text-sm font-medium shadow-lg border border-neutral-200"
                       >
                         {dest.name}
                       </motion.div>
@@ -148,7 +148,7 @@ export function InteractiveMap() {
                               {destination.region}
                             </Badge>
                           </div>
-                          <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2 mb-3">
+                          <p className="text-sm text-neutral-600 line-clamp-2 mb-3">
                             {destination.excerpt}
                           </p>
                           <div className="flex items-center text-sm font-semibold text-primary hover:underline transition-all">

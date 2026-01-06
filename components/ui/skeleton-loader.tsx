@@ -10,7 +10,7 @@ export function SkeletonLoader({
   className?: string;
   variant?: "default" | "card" | "text" | "circle";
 }) {
-  const baseClasses = "bg-neutral-200 dark:bg-neutral-800 rounded";
+  const baseClasses = "bg-neutral-200 rounded";
   
   const variantClasses = {
     default: "h-4 w-full",
@@ -36,7 +36,7 @@ export function SkeletonLoader({
 
 export function CardSkeleton() {
   return (
-    <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6 space-y-4">
+    <div className="rounded-xl border border-neutral-200 p-6 space-y-4">
       <SkeletonLoader variant="circle" />
       <SkeletonLoader variant="text" />
       <SkeletonLoader variant="default" />

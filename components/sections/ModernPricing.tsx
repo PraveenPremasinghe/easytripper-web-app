@@ -62,7 +62,7 @@ const pricingPlans = [
 
 export function ModernPricing() {
   return (
-    <section className="py-20 bg-gradient-to-b from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-background">
+    <section className="py-20 bg-gradient-to-b from-background via-slate-50 to-background">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

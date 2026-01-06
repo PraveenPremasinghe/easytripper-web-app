@@ -34,7 +34,7 @@ export function StickyInquiryBar() {
           exit={{ y: 100, opacity: 0 }}
           className="fixed bottom-0 left-0 right-0 z-40 bg-background border-t shadow-lg sm:hidden"
         >
-          <div className="mx-auto max-w-7xl px-4 py-3">
+          <div className="mx-auto max-w-7xl px-4 py-3 bg-white">
             <div className="flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <MessageCircle className="h-5 w-5 text-primary" />

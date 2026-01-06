@@ -67,7 +67,7 @@ export default function LoginPage() {
   // Only show loading if authenticated (redirecting) or if we're still checking
   if (status === "authenticated") {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-slate-50 to-background">
         <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Redirecting...</p>
@@ -77,7 +77,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-slate-50 to-background p-4">
       <div className="w-full max-w-md">
         <Card className="border-2 shadow-xl">
           <CardHeader className="space-y-3 text-center pb-6">

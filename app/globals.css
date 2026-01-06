@@ -97,46 +97,6 @@
   --success-foreground: #ffffff;
 }
 
-.dark {
-  /* Dark Mode */
-  --background: #0f172a;
-  --foreground: #f8fafc;
-  
-  /* Primary - Dark Teal (lighter for dark mode) */
-  --primary: #006b65;
-  --primary-foreground: #ffffff;
-  --primary-hover: #00534E;
-  --primary-light: #00857d;
-  --primary-dark: #003d39;
-  
-  /* Accent - Golden Yellow (lighter for dark mode) */
-  --accent: #ffd166;
-  --accent-foreground: #0f172a;
-  --accent-hover: #FFBE29;
-  --accent-light: #ffe08a;
-  
-  
-  /* Supporting Colors */
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  
-  /* UI Colors */
-  --border: #334155;
-  --input: #334155;
-  --ring: #006b65;
-  
-  /* Component Colors */
-  --popover: #1e293b;
-  --popover-foreground: #f8fafc;
-  --card: #1e293b;
-  --card-foreground: #f8fafc;
-  
-  /* Status Colors */
-  --destructive: #EF4444;
-  --destructive-foreground: #ffffff;
-  --success: #10B981;
-  --success-foreground: #ffffff;
-}
 
 * {
   border-color: var(--border);
@@ -288,10 +248,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.dark .glass {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
 
 /* Marquee animations */
 @keyframes marquee {

@@ -14,44 +14,46 @@ export function TopBar() {
     <div className={cn(
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
       shouldUseLightBackground
-        ? "bg-primary  dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800"
+        ? "bg-primary  border-b border-neutral-200"
         : "bg-black/90 backdrop-blur-lg border-b border-white/10"
     )}>
-      <div className="mx-auto max-w-7xl px-4 py-2.5 md:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-2 text-sm md:flex-row">
-          <div className="flex items-center gap-6">
+      <div className="mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-2.5">
+        <div className="flex flex-col items-center justify-between gap-2 text-xs sm:text-sm md:flex-row">
+          <div className="flex items-center gap-3 sm:gap-4 md:gap-6 flex-wrap justify-center">
             <Link
               href="tel:+94756433267"
               className={cn(
-                "flex items-center gap-2 transition-all duration-200 hover:scale-105 font-medium",
+                "flex items-center gap-1.5 sm:gap-2 transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap",
                 shouldUseLightBackground
-                  ? "text-white dark:text-neutral-300 hover:text-foreground"
+                  ? "text-white hover:text-foreground"
                   : "text-white/95 hover:text-white"
               )}
               aria-label="Call us"
             >
-              <Phone className="h-4 w-4" />
-              <span>+94 75 643 3267</span>
+              <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
+              <span className="text-xs sm:text-sm">+94 75 643 3267</span>
             </Link>
             <Link
               href="mailto:info@easytripper.lk"
               className={cn(
-                "flex items-center gap-2 transition-all duration-200 hover:scale-105 font-medium",
+                "flex items-center gap-1.5 sm:gap-2 transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap",
                 shouldUseLightBackground
-                  ? "text-white dark:text-neutral-300 hover:text-foreground"
+                  ? "text-white hover:text-foreground"
                   : "text-white/95 hover:text-white"
               )}
               aria-label="Email us"
             >
-              <Mail className="h-4 w-4" />
-              <span>info@easytripper.lk</span>
+              <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
+              <span className="text-xs sm:text-sm hidden xs:inline">info@easytripper.lk</span>
+              <span className="text-xs sm:text-sm xs:hidden">Email</span>
             </Link>
           </div>
           <div className={cn(
-            "font-semibold tracking-wide",
+            "font-semibold tracking-wide text-center md:text-left",
             shouldUseLightBackground
-              ? "text-white dark:text-neutral-300"
-              : "text-white/95"
+              ? "text-white"
+              : "text-white/95",
+            "text-[10px] sm:text-xs md:text-sm"
           )}>
             Your trusted guide to Sri Lanka
           </div>

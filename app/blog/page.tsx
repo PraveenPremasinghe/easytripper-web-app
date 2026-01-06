@@ -39,7 +39,7 @@ export default function BlogPage() {
       {/* SEO Content Section */}
       <section className="py-20 bg-muted/30">
         <div className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
-          <div className="prose prose-lg dark:prose-invert max-w-none">
+          <div className="prose prose-lg max-w-none">
             <h2 className="text-3xl font-bold text-foreground mb-6">
               Why Read Our Sri Lanka Travel Blog?
             </h2>

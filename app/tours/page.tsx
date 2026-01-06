@@ -44,7 +44,7 @@ export default function ToursPage() {
       : tours.filter((tour) => tour.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -53,10 +53,10 @@ export default function ToursPage() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h1 className="mb-4 text-4xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-5xl md:text-6xl">
+          <h1 className="mb-4 text-4xl font-bold text-neutral-800 sm:text-5xl md:text-6xl">
             Tours & Packages
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
+          <p className="mx-auto max-w-2xl text-lg text-neutral-600">
             Carefully crafted itineraries to help you experience the best of Sri Lanka. 
             All tours can be customized to your preferences.
           </p>
@@ -70,12 +70,12 @@ export default function ToursPage() {
           className="mb-12 flex justify-center"
         >
           <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
-            <TabsList className="flex flex-wrap justify-center gap-2 bg-neutral-100 dark:bg-neutral-900">
+            <TabsList className="flex flex-wrap justify-center gap-2 bg-neutral-100">
               {categories.map((category) => (
                 <TabsTrigger 
                   key={category} 
                   value={category} 
-                  className="rounded-full data-[state=active]:bg-white dark:data-[state=active]:bg-neutral-800"
+                  className="rounded-full data-[state=active]:bg-white"
                 >
                   {category}
                 </TabsTrigger>
@@ -108,7 +108,7 @@ export default function ToursPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-neutral-200 dark:border-neutral-800">
+              <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-neutral-200">
               <div className="relative aspect-video overflow-hidden">
                 <Image
                   src={tour.image}
@@ -124,7 +124,7 @@ export default function ToursPage() {
               </div>
 
               <CardContent className="p-6">
-                  <div className="mb-4 flex flex-wrap gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+                  <div className="mb-4 flex flex-wrap gap-4 text-sm text-neutral-600">
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4" />
                     <span>{tour.duration}</span>
@@ -142,15 +142,15 @@ export default function ToursPage() {
                   )}
                 </div>
 
-                  <p className="mb-4 text-neutral-700 dark:text-neutral-300">{tour.description}</p>
+                  <p className="mb-4 text-neutral-700">{tour.description}</p>
 
                 <div className="mb-4">
-                    <h4 className="mb-2 text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                    <h4 className="mb-2 text-sm font-semibold text-neutral-800">
                       Highlights:
                     </h4>
                     <ul className="space-y-1">
                       {tour.highlights.slice(0, 3).map((highlight, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li key={idx} className="flex items-start gap-2 text-sm text-neutral-600">
                           <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
                         <span>{highlight}</span>
                       </li>
@@ -159,11 +159,11 @@ export default function ToursPage() {
                 </div>
 
                 <div className="mb-4 flex items-baseline gap-2">
-                    <span className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+                    <span className="text-3xl font-bold text-neutral-900">
                       {tour.price}
                     </span>
                   {tour.priceNote && (
-                      <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                      <span className="text-sm text-neutral-600">
                         {tour.priceNote}
                       </span>
                   )}
@@ -174,7 +174,7 @@ export default function ToursPage() {
                       <Badge
                         key={dest}
                         variant="outline"
-                        className="text-xs border-neutral-300 dark:border-neutral-700"
+                        className="text-xs border-neutral-300"
                       >
                       <MapPin className="mr-1 h-3 w-3" />
                       {dest}
@@ -238,11 +238,11 @@ export default function ToursPage() {
                         <div className="space-y-6">
                           {/* Price Section */}
                           <div className="flex items-baseline gap-3 pb-4 border-b">
-                            <span className="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+                            <span className="text-4xl font-bold text-neutral-900">
                               {tour.price}
                             </span>
                             {tour.priceNote && (
-                              <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                              <span className="text-sm text-neutral-600">
                                 {tour.priceNote}
                               </span>
                             )}
@@ -251,12 +251,12 @@ export default function ToursPage() {
                           {/* Highlights Section */}
                           {tour.highlights && tour.highlights.length > 0 && (
                             <div>
-                              <h3 className="mb-3 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+                              <h3 className="mb-3 text-xl font-semibold text-neutral-800">
                                 Tour Highlights
                               </h3>
                               <ul className="grid gap-2 sm:grid-cols-2">
                                 {tour.highlights.map((highlight, idx) => (
-                                  <li key={idx} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+                                  <li key={idx} className="flex items-start gap-2 text-sm text-neutral-700">
                                     <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
                                     <span>{highlight}</span>
                                   </li>
@@ -268,7 +268,7 @@ export default function ToursPage() {
                           {/* Destinations Section */}
                           {tour.destinations && tour.destinations.length > 0 && (
                             <div>
-                              <h3 className="mb-3 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+                              <h3 className="mb-3 text-xl font-semibold text-neutral-800">
                                 Destinations
                               </h3>
                               <div className="flex flex-wrap gap-2">
@@ -276,7 +276,7 @@ export default function ToursPage() {
                                   <Badge
                                     key={dest}
                                     variant="outline"
-                                    className="text-sm border-neutral-300 dark:border-neutral-700"
+                                    className="text-sm border-neutral-300"
                                   >
                                     <MapPin className="mr-1 h-3 w-3" />
                                     {dest}
@@ -289,7 +289,7 @@ export default function ToursPage() {
                           {/* Itinerary Section */}
                           {tour.itinerary && tour.itinerary.length > 0 && (
                             <div>
-                              <h3 className="mb-4 text-xl font-semibold text-neutral-800 dark:text-neutral-200">
+                              <h3 className="mb-4 text-xl font-semibold text-neutral-800">
                                 Detailed Itinerary
                               </h3>
                               <ItineraryTimeline itinerary={tour.itinerary} />
@@ -299,14 +299,14 @@ export default function ToursPage() {
                           {/* Includes & Excludes */}
                           <div className="grid gap-6 md:grid-cols-2">
                             <div>
-                              <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                              <h3 className="mb-3 text-lg font-semibold text-neutral-800">
                                 What's Included
                               </h3>
                               <ul className="space-y-2">
                                 {tour.includes.map((item, index) => (
                                   <li
                                     key={index}
-                                    className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300"
+                                    className="flex items-start gap-2 text-sm text-neutral-700"
                                   >
                                     <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
                                     <span>{item}</span>
@@ -316,14 +316,14 @@ export default function ToursPage() {
                             </div>
                             {tour.excludes && tour.excludes.length > 0 && (
                               <div>
-                                <h3 className="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                                <h3 className="mb-3 text-lg font-semibold text-neutral-800">
                                   What's Not Included
                                 </h3>
                                 <ul className="space-y-2">
                                   {tour.excludes.map((item, index) => (
                                     <li
                                       key={index}
-                                      className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300"
+                                      className="flex items-start gap-2 text-sm text-neutral-700"
                                     >
                                       <X className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-500" />
                                       <span>{item}</span>
@@ -336,18 +336,18 @@ export default function ToursPage() {
 
                           {/* Best Time to Visit */}
                           {tour.bestTime && (
-                            <div className="p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg">
-                              <h3 className="mb-2 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+                            <div className="p-4 bg-neutral-50 rounded-lg">
+                              <h3 className="mb-2 text-lg font-semibold text-neutral-800">
                                 Best Time to Visit
                               </h3>
-                              <p className="text-neutral-600 dark:text-neutral-400">{tour.bestTime}</p>
+                              <p className="text-neutral-600">{tour.bestTime}</p>
                             </div>
                           )}
                         </div>
                       </div>
 
                       {/* Fixed Footer with Action Buttons */}
-                      <div className="border-t p-6 bg-white dark:bg-black">
+                      <div className="border-t p-6 bg-white">
                         <div className="flex gap-3">
                           <Button asChild className="flex-1 group/btn" size="lg">
                             <Link href="/contact">
@@ -385,12 +385,12 @@ export default function ToursPage() {
           transition={{ duration: 0.6 }}
           className="mt-16"
         >
-          <Card className="bg-gradient-to-r from-neutral-50 to-neutral-100 dark:from-neutral-900 dark:to-neutral-800 border-neutral-200 dark:border-neutral-800">
+          <Card className="bg-gradient-to-r from-neutral-50 to-neutral-100 border-neutral-200">
             <CardContent className="p-8 text-center">
-              <h2 className="mb-4 text-3xl font-bold text-neutral-800 dark:text-neutral-200">
+              <h2 className="mb-4 text-3xl font-bold text-neutral-800">
                 Don&apos;t see what you&apos;re looking for?
               </h2>
-              <p className="mb-6 text-lg text-neutral-600 dark:text-neutral-400">
+              <p className="mb-6 text-lg text-neutral-600">
                 We can create a completely customized itinerary based on your interests, 
                 budget, and travel dates.
               </p>

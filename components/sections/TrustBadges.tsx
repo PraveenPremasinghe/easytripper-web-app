@@ -38,7 +38,7 @@ const badges = [
 
 export function TrustBadges() {
   return (
-    <section className="py-20 bg-muted/20 dark:bg-slate-800/30 relative overflow-hidden">
+    <section className="py-20 bg-muted/20 relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -89,12 +89,12 @@ export function AboutSriLanka() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-background">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section ref={sectionRef} className="py-12 sm:py-16 md:py-20 bg-background">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
           {/* Left Side - Slogan */}
           <div ref={leftRef} className="space-y-2">
-            <h2 className="text-5xl md:text-6xl lg:text-8xl font-bold text-foreground leading-[1.3] tracking-[-0.02em]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold text-foreground leading-[1.3] tracking-[-0.02em]">
               Discover
               <br />
               <span className="text-primary">Extraordinary</span>
@@ -104,18 +104,18 @@ export function AboutSriLanka() {
           </div>
 
           {/* Right Side - About Sri Lanka Content */}
-          <div ref={rightRef} className="space-y-8">
-            <div className="space-y-4">
-              <h3 ref={titleRef} className="text-2xl md:text-3xl font-bold text-foreground leading-tight tracking-tight">
+          <div ref={rightRef} className="space-y-4 sm:space-y-6 md:space-y-8">
+            <div className="space-y-3 sm:space-y-4">
+              <h3 ref={titleRef} className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground leading-tight tracking-tight">
                 A Tropical Paradise Awaits
               </h3>
               
-              <p ref={headingRef} className="text-lg md:text-xl text-foreground leading-relaxed font-medium">
+              <p ref={headingRef} className="text-base sm:text-lg md:text-xl text-foreground leading-relaxed font-medium">
                 Discover <span className="text-primary font-semibold">&quot;The Pearl of the Indian Ocean&quot;</span> with expert local guides
               </p>
                   </div>
             
-            <p ref={textRef} className="text-base md:text-lg text-muted-foreground leading-[1.8] font-normal max-w-2xl">
+            <p ref={textRef} className="text-sm sm:text-base md:text-lg text-muted-foreground leading-[1.8] font-normal max-w-2xl">
               From pristine golden beaches to misty mountain peaks, ancient temples to wildlife safaris, Sri Lanka offers an 
               extraordinary journey through diverse landscapes and rich cultural heritage. Experience authentic Sri Lankan 
               hospitality as you explore UNESCO World Heritage sites, tea plantations, and vibrant local markets. Whether 
@@ -126,11 +126,11 @@ export function AboutSriLanka() {
             <Link
               ref={linkRef}
               href="/about"
-              className="inline-flex items-center gap-3 text-primary font-semibold text-base hover:gap-4 transition-all group mt-4"
+              className="inline-flex items-center gap-2 sm:gap-3 text-primary font-semibold text-sm sm:text-base hover:gap-3 sm:hover:gap-4 transition-all group mt-2 sm:mt-4"
             >
               ABOUT US
-              <div className="w-7 h-7 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors">
-                <ArrowRight className="h-4 w-4 text-primary group-hover:text-white transition-colors" />
+              <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-colors">
+                <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary group-hover:text-white transition-colors" />
               </div>
             </Link>
             </div>

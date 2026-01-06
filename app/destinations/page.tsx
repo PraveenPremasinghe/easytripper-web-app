@@ -32,18 +32,18 @@ export default function DestinationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
-      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
+    <div className="min-h-screen bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-8 sm:mb-12 md:mb-16 text-center"
         >
-          <h1 className="mb-4 text-4xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-5xl md:text-6xl">
+          <h1 className="mb-3 sm:mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-neutral-800">
             All Destinations
           </h1>
-          <p className="mx-auto max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
+          <p className="mx-auto max-w-2xl text-sm sm:text-base md:text-lg text-neutral-600 px-4">
             Discover the diverse beauty of Sri Lanka across all regions
           </p>
         </motion.div>
@@ -65,7 +65,7 @@ export default function DestinationsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
             >
-              <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-neutral-200 dark:border-neutral-800">
+              <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-neutral-200">
               <Link href={`/destinations/${destination.slug}`}>
                 <div className="relative aspect-video overflow-hidden">
                   <Image
@@ -80,10 +80,10 @@ export default function DestinationsPage() {
                   </Badge>
                 </div>
                 <CardContent className="p-6">
-                    <h3 className="mb-2 text-xl font-semibold text-neutral-800 dark:text-neutral-200 group-hover:text-primary transition-colors">
+                    <h3 className="mb-2 text-xl font-semibold text-neutral-800 group-hover:text-primary transition-colors">
                     {destination.name}
                   </h3>
-                    <p className="mb-4 text-neutral-600 dark:text-neutral-400 line-clamp-2">
+                    <p className="mb-4 text-neutral-600 line-clamp-2">
                     {destination.excerpt}
                   </p>
                   <div className="flex items-center text-primary group-hover:underline">

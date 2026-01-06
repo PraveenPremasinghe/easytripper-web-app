@@ -49,7 +49,7 @@ export const TextGenerateEffect = ({
       </motion.div>
 
       {filter && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center dark:from-black dark:to-transparent z-40" />
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center z-40" />
       )}
     </div>
   );

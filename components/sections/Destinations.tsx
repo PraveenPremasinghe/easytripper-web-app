@@ -67,7 +67,7 @@ export function Destinations() {
   };
 
   return (
-    <section id="destinations" className="py-20 bg-gradient-to-b from-slate-50 via-background to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <section id="destinations" className="py-20 bg-gradient-to-b from-slate-50 via-background to-slate-50">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -123,7 +123,7 @@ export function Destinations() {
         >
           {filteredDestinations.map((destination) => (
             <motion.div key={destination.slug} variants={itemVariants}>
-              <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] border border-border/50 hover:border-primary/30 relative bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900">
+              <Card className="group h-full overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] border border-border/50 hover:border-primary/30 relative bg-gradient-to-br from-white to-slate-50">
                 <div className="relative aspect-video overflow-hidden">
                   <Image
                     src={destination.image}

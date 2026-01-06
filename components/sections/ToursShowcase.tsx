@@ -148,7 +148,7 @@ export function ToursShowcase() {
                 </div>
 
                 <CardContent className="p-6">
-                  <div className="mb-4 flex flex-wrap gap-4 text-sm text-neutral-600 dark:text-neutral-400">
+                  <div className="mb-4 flex flex-wrap gap-4 text-sm text-neutral-600">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
                       <span>{tour.duration}</span>
@@ -166,17 +166,17 @@ export function ToursShowcase() {
                     )}
                   </div>
 
-                  <p className="mb-4 text-neutral-700 dark:text-neutral-300 line-clamp-2">
+                  <p className="mb-4 text-neutral-700 line-clamp-2">
                     {tour.description}
                   </p>
 
                   <div className="mb-4">
-                    <h4 className="mb-2 text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                    <h4 className="mb-2 text-sm font-semibold text-neutral-800">
                       Highlights:
                     </h4>
                     <ul className="space-y-1">
                       {tour.highlights.slice(0, 3).map((highlight, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li key={idx} className="flex items-start gap-2 text-sm text-neutral-600">
                           <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-green-500" />
                           <span>{highlight}</span>
                         </li>
@@ -185,11 +185,11 @@ export function ToursShowcase() {
                   </div>
 
                   <div className="mb-4 flex items-baseline gap-2">
-                    <span className="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+                    <span className="text-3xl font-bold text-neutral-900">
                       {tour.price}
                     </span>
                     {tour.priceNote && (
-                      <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                      <span className="text-sm text-neutral-600">
                         {tour.priceNote}
                       </span>
                     )}
@@ -200,7 +200,7 @@ export function ToursShowcase() {
                       <Badge
                         key={dest}
                         variant="outline"
-                        className="text-xs border-neutral-300 dark:border-neutral-700"
+                        className="text-xs border-neutral-300"
                       >
                         <MapPin className="mr-1 h-3 w-3" />
                         {dest}

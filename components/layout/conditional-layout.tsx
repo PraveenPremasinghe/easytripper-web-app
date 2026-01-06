@@ -19,7 +19,7 @@ export function ConditionalLayout({ children }: { children: React.ReactNode }) {
     <>
       <TopBar />
       <MainNav />
-      <main className="pt-[97px]">{children}</main>
+      <main className="pt-[73px] sm:pt-[89px] md:pt-[97px]">{children}</main>
       <Footer />
       <WhatsAppButton />
       <StickyInquiryBar />

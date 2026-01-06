@@ -128,7 +128,7 @@ export default async function BlogPostPage({ params }: Props) {
         )}
 
         {/* Article Content */}
-        <div className="prose prose-lg dark:prose-invert max-w-none">
+        <div className="prose prose-lg max-w-none">
           <div className="blog-content whitespace-pre-line text-foreground leading-relaxed">
             {post.content.split('\n\n').map((paragraph, index) => (
               paragraph.trim() && (

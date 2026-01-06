@@ -11,7 +11,7 @@ import { AnimatedCard } from "@/components/ui/animated-card";
 
 export function ModernDestinations() {
   return (
-    <section className="py-20 bg-muted/30 dark:bg-slate-800/50 relative overflow-hidden">
+    <section className="py-20 bg-muted/30 relative overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -63,7 +63,7 @@ export function GuideProfile() {
   ];
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <section ref={sectionRef} className="py-24 bg-gradient-to-br from-background via-slate-50 to-background">
       <div className="mx-auto max-w-6xl px-4 md:px-6 lg:px-8">
 
         {/* Main Profile Card */}
@@ -75,7 +75,7 @@ export function GuideProfile() {
           transition={{ duration: 0.8 }}
           className="relative"
         >
-          <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-slate-800 border-2 border-gray-200 dark:border-slate-700 shadow-2xl">
+          <div className="relative overflow-hidden rounded-3xl bg-white border-2 border-gray-200 shadow-2xl">
             {/* Decorative Background */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
@@ -92,7 +92,7 @@ export function GuideProfile() {
                   transition={{ duration: 0.6, type: "spring", stiffness: 200 }}
                   className="relative flex-shrink-0"
                 >
-                  <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800 ring-4 ring-primary/20 group">
+                  <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-2xl border-4 border-white ring-4 ring-primary/20 group">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     <Image
                       src="/images/guide/jagath-premasinghe.jpg"
@@ -116,7 +116,7 @@ export function GuideProfile() {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
-                    className="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-br from-accent to-accent-deep rounded-full border-4 border-white dark:border-slate-800 flex items-center justify-center shadow-lg"
+                    className="absolute -bottom-2 -right-2 w-12 h-12 bg-gradient-to-br from-accent to-accent-deep rounded-full border-4 border-white flex items-center justify-center shadow-lg"
                   >
                     <CheckCircle2 className="h-6 w-6 text-white" />
                   </motion.div>
@@ -126,7 +126,7 @@ export function GuideProfile() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.5 }}
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border-2 border-primary shadow-lg"
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center gap-1 px-3 py-1.5 rounded-full bg-white border-2 border-primary shadow-lg"
                   >
                     <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
                     <span className="text-sm font-bold text-foreground">5.0</span>
@@ -201,8 +201,8 @@ export function GuideProfile() {
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
                       className={cn(
-                        "relative overflow-hidden rounded-2xl p-6 border border-gray-200 dark:border-slate-700",
-                        "bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900",
+                        "relative overflow-hidden rounded-2xl p-6 border border-gray-200",
+                        "bg-gradient-to-br from-white to-slate-50",
                         "hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                       )}
                     >
@@ -257,7 +257,7 @@ export function GuideProfile() {
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.9 + index * 0.1 }}
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300"
+                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300"
                     >
                       <span className="text-2xl">{lang.flag}</span>
                       <div>

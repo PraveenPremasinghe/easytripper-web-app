@@ -110,8 +110,8 @@ export function SaveTripDialog({ isOpen, onClose, selectedPlaces }: SaveTripDial
 
         {isSuccess ? (
           <div className="flex flex-col items-center justify-center py-8 space-y-4">
-            <div className="rounded-full bg-green-100 dark:bg-green-900/30 p-4">
-              <CheckCircle className="h-16 w-16 text-green-600 dark:text-green-400" />
+            <div className="rounded-full bg-green-100 p-4">
+              <CheckCircle className="h-16 w-16 text-green-600" />
             </div>
             <p className="text-center text-muted-foreground text-base">
               Thank you for choosing Easy Tripper!

@@ -21,11 +21,10 @@ const DestinationCard = ({
   region: string;
 }) => {
   return (
-    <figure
+      <figure
       className={cn(
-        "relative h-80 w-60 sm:h-96 sm:w-72 md:h-[28rem] md:w-80 lg:h-[32rem] lg:w-96 cursor-pointer overflow-hidden rounded-xl border shadow-none",
-        "border-gray-950/[.1] ]",
-        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
+        "relative h-64 w-48 xs:h-72 xs:w-56 sm:h-80 sm:w-60 md:h-96 md:w-72 lg:h-[28rem] lg:w-80 xl:h-[32rem] xl:w-96 cursor-pointer overflow-hidden rounded-xl border shadow-none",
+        "border-gray-950/[.1]",
         "group transition-all duration-300 hover:scale-105"
       )}
     >
@@ -37,11 +36,11 @@ const DestinationCard = ({
           className="object-cover transition-transform duration-300 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <figcaption className="text-sm font-semibold text-white mb-1">
+        <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 md:p-4">
+          <figcaption className="text-xs sm:text-sm font-semibold text-white mb-0.5 sm:mb-1">
             {name}
           </figcaption>
-          <p className="text-xs text-white/80">{region}</p>
+          <p className="text-[10px] sm:text-xs text-white/80">{region}</p>
         </div>
       </div>
     </figure>
@@ -242,18 +241,18 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative  w-full overflow-hidden -mt-[97px] pt-[97px] bg-gradient-to-br from-background via-slate-50 to-background dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      <div className="relative z-10  mx-auto h-screen">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center py-20 lg:py-0">
+    <section ref={sectionRef} className="relative  w-full overflow-hidden -mt-[97px] pt-[97px] bg-gradient-to-br from-background via-slate-50 to-background">
+      <div className="relative z-10  mx-auto min-h-screen lg:h-screen">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center py-12 sm:py-16 md:py-20 lg:py-0">
           {/* Left Content Section */}
-          <div ref={contentRef} className="flex flex-col justify-center space-y-8 lg:space-y-10 order-2 lg:order-1 px-20 ">
+          <div ref={contentRef} className="flex flex-col justify-center space-y-6 sm:space-y-8 lg:space-y-10 order-2 lg:order-1 px-4 sm:px-6 md:px-12 lg:px-20">
             {/* Tagline */}
            
 
             {/* Main Heading */}
             <h1
               ref={headingRef}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight"
             >
               Your Home, Your Journey,
               <br />
@@ -263,7 +262,7 @@ export function Hero() {
             {/* Subheading */}
             <p
               ref={subheadingRef}
-              className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
             >
               Paradise. Where else do you find perfect beaches, ancient history, vibrant culture, 
               exotic cuisine and exciting wilderness in one tiny island? Come, let&apos;s explore Sri Lanka.
@@ -300,34 +299,34 @@ export function Hero() {
             {/* Stats */}
             <div
               ref={statsRef}
-              className="grid grid-cols-3 gap-6 pt-8 border-t border-border"
+              className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 pt-6 sm:pt-8 border-t border-border"
             >
               <div className="flex flex-col">
-                <div className="flex items-center gap-2 mb-1">
-                  <Award className="h-5 w-5 text-primary" />
-                  <span className="text-2xl md:text-3xl font-bold text-foreground">15+</span>
+                <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                  <Award className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                  <span className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">15+</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Years Experience</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">Years Experience</p>
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-2 mb-1">
-                  <Users className="h-5 w-5 text-primary" />
-                  <span className="text-2xl md:text-3xl font-bold text-foreground">5000+</span>
+                <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                  <span className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">5000+</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Happy Travelers</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">Happy Travelers</p>
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-2 mb-1">
-                  <Calendar className="h-5 w-5 text-primary" />
-                  <span className="text-2xl md:text-3xl font-bold text-foreground">1000+</span>
+                <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                  <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                  <span className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">1000+</span>
                 </div>
-                <p className="text-sm text-muted-foreground">Tours Completed</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">Tours Completed</p>
               </div>
             </div>
           </div>
 
           {/* Right Marquee 3D Section */}
-          <div ref={marqueeRef} className="relative order-1 lg:order-2 h-[90vh] overflow-hidden">
+          <div ref={marqueeRef} className="relative order-1 lg:order-2 h-[400px] sm:h-[500px] md:h-[600px] lg:h-[90vh] overflow-hidden">
             {destinations.length > 0 ? (
               <Marquee3D destinations={destinations} />
             ) : (
@@ -339,10 +338,10 @@ export function Hero() {
               </div>
             )}
             {/* Fade Gradients - All Sides - Subtle */}
-            {/* <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div> */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div>
-            {/* <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-50 via-slate-50/50 to-transparent z-20 dark:from-slate-900 dark:via-slate-900/50"></div> */}
+            {/* <div className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-50 via-slate-50/50 to-transparent z-20"></div> */}
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-50 via-slate-50/50 to-transparent z-20"></div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-50 via-slate-50/50 to-transparent z-20"></div>
+            {/* <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-50 via-slate-50/50 to-transparent z-20"></div> */}
           </div>
         </div>
       </div>

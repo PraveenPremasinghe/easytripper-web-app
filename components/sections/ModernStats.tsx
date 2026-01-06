@@ -37,7 +37,7 @@ const stats = [
 
 export function ModernStats() {
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 via-background to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <section className="py-20 bg-gradient-to-br from-slate-50 via-background to-slate-50">
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ export function ModernStats() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 p-8 border border-border shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white to-slate-50 p-8 border border-border shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
                 {/* Gradient Background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />

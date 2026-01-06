@@ -44,7 +44,7 @@ export const BentoCard = ({
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "row-span-1 rounded-2xl group/bento hover:shadow-2xl transition-all duration-300 shadow-lg p-6 dark:bg-slate-800/80 dark:border-slate-700 bg-white/90 backdrop-blur-sm border border-border hover:border-primary/50 justify-between flex flex-col space-y-4 hover:-translate-y-1",
+        "row-span-1 rounded-2xl group/bento hover:shadow-2xl transition-all duration-300 shadow-lg p-6 bg-white/90 backdrop-blur-sm border border-border hover:border-primary/50 justify-between flex flex-col space-y-4 hover:-translate-y-1",
         className
       )}
     >

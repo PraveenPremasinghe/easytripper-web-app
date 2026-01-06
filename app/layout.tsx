@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthSessionProvider } from "@/components/providers/session-provider";
 import { ConditionalLayout } from "@/components/layout/conditional-layout";
 import { Toaster } from "@/components/ui/toaster";
@@ -63,6 +62,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+  },
 };
 
 export default function RootLayout({
@@ -74,15 +78,8 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="antialiased">
         <AuthSessionProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ConditionalLayout>{children}</ConditionalLayout>
-            <Toaster />
-          </ThemeProvider>
+          <ConditionalLayout>{children}</ConditionalLayout>
+          <Toaster />
         </AuthSessionProvider>
       </body>
     </html>
