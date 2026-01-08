@@ -296,7 +296,7 @@ export const NavbarButton = ({
       "bg-primary text-white border-primary hover:bg-primary/90 hover:border-primary/90 active:bg-primary-dark active:border-primary-dark",
     secondary: 
       "bg-transparent border-border text-foreground hover:bg-muted hover:border-border/80",
-    
+    dark:
       "bg-foreground text-background border-foreground hover:bg-foreground/90 hover:border-foreground/90",
     gradient:
       "bg-primary text-white border-primary hover:bg-primary/90 hover:border-primary/90 active:bg-primary-dark active:border-primary-dark",

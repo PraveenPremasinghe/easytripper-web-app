@@ -4,7 +4,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Upload, X, Image as ImageIcon, Loader2 } from "lucide-react";
-import { fileToBase64 } from "@/lib/utils-admin";
+import { fileToWebP } from "@/lib/utils-admin";
 import { cn } from "@/lib/utils";
 
 interface MultiImageUploadProps {
@@ -51,9 +51,10 @@ export function MultiImageUpload({
     setIsUploading(true);
     try {
       const newImages: string[] = [];
+      // Convert each image to WebP format for better compression
       for (const file of imageFiles) {
-        const base64 = await fileToBase64(file);
-        newImages.push(base64);
+        const webpBase64 = await fileToWebP(file, 0.85, 1920, 1920); // 85% quality, max 1920px
+        newImages.push(webpBase64);
       }
       const updatedImages = [...previews, ...newImages];
       onChange(updatedImages);

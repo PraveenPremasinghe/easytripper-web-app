@@ -11,10 +11,11 @@ export async function GET() {
   try {
     const destinations = await getDestinations();
     return NextResponse.json({ success: true, data: destinations });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error fetching destinations:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { success: false, error: error.message },
+      { success: false, error: message },
       { status: 500 }
     );
   }
@@ -31,10 +32,11 @@ export async function POST(request: NextRequest) {
     }
     const destination = await createDestination(body as Destination);
     return NextResponse.json({ success: true, data: destination }, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error creating destination:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { success: false, error: error.message },
+      { success: false, error: message },
       { status: 500 }
     );
   }
@@ -58,10 +60,11 @@ export async function PUT(request: NextRequest) {
       );
     }
     return NextResponse.json({ success: true, data: destination });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error updating destination:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { success: false, error: error.message },
+      { success: false, error: message },
       { status: 500 }
     );
   }
@@ -85,10 +88,11 @@ export async function DELETE(request: NextRequest) {
       );
     }
     return NextResponse.json({ success: true });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error deleting destination:", error);
+    const message = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json(
-      { success: false, error: error.message },
+      { success: false, error: message },
       { status: 500 }
     );
   }

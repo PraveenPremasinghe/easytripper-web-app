@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { VehiclesHero } from "@/components/sections/VehiclesHero";
-import { VehiclesGrid } from "@/components/sections/VehiclesGrid";
 import { Users, Wind, Shield, MapPin } from "lucide-react";
 import { VehiclesPageClient } from "./client";
 

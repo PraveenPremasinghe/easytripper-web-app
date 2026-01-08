@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { BlogHero } from "@/components/sections/BlogHero";
-import { BlogGrid } from "@/components/sections/BlogGrid";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BlogPageClient } from "./client";
@@ -71,10 +70,10 @@ export default function BlogPage() {
               typical tourist information.
             </p>
             <h3 className="text-2xl font-semibold text-foreground mt-8 mb-4">
-              What You'll Find Here
+              What You&apos;ll Find Here
             </h3>
             <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
-              <li><strong className="text-foreground">Destination Guides:</strong> In-depth information about Sri Lanka's top destinations, from UNESCO World Heritage Sites to hidden gems</li>
+              <li><strong className="text-foreground">Destination Guides:</strong> In-depth information about Sri Lanka&apos;s top destinations, from UNESCO World Heritage Sites to hidden gems</li>
               <li><strong className="text-foreground">Travel Tips:</strong> Practical advice on everything from visa requirements to cultural etiquette</li>
               <li><strong className="text-foreground">Wildlife Guides:</strong> Expert information about national parks, safaris, and wildlife encounters</li>
               <li><strong className="text-foreground">Cultural Insights:</strong> Learn about Sri Lankan culture, traditions, and local customs</li>
@@ -82,7 +81,7 @@ export default function BlogPage() {
               <li><strong className="text-foreground">Seasonal Advice:</strong> Know the best times to visit different regions based on weather and events</li>
             </ul>
             <p className="text-muted-foreground mt-6">
-              Whether you're planning your first trip to Sri Lanka or looking to explore new 
+              Whether you&apos;re planning your first trip to Sri Lanka or looking to explore new 
               destinations on the island, our blog provides the knowledge and inspiration you 
               need for an unforgettable travel experience.
             </p>

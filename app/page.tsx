@@ -8,7 +8,6 @@ import { KeyExperiences } from "@/components/sections/KeyExperiences";
 import { TravelStories } from "@/components/sections/TravelStories";
 import { ToursShowcase } from "@/components/sections/ToursShowcase";
 import { StatsSection } from "@/components/sections/StatsSection";
-import { GuideProfile } from "@/components/sections/GuideProfile";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";

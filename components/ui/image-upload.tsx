@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Upload, X, Image as ImageIcon } from "lucide-react";
-import { fileToBase64 } from "@/lib/utils-admin";
+import { fileToWebP } from "@/lib/utils-admin";
 
 interface ImageUploadProps {
   value: string;
@@ -35,11 +35,11 @@ export function ImageUpload({ value, onChange, label = "Image", required = false
 
     setIsUploading(true);
     try {
-      // For development: convert to base64
-      // In production, you'd upload to a server/CDN
-      const base64 = await fileToBase64(file);
-      onChange(base64);
-      setPreview(base64);
+      // Convert image to WebP format for better compression and faster loading
+      // WebP provides 30-50% smaller file sizes while maintaining quality
+      const webpBase64 = await fileToWebP(file, 0.85, 1920, 1920); // 85% quality, max 1920px
+      onChange(webpBase64);
+      setPreview(webpBase64);
     } catch (error) {
       console.error('Error uploading image:', error);
       alert('Failed to upload image');

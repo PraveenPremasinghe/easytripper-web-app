@@ -306,7 +306,7 @@ export default function ToursPage() {
                           <div className="grid gap-6 md:grid-cols-2">
                             <div>
                               <h3 className="mb-3 text-lg font-semibold text-neutral-800">
-                                What's Included
+                                What&apos;s Included
                               </h3>
                               <ul className="space-y-2">
                                 {tour.includes.map((item, index) => (
@@ -323,7 +323,7 @@ export default function ToursPage() {
                             {tour.excludes && tour.excludes.length > 0 && (
                               <div>
                                 <h3 className="mb-3 text-lg font-semibold text-neutral-800">
-                                  What's Not Included
+                                  What&apos;s Not Included
                                 </h3>
                                 <ul className="space-y-2">
                                   {tour.excludes.map((item, index) => (

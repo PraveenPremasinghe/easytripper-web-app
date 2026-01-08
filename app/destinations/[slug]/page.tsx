@@ -97,7 +97,7 @@ export default async function DestinationPage({ params }: Props) {
   }
 
   // Things to do is now empty, so we'll skip that section
-  const destinationActivities: any[] = [];
+  const destinationActivities: Array<{ id: string; title: string; description: string; image: string; category: string; location?: string }> = [];
 
   return (
     <div className="min-h-screen bg-background">
