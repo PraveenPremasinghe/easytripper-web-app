@@ -49,7 +49,7 @@ const features = [
     icon: DollarSign,
     title: "Fair Pricing",
     description:
-      "Transparent, competitive rates with no hidden fees. Customized packages to fit your budget.",
+      "Transparent, competitive rates with no hidden fees. Customized tours to fit your budget.",
     className: "md:col-span-1",
     header: (
       <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-green-500/20 to-green-500/5 relative overflow-hidden">

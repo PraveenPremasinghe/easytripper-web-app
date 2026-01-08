@@ -40,16 +40,48 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!destination) {
     return {
-      title: "Destination Not Found",
+      title: "Destination Not Found | Easy Tripper",
     };
   }
 
+  const title = `${destination.name} - Sri Lanka Travel Guide | Easy Tripper`;
+  const description = destination.excerpt || `Visit ${destination.name} in Sri Lanka. ${destination.region} region. Plan your trip with Easy Tripper's expert guides.`;
+  const canonical = `https://easytripper.lk/destinations/${slug}`;
+
   return {
-    title: destination.name,
-    description: destination.excerpt,
+    title,
+    description,
+    keywords: [
+      destination.name,
+      `${destination.name} Sri Lanka`,
+      `visit ${destination.name}`,
+      `${destination.region} Sri Lanka`,
+      "Sri Lanka destinations",
+      "Sri Lanka travel",
+    ],
+    alternates: {
+      canonical,
+    },
     openGraph: {
-      title: destination.name,
-      description: destination.excerpt,
+      title,
+      description,
+      url: canonical,
+      siteName: "Easy Tripper",
+      images: [
+        {
+          url: destination.image,
+          width: 1200,
+          height: 630,
+          alt: `${destination.name} - Sri Lanka`,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
       images: [destination.image],
     },
   };

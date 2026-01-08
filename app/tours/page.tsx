@@ -11,7 +11,11 @@ import { ArrowRight, Calendar, Users, MapPin, Check, X } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { ItineraryTimeline } from "@/components/sections/ItineraryTimeline";
 import { motion } from "framer-motion";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import type { Tour } from "@/lib/types";
+
+// Note: Metadata export doesn't work with "use client" - will need to create separate metadata file
+// For now, adding structured data and breadcrumbs
 
 export default function ToursPage() {
   const [tours, setTours] = useState<Tour[]>([]);
@@ -45,20 +49,22 @@ export default function ToursPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-20 md:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:py-16 md:py-20 md:px-6 lg:px-8">
+        <Breadcrumbs items={[{ name: "Custom Tours", url: "/tours" }]} />
+        
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-12 sm:mb-16 text-center"
         >
-          <h1 className="mb-4 text-4xl font-bold text-neutral-800 sm:text-5xl md:text-6xl">
-            Tours & Packages
+          <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-800">
+            Custom Sri Lanka Tours
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-neutral-600">
-            Carefully crafted itineraries to help you experience the best of Sri Lanka. 
-            All tours can be customized to your preferences.
+            Create your perfect custom tour tailored to your interests, budget, and travel dates. 
+            Every tour is personalized to give you the best Sri Lanka experience.
           </p>
         </motion.div>
 

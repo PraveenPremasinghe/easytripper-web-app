@@ -113,10 +113,10 @@ export function ToursShowcase() {
       <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <div ref={headerRef} className="mb-16 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Popular Tours & Packages
+            Popular Custom Tours
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Carefully crafted itineraries to help you experience the best of Sri Lanka
+            Personalized tours tailored to your interests. Every itinerary is customized to give you the best Sri Lanka experience
           </p>
         </div>
 

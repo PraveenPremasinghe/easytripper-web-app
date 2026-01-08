@@ -39,17 +39,43 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const title = `${post.title} | Easy Tripper - Sri Lanka Travel Blog`;
+  const canonical = `https://easytripper.lk/blog/${slug}`;
+
   return {
-    title: post.title,
-    description: post.excerpt,
-    keywords: post.seoKeywords || post.tags,
+    title,
+    description: post.excerpt || `Read about ${post.title} on Easy Tripper's Sri Lanka travel blog. Expert travel guides and tips.`,
+    keywords: [
+      ...(post.seoKeywords || post.tags || []),
+      "Sri Lanka travel blog",
+      "Sri Lanka travel guide",
+      "Sri Lanka travel tips",
+    ],
+    alternates: {
+      canonical,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      images: [post.image],
+      url: canonical,
+      siteName: "Easy Tripper",
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
       type: "article",
       publishedTime: post.publishedAt,
-      authors: [post.author],
+      authors: [post.author || "Jagath Premasinghe"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
     },
   };
 }

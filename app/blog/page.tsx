@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { BlogPageClient } from "./client";
 
 export const metadata: Metadata = {
-  title: "Travel Blog & Guides | Expert Sri Lanka Travel Tips & Destination Guides",
+  title: "Sri Lanka Travel Blog & Guides | Expert Travel Tips | Easy Tripper",
   description: "Comprehensive travel guides, destination insights, and expert tips for exploring Sri Lanka. From cultural heritage to wildlife safaris, discover everything you need to plan your perfect trip.",
   keywords: [
     "Sri Lanka travel blog",
@@ -14,12 +14,34 @@ export const metadata: Metadata = {
     "Sri Lanka travel tips",
     "Sri Lanka destinations",
     "travel guide Sri Lanka",
-    "Sri Lanka blog"
+    "Sri Lanka blog",
+    "best time to visit Sri Lanka",
+    "Sri Lanka itinerary",
+    "Sri Lanka travel cost",
   ],
+  alternates: {
+    canonical: "https://easytripper.lk/blog",
+  },
   openGraph: {
-    title: "Travel Blog & Guides | Easy Tripper",
+    title: "Sri Lanka Travel Blog & Guides | Easy Tripper",
     description: "Expert travel guides and tips for exploring Sri Lanka",
+    url: "https://easytripper.lk/blog",
+    siteName: "Easy Tripper",
     type: "website",
+    images: [
+      {
+        url: "/images/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Sri Lanka Travel Blog",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sri Lanka Travel Blog & Guides",
+    description: "Expert travel guides and tips for exploring Sri Lanka",
+    images: ["/images/og-image.jpg"],
   },
 };
 
@@ -94,7 +116,7 @@ export default function BlogPage() {
               className="border-2 border-white bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 hover:border-white/50 hover:text-white"
             >
               <Link href="/tours">
-                View Tour Packages
+                View Custom Tours
               </Link>
             </Button>
           </div>

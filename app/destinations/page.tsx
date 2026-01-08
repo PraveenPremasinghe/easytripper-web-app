@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import type { Destination } from "@/lib/types";
 
 export default function DestinationsPage() {
@@ -34,6 +35,8 @@ export default function DestinationsPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+        <Breadcrumbs items={[{ name: "Destinations", url: "/destinations" }]} />
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,7 +44,7 @@ export default function DestinationsPage() {
           className="mb-8 sm:mb-12 md:mb-16 text-center"
         >
           <h1 className="mb-3 sm:mb-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-neutral-800">
-            All Destinations
+            Sri Lanka Destinations
           </h1>
           <p className="mx-auto max-w-2xl text-sm sm:text-base md:text-lg text-neutral-600 px-4">
             Discover the diverse beauty of Sri Lanka across all regions

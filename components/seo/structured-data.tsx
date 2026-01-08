@@ -1,13 +1,17 @@
 import { destinations, tours, testimonials, faqs } from "@/lib/data";
 
-export function LocalBusinessSchema() {
+export function OrganizationSchema() {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "TouristInformationCenter",
-    name: "Easy Tripper - Sri Lanka Tour Guide",
-    description: "Professional tour guide and vehicle service in Sri Lanka. Expert local guide offering personalized tours, cultural experiences, wildlife safaris, and transportation services across the island.",
+    "@type": "TravelAgency",
+    "@id": "https://easytripper.lk/#organization",
+    name: "Easy Tripper",
+    alternateName: "Easy Tripper Sri Lanka Tours",
     url: "https://easytripper.lk",
-    telephone: "+94-75-643-3267", // Update with actual phone
+    logo: "https://easytripper.lk/images/logo.png",
+    description: "Custom Sri Lanka tours with private chauffeur service. Expert local guide offering personalized tours tailored to your preferences, cultural experiences, wildlife safaris, and luxury transportation services.",
+    telephone: "+94756433267",
+    email: "info@easytripper.lk",
     address: {
       "@type": "PostalAddress",
       addressCountry: "LK",
@@ -25,8 +29,48 @@ export function LocalBusinessSchema() {
     priceRange: "$$",
     image: "https://easytripper.lk/images/og-image.jpg",
     sameAs: [
-      // Add social media links
-    ]
+      // Add social media links when available
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5.0",
+      reviewCount: "5000+"
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+export function LocalBusinessSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "TouristInformationCenter",
+    name: "Easy Tripper - Sri Lanka Tour Guide",
+    description: "Professional tour guide and vehicle service in Sri Lanka. Expert local guide offering personalized tours, cultural experiences, wildlife safaris, and transportation services across the island.",
+    url: "https://easytripper.lk",
+    telephone: "+94756433267",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "LK",
+      addressLocality: "Sri Lanka"
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "7.8731",
+      longitude: "80.7718"
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Sri Lanka"
+    },
+    priceRange: "$$",
+    image: "https://easytripper.lk/images/og-image.jpg",
+    sameAs: []
   };
 
   return (
@@ -77,11 +121,12 @@ export function TouristTripSchemas() {
   );
 }
 
-export function FAQSchema() {
+export function FAQSchema({ faqs: customFaqs }: { faqs?: Array<{ q: string; a: string }> }) {
+  const faqData = customFaqs || faqs;
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: faqData.map((faq) => ({
       "@type": "Question",
       name: faq.q,
       acceptedAnswer: {
@@ -139,7 +184,7 @@ export function BreadcrumbSchema({ items }: { items: Array<{ name: string; url: 
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: item.url
+      item: item.url.startsWith("http") ? item.url : `https://easytripper.lk${item.url}`
     }))
   };
 

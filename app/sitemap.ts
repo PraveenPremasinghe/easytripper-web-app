@@ -4,19 +4,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://easytripper.lk";
 
   const routes = [
-    "",
-    "/destinations",
-    "/tours",
-    "/vehicles",
-    "/blog",
-    "/stories",
-    "/travel-tips",
-    "/contact",
+    { path: "", priority: 1.0, changeFreq: "weekly" },
+    { path: "/destinations", priority: 0.9, changeFreq: "weekly" },
+    { path: "/tours", priority: 0.9, changeFreq: "weekly" },
+    { path: "/vehicles", priority: 0.8, changeFreq: "monthly" },
+    { path: "/plan-your-trip", priority: 0.9, changeFreq: "monthly" },
+    { path: "/blog", priority: 0.8, changeFreq: "weekly" },
+    { path: "/stories", priority: 0.7, changeFreq: "monthly" },
+    { path: "/travel-tips", priority: 0.7, changeFreq: "monthly" },
+    { path: "/contact", priority: 0.8, changeFreq: "monthly" },
   ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: `${baseUrl}${route.path}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: route === "" ? 1 : 0.8,
+    changeFrequency: route.changeFreq as "weekly" | "monthly",
+    priority: route.priority,
   }));
 
   // Fetch destinations and blog posts from Firebase

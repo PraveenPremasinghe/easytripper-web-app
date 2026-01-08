@@ -162,21 +162,21 @@ export function JourneyTypes() {
           {/* Navigation Arrows */}
           <button
             onClick={goPrev}
-            className="swiper-button-prev-journey absolute left-0.5 sm:left-1 md:left-2 lg:left-4 top-1/2 -translate-y-1/2 z-40 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium touch-manipulation"
+            className="swiper-button-prev-journey absolute left-2 sm:left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-40 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium touch-manipulation"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
           </button>
           <button
             onClick={goNext}
-            className="swiper-button-next-journey absolute right-0.5 sm:right-1 md:right-2 lg:right-4 top-1/2 -translate-y-1/2 z-40 w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium touch-manipulation"
+            className="swiper-button-next-journey absolute right-2 sm:right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-40 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-primary text-white border-2 border-primary flex items-center justify-center shadow-lg transition-all duration-200 hover:bg-primary/90 hover:border-primary/90 hover:scale-110 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed backdrop-blur-sm font-medium touch-manipulation"
             aria-label="Next slide"
           >
-            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
           </button>
 
           {/* Swiper Wrapper */}
-          <div className="px-1 sm:px-2 md:px-4 lg:px-6 xl:px-10 2xl:px-12">
+          <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
             <Swiper
               onSwiper={setSwiper}
               onSlideChange={handleSlideChange}
@@ -190,27 +190,27 @@ export function JourneyTypes() {
               watchSlidesProgress={true}
               breakpoints={{
                 320: {
-                  slidesPerView: 1.1,
-                  spaceBetween: 12,
-                },
-                375: {
-                  slidesPerView: 1.2,
+                  slidesPerView: 1.3,
                   spaceBetween: 16,
                 },
+                375: {
+                  slidesPerView: 1.4,
+                  spaceBetween: 18,
+                },
                 640: {
-                  slidesPerView: 1.8,
+                  slidesPerView: 2,
                   spaceBetween: 20,
                 },
                 768: {
-                  slidesPerView: 2.2,
+                  slidesPerView: 2.5,
                   spaceBetween: 24,
                 },
                 1024: {
-                  slidesPerView: 3.2,
+                  slidesPerView: 3,
                   spaceBetween: 30,
                 },
                 1280: {
-                  slidesPerView: 3.8,
+                  slidesPerView: 3.5,
                   spaceBetween: 35,
                 },
               }}
@@ -222,38 +222,30 @@ export function JourneyTypes() {
                 return (
                   <SwiperSlide 
                     key={journey.title} 
-                    className="!w-[160px] xs:!w-[180px] sm:!w-[200px] md:!w-[240px] lg:!w-[280px]"
+                    className=" sm:!w-[220px] md:!w-[260px] lg:!w-[300px]"
                   >
                   <div
-                    className="w-full cursor-pointer flex justify-center items-start pt-2 sm:pt-4 pb-4 sm:pb-6"
+                    className="w-full cursor-pointer flex justify-center items-start pt-4 sm:pt-6 pb-6 sm:pb-8"
                     onClick={() => handleCardClick(index)}
                   >
                     <div className="flex flex-col items-center text-center w-full">
                       {/* Circular Image Container */}
                       <motion.div
                         animate={{
-                          scale: isActive ? 1.4 : 0.8,
+                          scale: isActive ? 1.1 : 0.85,
                         }}
                         transition={{ 
                           duration: 0.6, 
                           ease: [0.25, 0.46, 0.45, 0.94]
                         }}
-                        className="relative mb-8 sm:mb-12 md:mb-16 lg:mb-20"
+                        className="relative mb-4 sm:mb-6 md:mb-8 lg:mb-12"
                       >
                         <div
-                          className={`relative rounded-full overflow-hidden border-2 md:border-4 border-white shadow-2xl transition-all duration-500 ${
+                          className={`journey-image-circle relative rounded-full overflow-hidden border-2 md:border-4 border-white shadow-2xl transition-all duration-500 flex-shrink-0 ${
                             isActive 
-                              ? "ring-2 md:ring-4 ring-white/80 ring-offset-1 md:ring-offset-4 ring-offset-transparent" 
-                              : "opacity-65"
+                              ? "journey-image-active ring-2 md:ring-4 ring-white/80 ring-offset-1 md:ring-offset-4 ring-offset-transparent" 
+                              : "journey-image-inactive opacity-75"
                           }`}
-                          style={{
-                            width: isActive 
-                              ? "clamp(140px, 20vw, 260px)" 
-                              : "clamp(100px, 14vw, 150px)",
-                            height: isActive 
-                              ? "clamp(140px, 20vw, 260px)" 
-                              : "clamp(100px, 14vw, 150px)",
-                          }}
                         >
                             <Image
                               src={journey.image}
@@ -278,17 +270,17 @@ export function JourneyTypes() {
                         {/* Text Content */}
                         <motion.div
                           animate={{
-                            opacity: isActive ? 1 : 0.7,
-                            y: isActive ? 0 : 5,
+                            opacity: isActive ? 1 : 0.75,
+                            y: isActive ? 0 : 3,
                           }}
                           transition={{ duration: 0.4 }}
-                          className="w-full px-1 sm:px-2 min-h-[60px] sm:min-h-[70px] md:min-h-[80px] flex flex-col justify-start"
+                          className="w-full px-2 sm:px-3 min-h-[70px] sm:min-h-[80px] md:min-h-[90px] flex flex-col justify-start items-center"
                         >
                           <h3
-                            className={`text-sm sm:text-base md:text-lg lg:text-xl font-bold transition-all duration-300 leading-tight mb-1.5 sm:mb-2 ${
+                            className={`text-sm sm:text-base md:text-lg lg:text-xl font-bold transition-all duration-300 leading-tight mb-2 sm:mb-2.5 ${
                               isActive
                                 ? "text-white"
-                                : "text-white/75"
+                                : "text-white/80"
                             }`}
                           >
                             {journey.title.split(" ").map((word, i) => (
@@ -298,10 +290,10 @@ export function JourneyTypes() {
                             ))}
                           </h3>
                           <p
-                            className={`text-[10px] sm:text-xs md:text-sm transition-all duration-300 leading-relaxed whitespace-normal mb-2 sm:mb-3 ${
+                            className={`text-xs sm:text-sm md:text-base transition-all duration-300 leading-relaxed whitespace-normal mb-3 sm:mb-4 text-center ${
                               isActive
                                 ? "text-white/95"
-                                : "text-white/65"
+                                : "text-white/70"
                             }`}
                           >
                             {journey.description}
@@ -309,15 +301,15 @@ export function JourneyTypes() {
                           <Button
                             asChild
                             size="sm"
-                            className={`group transition-all duration-300 text-xs sm:text-sm ${
+                            className={`group transition-all duration-300 text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 ${
                               isActive
                                 ? "bg-primary text-white hover:bg-primary-hover shadow-lg hover:shadow-xl"
-                                : "bg-primary/70 text-white/90 hover:bg-primary/90 opacity-70"
+                                : "bg-primary/70 text-white/90 hover:bg-primary/90 opacity-75"
                             }`}
                           >
-                            <Link href={journey.href} className="flex items-center gap-1 sm:gap-1.5">
+                            <Link href={journey.href} className="flex items-center gap-1.5 sm:gap-2">
                               <span className="whitespace-nowrap">View More</span>
-                              <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 transition-transform group-hover:translate-x-1 flex-shrink-0" />
+                              <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover:translate-x-1 flex-shrink-0" />
                             </Link>
                           </Button>
                         </motion.div>
@@ -339,19 +331,19 @@ export function JourneyTypes() {
         }
         
         .journey-swiper .swiper-wrapper {
-          align-items: flex-start;
-          padding: 20px 0 40px 0;
+          align-items: center;
+          padding: 30px 0 50px 0;
         }
         
         @media (min-width: 640px) {
           .journey-swiper .swiper-wrapper {
-            padding: 30px 0 50px 0;
+            padding: 40px 0 60px 0;
           }
         }
         
         @media (min-width: 1024px) {
           .journey-swiper .swiper-wrapper {
-            padding: 40px 0 60px 0;
+            padding: 50px 0 70px 0;
           }
         }
         
@@ -365,6 +357,65 @@ export function JourneyTypes() {
           align-items: flex-start;
           height: auto;
           transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Circular Image Sizing - Mobile First */
+        .journey-image-circle {
+          width: 100px;
+          height: 100px;
+        }
+        
+        .journey-image-active {
+          width: 120px;
+          height: 120px;
+        }
+        
+        @media (min-width: 640px) {
+          .journey-image-circle {
+            width: 120px;
+            height: 120px;
+          }
+          
+          .journey-image-active {
+            width: 150px;
+            height: 150px;
+          }
+        }
+        
+        @media (min-width: 768px) {
+          .journey-image-circle {
+            width: 140px;
+            height: 140px;
+          }
+          
+          .journey-image-active {
+            width: 180px;
+            height: 180px;
+          }
+        }
+        
+        @media (min-width: 1024px) {
+          .journey-image-circle {
+            width: 160px;
+            height: 160px;
+          }
+          
+          .journey-image-active {
+            width: 220px;
+            height: 220px;
+          }
+        }
+        
+        @media (min-width: 1280px) {
+          .journey-image-circle {
+            width: 180px;
+            height: 180px;
+          }
+          
+          .journey-image-active {
+            width: 260px;
+            height: 260px;
+          }
         }
         
         .swiper-button-prev-journey,

@@ -249,14 +249,14 @@ export function Hero() {
             {/* Tagline */}
            
 
-            {/* Main Heading */}
+            {/* Main Heading - SEO Optimized */}
             <h1
               ref={headingRef}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight"
             >
-              Your Home, Your Journey,
+              Custom Sri Lanka Tours
               <br />
-              <span className="text-primary">Your Hospitality Haven</span>
+              <span className="text-primary">with Private Chauffeur</span>
             </h1>
 
             {/* Subheading */}

@@ -63,7 +63,7 @@ export function FinalCTA() {
               variant="outline"
               className="border-2 border-white/30 bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 hover:border-white/50 hover:text-white"
             >
-              <Link href="/tours">View Tour Packages</Link>
+              <Link href="/tours">View Custom Tours</Link>
             </Button>
           </motion.div>
         </div>
