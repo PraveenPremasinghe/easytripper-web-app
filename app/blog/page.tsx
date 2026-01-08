@@ -3,10 +3,11 @@ import { BlogHero } from "@/components/sections/BlogHero";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BlogPageClient } from "./client";
+import { generatePageMetadata, TARGET_COUNTRIES } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Sri Lanka Travel Blog & Guides | Expert Travel Tips | Easy Tripper",
-  description: "Comprehensive travel guides, destination insights, and expert tips for exploring Sri Lanka. From cultural heritage to wildlife safaris, discover everything you need to plan your perfect trip.",
+export const metadata: Metadata = generatePageMetadata({
+  title: "Sri Lanka Travel Blog & Guides | Expert Travel Tips",
+  description: "Comprehensive travel guides, destination insights, and expert tips for exploring Sri Lanka. From cultural heritage to wildlife safaris, discover everything you need to plan your perfect trip. Expert advice for travelers from India, Switzerland, Netherlands, Germany, and Sweden.",
   keywords: [
     "Sri Lanka travel blog",
     "Sri Lanka travel guides",
@@ -17,32 +18,13 @@ export const metadata: Metadata = {
     "best time to visit Sri Lanka",
     "Sri Lanka itinerary",
     "Sri Lanka travel cost",
+    "Sri Lanka travel information",
+    "Sri Lanka travel advice",
   ],
-  alternates: {
-    canonical: "https://easytripper.lk/blog",
-  },
-  openGraph: {
-    title: "Sri Lanka Travel Blog & Guides | Easy Tripper",
-    description: "Expert travel guides and tips for exploring Sri Lanka",
-    url: "https://easytripper.lk/blog",
-    siteName: "Easy Tripper",
-    type: "website",
-    images: [
-      {
-        url: "/images/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Sri Lanka Travel Blog",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Sri Lanka Travel Blog & Guides",
-    description: "Expert travel guides and tips for exploring Sri Lanka",
-    images: ["/images/og-image.jpg"],
-  },
-};
+  path: "/blog",
+  image: "/images/og-image.jpg",
+  targetCountries: TARGET_COUNTRIES.map((c) => c.code),
+});
 
 export default function BlogPage() {
   return (

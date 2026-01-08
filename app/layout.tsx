@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthSessionProvider } from "@/components/providers/session-provider";
 import { ConditionalLayout } from "@/components/layout/conditional-layout";
 import { Toaster } from "@/components/ui/toaster";
+import { SITE_URL, generateHreflangTags, TARGET_COUNTRIES } from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,14 +18,16 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const hreflangTags = generateHreflangTags("");
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://easytripper.lk"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Custom Sri Lanka Tours with Private Chauffeur | Easy Tripper",
     template: "%s | Easy Tripper - Sri Lanka Tour Guide",
   },
   description:
-    "Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Create your perfect custom tour today. Airport pickup available.",
+    "Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden. Create your perfect custom tour today. Airport pickup available.",
   keywords: [
     "custom Sri Lanka tours",
     "Sri Lanka private tour guide",
@@ -36,6 +39,11 @@ export const metadata: Metadata = {
     "Sri Lanka travel guide",
     "personalized Sri Lanka tours",
     "custom tour Sri Lanka",
+    "Sri Lanka tours from India",
+    "Sri Lanka tours from Switzerland",
+    "Sri Lanka tours from Netherlands",
+    "Sri Lanka tours from Germany",
+    "Sri Lanka tours from Sweden",
     "Jagath Premasinghe",
     "Easy Tripper",
     "Sri Lanka destinations",
@@ -45,19 +53,23 @@ export const metadata: Metadata = {
   creator: "Easy Tripper",
   publisher: "Easy Tripper",
   alternates: {
-    canonical: "https://easytripper.lk",
+    canonical: SITE_URL,
+    languages: Object.fromEntries(
+      hreflangTags.map((tag) => [tag.hreflang, tag.href])
+    ),
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://easytripper.lk",
+    alternateLocale: TARGET_COUNTRIES.map((c) => c.locale),
+    url: SITE_URL,
     siteName: "Easy Tripper - Custom Sri Lanka Tours",
     title: "Custom Sri Lanka Tours with Private Chauffeur",
     description:
-      "Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Create your perfect custom tour today.",
+      "Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Serving international travelers. Create your perfect custom tour today.",
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: `${SITE_URL}/images/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: "Custom Sri Lanka Tours - Easy Tripper",
@@ -69,7 +81,7 @@ export const metadata: Metadata = {
     title: "Custom Sri Lanka Tours with Private Chauffeur",
     description:
       "Custom Sri Lanka tours tailored to your preferences. Personalized itineraries and expert guides.",
-    images: ["/images/og-image.jpg"],
+    images: [`${SITE_URL}/images/og-image.jpg`],
     creator: "@easytripper",
   },
   robots: {
@@ -91,6 +103,12 @@ export const metadata: Metadata = {
   verification: {
     google: process.env.GOOGLE_VERIFICATION_ID,
     yandex: process.env.YANDEX_VERIFICATION_ID,
+  },
+  other: {
+    "geo.region": "LK",
+    "geo.placename": "Sri Lanka",
+    "geo.position": "7.8731;80.7718",
+    "ICBM": "7.8731, 80.7718",
   },
 };
 

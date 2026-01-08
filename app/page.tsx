@@ -12,10 +12,12 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { OrganizationSchema, LocalBusinessSchema, TouristTripSchemas, FAQSchema } from "@/components/seo/structured-data";
+import { ServiceSchema } from "@/components/seo/ServiceSchema";
+import { generatePageMetadata, SITE_URL, TARGET_COUNTRIES } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Custom Sri Lanka Tours with Private Chauffeur | Easy Tripper",
-  description: "Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Create your perfect custom tour today. Airport pickup available.",
+export const metadata: Metadata = generatePageMetadata({
+  title: "Custom Sri Lanka Tours with Private Chauffeur",
+  description: "Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden. Create your perfect custom tour today. Airport pickup available.",
   keywords: [
     "custom Sri Lanka tours",
     "Sri Lanka private tour guide",
@@ -26,39 +28,19 @@ export const metadata: Metadata = {
     "private tours Sri Lanka",
     "personalized Sri Lanka tours",
     "custom tour Sri Lanka",
+    "Sri Lanka tour packages",
   ],
-  alternates: {
-    canonical: "https://easytripper.lk",
-  },
-  openGraph: {
-    title: "Custom Sri Lanka Tours with Private Chauffeur",
-    description: "Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides.",
-    url: "https://easytripper.lk",
-    siteName: "Easy Tripper",
-    images: [
-      {
-        url: "/images/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Custom Sri Lanka Tours",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Custom Sri Lanka Tours with Private Chauffeur",
-    description: "Custom Sri Lanka tours tailored to your preferences. Personalized itineraries and expert guides.",
-    images: ["/images/og-image.jpg"],
-  },
-};
+  path: "",
+  image: "/images/og-image.jpg",
+  targetCountries: TARGET_COUNTRIES.map((c) => c.code),
+});
 
 export default function Home() {
   return (
     <>
       <OrganizationSchema />
       <LocalBusinessSchema />
+      <ServiceSchema />
       <TouristTripSchemas />
       <FAQSchema />
       <Hero />

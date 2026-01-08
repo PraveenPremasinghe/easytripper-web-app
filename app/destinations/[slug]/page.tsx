@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, MapPin, Calendar, Clock, Thermometer } from "lucide-react";
 import { InquiryForm } from "@/components/sections/InquiryForm";
 import type { Destination } from "@/lib/types";
+import { SITE_URL, generatePageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -45,27 +46,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const title = `${destination.name} - Sri Lanka Travel Guide | Easy Tripper`;
-  const description = destination.excerpt || `Visit ${destination.name} in Sri Lanka. ${destination.region} region. Plan your trip with Easy Tripper's expert guides.`;
-  const canonical = `https://easytripper.lk/destinations/${slug}`;
+  const description = destination.excerpt || `Visit ${destination.name} in Sri Lanka. ${destination.region} region. Plan your trip with Easy Tripper's expert guides. Perfect for travelers from India, Switzerland, Netherlands, Germany, and Sweden.`;
 
   return {
-    title,
-    description,
-    keywords: [
-      destination.name,
-      `${destination.name} Sri Lanka`,
-      `visit ${destination.name}`,
-      `${destination.region} Sri Lanka`,
-      "Sri Lanka destinations",
-      "Sri Lanka travel",
-    ],
-    alternates: {
-      canonical,
-    },
+    ...generatePageMetadata({
+      title: `${destination.name} - Sri Lanka Travel Guide`,
+      description,
+      keywords: [
+        destination.name,
+        `${destination.name} Sri Lanka`,
+        `visit ${destination.name}`,
+        `${destination.region} Sri Lanka`,
+        "Sri Lanka destinations",
+        "Sri Lanka travel",
+        `${destination.name} tour`,
+        `${destination.name} travel guide`,
+      ],
+      path: `/destinations/${slug}`,
+      image: destination.image,
+    }),
     openGraph: {
       title,
       description,
-      url: canonical,
+      url: `${SITE_URL}/destinations/${slug}`,
       siteName: "Easy Tripper",
       images: [
         {

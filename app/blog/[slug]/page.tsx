@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShareButton } from "./ShareButton";
 import type { BlogPost } from "@/lib/types";
+import { SITE_URL, generatePageMetadata } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -40,24 +41,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const title = `${post.title} | Easy Tripper - Sri Lanka Travel Blog`;
-  const canonical = `https://easytripper.lk/blog/${slug}`;
+  const description = post.excerpt || `Read about ${post.title} on Easy Tripper's Sri Lanka travel blog. Expert travel guides and tips for travelers from India, Switzerland, Netherlands, Germany, and Sweden.`;
 
   return {
-    title,
-    description: post.excerpt || `Read about ${post.title} on Easy Tripper's Sri Lanka travel blog. Expert travel guides and tips.`,
-    keywords: [
-      ...(post.seoKeywords || post.tags || []),
-      "Sri Lanka travel blog",
-      "Sri Lanka travel guide",
-      "Sri Lanka travel tips",
-    ],
-    alternates: {
-      canonical,
-    },
+    ...generatePageMetadata({
+      title: post.title,
+      description,
+      keywords: [
+        ...(post.seoKeywords || post.tags || []),
+        "Sri Lanka travel blog",
+        "Sri Lanka travel guide",
+        "Sri Lanka travel tips",
+        "Sri Lanka travel information",
+      ],
+      path: `/blog/${slug}`,
+      image: post.image,
+    }),
     openGraph: {
       title: post.title,
-      description: post.excerpt,
-      url: canonical,
+      description: post.excerpt || description,
+      url: `${SITE_URL}/blog/${slug}`,
       siteName: "Easy Tripper",
       images: [
         {
@@ -74,7 +77,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: post.title,
-      description: post.excerpt,
+      description: post.excerpt || description,
       images: [post.image],
     },
   };
