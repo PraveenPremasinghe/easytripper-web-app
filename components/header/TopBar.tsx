@@ -34,7 +34,7 @@ export function TopBar() {
               <span className="text-xs sm:text-sm">+94 75 643 3267</span>
             </Link>
             <Link
-              href="mailto:info@easytripper.lk"
+              href="mailto:hello@easytripper.lk"
               className={cn(
                 "flex items-center gap-1.5 sm:gap-2 transition-all duration-200 hover:scale-105 font-medium whitespace-nowrap",
                 shouldUseLightBackground
@@ -44,7 +44,7 @@ export function TopBar() {
               aria-label="Email us"
             >
               <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
-              <span className="text-xs sm:text-sm hidden xs:inline">info@easytripper.lk</span>
+                <span className="text-xs sm:text-sm hidden xs:inline">hello@easytripper.lk</span>
               <span className="text-xs sm:text-sm xs:hidden">Email</span>
             </Link>
           </div>

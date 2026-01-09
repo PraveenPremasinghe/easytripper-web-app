@@ -132,9 +132,9 @@ export function Footer() {
             
             {/* Contact Info */}
             <div className="space-y-4 sm:space-y-5 mb-6 sm:mb-8">
-              <a href="mailto:info@easytripper.lk" className="flex items-center gap-3 text-white/85 hover:text-accent transition-colors group">
+              <a href="mailto:hello@easytripper.lk" className="flex items-center gap-3 text-white/85 hover:text-accent transition-colors group">
                 <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-accent group-hover:scale-110 transition-transform" />
-                <span className="text-base sm:text-lg">info@easytripper.lk</span>
+                <span className="text-base sm:text-lg">hello@easytripper.lk</span>
               </a>
               <a href="tel:+94756433267" className="flex items-center gap-3 text-white/85 hover:text-accent transition-colors group">
                 <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-accent group-hover:scale-110 transition-transform" />

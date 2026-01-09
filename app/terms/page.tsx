@@ -256,8 +256,8 @@ export default function TermsOfServicePage() {
               <div className="space-y-2 text-muted-foreground">
                 <p>
                   <strong className="text-foreground">Email:</strong>{" "}
-                  <a href="mailto:info@easytripper.lk" className="text-primary hover:underline">
-                    info@easytripper.lk
+                  <a href="mailto:hello@easytripper.lk" className="text-primary hover:underline">
+                    hello@easytripper.lk
                   </a>
                 </p>
                 <p>

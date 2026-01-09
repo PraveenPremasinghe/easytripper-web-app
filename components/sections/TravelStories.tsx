@@ -139,7 +139,7 @@ export function TravelStories() {
                 );
               })}
             </div>
-            {stories.length > 6 && (
+            {displayedStories.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -147,10 +147,10 @@ export function TravelStories() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="text-center mt-12"
               >
-                <Button asChild size="lg">
+                <Button asChild size="lg" variant="outline" className="group">
                   <Link href="/stories">
                     View All Stories
-                    <ArrowRight className="h-5 w-5" />
+                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
               </motion.div>

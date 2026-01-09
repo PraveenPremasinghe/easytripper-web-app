@@ -17,8 +17,8 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email",
-      content: "info@easytripper.lk",
-      href: "mailto:info@easytripper.lk",
+      content: "hello@easytripper.lk",
+      href: "mailto:hello@easytripper.lk",
       color: "from-purple-500 to-pink-500",
     },
     {

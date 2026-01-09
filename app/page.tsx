@@ -5,6 +5,7 @@ import { JourneyTypes } from "@/components/sections/JourneyTypes";
 import { TourCategories } from "@/components/sections/TourCategories";
 import { DestinationShowcase } from "@/components/sections/DestinationShowcase";
 import { KeyExperiences } from "@/components/sections/KeyExperiences";
+import { VehiclesShowcase } from "@/components/sections/VehiclesShowcase";
 import { TravelStories } from "@/components/sections/TravelStories";
 import { ToursShowcase } from "@/components/sections/ToursShowcase";
 import { StatsSection } from "@/components/sections/StatsSection";
@@ -50,6 +51,7 @@ export default function Home() {
       <TourCategories />
       <DestinationShowcase />
       <KeyExperiences />
+      <VehiclesShowcase />
       <TravelStories />
       <ToursShowcase />
       <Testimonials />

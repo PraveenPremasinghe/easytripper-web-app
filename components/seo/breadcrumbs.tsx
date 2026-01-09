@@ -15,10 +15,13 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
+  // Filter out duplicate home item if provided
+  const filteredItems = items.filter(item => item.url !== "/");
+  
   // Always include home as first item
   const breadcrumbItems = [
     { name: "Home", url: "/" },
-    ...items,
+    ...filteredItems,
   ];
 
   // Generate full URLs for schema
@@ -38,7 +41,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
           {breadcrumbItems.map((item, index) => {
             const isLast = index === breadcrumbItems.length - 1;
             return (
-              <li key={item.url} className="flex items-center">
+              <li key={`${item.url}-${index}`} className="flex items-center">
                 {index === 0 ? (
                   <Link
                     href={item.url}

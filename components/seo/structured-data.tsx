@@ -17,7 +17,7 @@ export function OrganizationSchema() {
     },
     description: "Custom Sri Lanka tours with private chauffeur service. Expert local guide offering personalized tours tailored to your preferences, cultural experiences, wildlife safaris, and luxury transportation services. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden.",
     telephone: "+94756433267",
-    email: "info@easytripper.lk",
+    email: "hello@easytripper.lk",
     address: {
       "@type": "PostalAddress",
       addressCountry: "LK",
@@ -97,7 +97,7 @@ export function LocalBusinessSchema() {
     description: "Professional tour guide and vehicle service in Sri Lanka. Expert local guide offering personalized tours, cultural experiences, wildlife safaris, and transportation services across the island. Serving international travelers from India, Switzerland, Netherlands, Germany, and Sweden.",
     url: SITE_URL,
     telephone: "+94756433267",
-    email: "info@easytripper.lk",
+    email: "hello@easytripper.lk",
     address: {
       "@type": "PostalAddress",
       addressCountry: "LK",
