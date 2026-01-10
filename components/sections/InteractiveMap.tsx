@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import type { Destination } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 export function InteractiveMap() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
@@ -53,7 +54,7 @@ export function InteractiveMap() {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading destinations...</p>
+            <Loader size="md" text="Loading destinations..." />
           </div>
         ) : popularDestinations.length === 0 ? (
           <div className="text-center py-12">

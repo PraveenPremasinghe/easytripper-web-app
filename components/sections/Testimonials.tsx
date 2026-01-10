@@ -9,6 +9,7 @@ import { FeedbackForm } from "./FeedbackForm";
 import { cn } from "@/lib/utils";
 import { toast } from "@/components/ui/toaster";
 import type { Testimonial } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 // Country flag emoji mapping
 const countryFlags: Record<string, string> = {
@@ -227,8 +228,7 @@ export function Testimonials() {
         {/* Magic UI Marquee - Two Rows with improved spacing */}
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent mb-4"></div>
-            <p className="text-muted-foreground">Loading testimonials...</p>
+            <Loader size="md" text="Loading testimonials..." />
           </div>
         ) : reviews.length === 0 ? (
           <div className="text-center py-12">

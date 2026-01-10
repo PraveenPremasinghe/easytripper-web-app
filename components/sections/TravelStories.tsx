@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { StoryModal } from "@/components/stories/StoryModal";
 import type { Story } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 export function TravelStories() {
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
@@ -67,7 +68,7 @@ export function TravelStories() {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading stories...</p>
+            <Loader size="md" text="Loading stories..." />
           </div>
         ) : displayedStories.length === 0 ? (
           <div className="text-center py-12">

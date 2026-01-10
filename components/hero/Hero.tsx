@@ -9,6 +9,7 @@ import { gsap } from "@/lib/gsap";
 import { Marquee } from "@/components/ui/marquee";
 import { cn } from "@/lib/utils";
 import type { Destination } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 // Destination Card Component for Marquee
 const DestinationCard = ({
@@ -241,7 +242,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative  w-full overflow-hidden -mt-[97px] pt-[97px] bg-gradient-to-br from-background via-slate-50 to-background">
+    <section ref={sectionRef} className="relative w-full overflow-hidden -mt-[73px] sm:-mt-[89px] md:-mt-[97px] pt-[73px] sm:pt-[89px] md:pt-[97px] bg-gradient-to-br from-background via-slate-50 to-background">
       <div className="relative z-10  mx-auto min-h-screen lg:h-screen">
         <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center py-12 sm:py-16 md:py-20 lg:py-0">
           {/* Left Content Section */}
@@ -331,10 +332,7 @@ export function Hero() {
               <Marquee3D destinations={destinations} />
             ) : (
               <div className="flex h-full items-center justify-center">
-                <div className="text-center">
-                  <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent mb-4"></div>
-                  <p className="text-muted-foreground">Loading destinations...</p>
-                </div>
+                <Loader size="md" text="Loading destinations..." />
               </div>
             )}
             {/* Fade Gradients - All Sides - Subtle */}

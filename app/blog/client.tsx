@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { BlogGrid } from "@/components/sections/BlogGrid";
 import type { BlogPost } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 export function BlogPageClient() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -27,7 +28,7 @@ export function BlogPageClient() {
   };
 
   if (loading) {
-    return <div className="text-center py-12"><p className="text-muted-foreground">Loading blog posts...</p></div>;
+    return <div className="text-center py-12"><Loader size="md" text="Loading blog posts..." /></div>;
   }
 
   if (posts.length === 0) {

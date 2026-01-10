@@ -16,7 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Star, MessageSquare, User, MapPin } from "lucide-react";
+import { Star, MessageSquare, User, MapPin } from "lucide-react";
+import { Spinner } from "@/components/ui/loader";
 import { cn } from "@/lib/utils";
 
 const feedbackSchema = z.object({
@@ -232,7 +233,7 @@ export function FeedbackForm({ isOpen, onClose, onSubmit, isSubmitting: external
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Spinner size="sm" className="mr-2" />
                 Submitting...
               </>
             ) : (

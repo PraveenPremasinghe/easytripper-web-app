@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { Button } from "@/components/ui/button";
 import type { Destination } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 export function DestinationShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -125,7 +126,7 @@ export function DestinationShowcase() {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading destinations...</p>
+            <Loader size="md" text="Loading destinations..." />
           </div>
         ) : featuredDestinations.length === 0 ? (
           <div className="text-center py-12">

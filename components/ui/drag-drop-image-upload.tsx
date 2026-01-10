@@ -3,7 +3,8 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Upload, X, Image as ImageIcon, Loader2 } from "lucide-react";
+import { Upload, X, Image as ImageIcon } from "lucide-react";
+import { Loader } from "@/components/ui/loader";
 import { fileToWebP } from "@/lib/utils-admin";
 import { cn } from "@/lib/utils";
 
@@ -135,7 +136,7 @@ export function DragDropImageUpload({
           <div className="flex flex-col items-center justify-center p-8 min-h-[200px]">
             {isUploading ? (
               <>
-                <Loader2 className="h-12 w-12 animate-spin text-primary mb-4" />
+                <Loader size="lg" className="mb-4" />
                 <p className="text-sm font-medium text-foreground">Uploading...</p>
               </>
             ) : (

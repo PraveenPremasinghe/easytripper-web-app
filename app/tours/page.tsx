@@ -13,6 +13,7 @@ import { ItineraryTimeline } from "@/components/sections/ItineraryTimeline";
 import { motion } from "framer-motion";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import type { Tour } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 // Note: Metadata export doesn't work with "use client" - will need to create separate metadata file
 // For now, adding structured data and breadcrumbs
@@ -93,7 +94,7 @@ export default function ToursPage() {
         {/* Tours Grid */}
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading tours...</p>
+            <Loader size="md" text="Loading tours..." />
           </div>
         ) : filteredTours.length === 0 ? (
           <div className="text-center py-12">

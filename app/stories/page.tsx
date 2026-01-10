@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { StoryModal } from "@/components/stories/StoryModal";
 import { Calendar } from "lucide-react";
 import type { Story } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 export default function StoriesPage() {
   const [stories, setStories] = useState<Story[]>([]);
@@ -57,7 +58,7 @@ export default function StoriesPage() {
 
           {loading ? (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">Loading stories...</p>
+              <Loader size="md" text="Loading stories..." />
             </div>
           ) : stories.length === 0 ? (
             <div className="text-center py-12">

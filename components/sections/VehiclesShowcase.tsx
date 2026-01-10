@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VehiclesGrid } from "@/components/sections/VehiclesGrid";
 import type { Vehicle } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 export function VehiclesShowcase() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -53,7 +54,7 @@ export function VehiclesShowcase() {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading vehicles...</p>
+            <Loader size="md" text="Loading vehicles..." />
           </div>
         ) : vehicles.length === 0 ? (
           <div className="text-center py-12">

@@ -17,7 +17,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import { Spinner } from "@/components/ui/loader";
 import { toast } from "@/components/ui/toaster";
 import { DatePicker } from "@/components/ui/date-picker";
 
@@ -108,7 +109,7 @@ export function InquiryForm() {
 
   if (isSuccess) {
     return (
-      <Card className="sticky top-24">
+      <Card className="sticky top-20 sm:top-24 z-10">
         <CardContent className="flex flex-col items-center justify-center p-8 text-center">
           <CheckCircle2 className="mb-4 h-16 w-16 text-green-500" />
           <h3 className="mb-2 text-xl font-semibold">Thank you!</h3>
@@ -311,7 +312,7 @@ export function InquiryForm() {
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Spinner size="sm" className="mr-2" />
                 Sending...
               </>
             ) : (

@@ -9,6 +9,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Breadcrumbs } from "@/components/seo/breadcrumbs";
 import type { Destination } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 export default function DestinationsPage() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
@@ -53,7 +54,7 @@ export default function DestinationsPage() {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading destinations...</p>
+            <Loader size="md" text="Loading destinations..." />
           </div>
         ) : destinations.length === 0 ? (
           <div className="text-center py-12">

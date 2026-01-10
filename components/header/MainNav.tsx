@@ -3,19 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { Menu, X, Home, MapPin, Route, Car, BookOpen, BookMarked, Lightbulb, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
 
 const navItems = [
-  { name: "Home", link: "/" },
-  { name: "Destinations", link: "/destinations" },
-  { name: "Tours", link: "/tours" },
-  { name: "Vehicles", link: "/vehicles" },
-  { name: "Blog", link: "/blog" },
-  { name: "Stories", link: "/stories" },
-  { name: "Travel Tips", link: "/travel-tips" },
+  { name: "Home", link: "/", icon: Home },
+  { name: "Destinations", link: "/destinations", icon: MapPin },
+  { name: "Tours", link: "/tours", icon: Route },
+  { name: "Vehicles", link: "/vehicles", icon: Car },
+  { name: "Blog", link: "/blog", icon: BookOpen },
+  { name: "Stories", link: "/stories", icon: BookMarked },
+  { name: "Travel Tips", link: "/travel-tips", icon: Lightbulb },
 ];
 
 export function MainNav() {
@@ -24,10 +26,8 @@ export function MainNav() {
 
   // Close mobile menu when route changes
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
-  }, [pathname, isMobileMenuOpen]);
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
     <motion.header
@@ -35,11 +35,11 @@ export function MainNav() {
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "fixed inset-x-0 top-[41px] z-50 w-full transition-all duration-300",
+        "fixed inset-x-0 top-[50px] sm:top-[40px] z-[50] w-full transition-all duration-300",
         "bg-white border-b border-neutral-200"
       )}
     >
-      <nav className="mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8">
+      <nav className="relative mx-auto max-w-7xl px-3 sm:px-4 md:px-6 lg:px-8">
         <div className="flex h-12 sm:h-14 items-center justify-between">
           {/* Logo */}
           <Link
@@ -93,68 +93,113 @@ export function MainNav() {
             </Button>
 
             {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            <button
+              type="button"
+              className="lg:hidden relative z-[60] p-2 rounded-md hover:bg-primary/10 active:bg-primary/20 transition-colors touch-manipulation"
+              onClick={() => setIsMobileMenuOpen(true)}
               aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
             >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </Button>
+              <Menu className="h-6 w-6 text-foreground" />
+            </button>
           </div>
         </div>
-
-        {/* Mobile Navigation Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="overflow-hidden lg:hidden border-t border-border/40"
-            >
-              <div className="py-4 space-y-1">
-                {navItems.map((item) => {
-                  const isActive = pathname === item.link || 
-                    (item.link !== "/" && pathname.startsWith(item.link));
-                  
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.link}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={cn(
-                        "block px-4 py-2.5 text-base font-medium rounded-lg transition-colors mx-2 cursor-pointer",
-                        isActive
-                          ? "bg-primary/10 text-primary font-semibold"
-                          : "text-muted-foreground hover:bg-primary/5 hover:text-primary"
-                      )}
-                    >
-                      {item.name}
-                    </Link>
-                  );
-                })}
-                <div className="px-6 pt-4">
-                  <Button
-                    asChild
-                    className="w-full"
-                  >
-                    <Link href="/plan-your-trip">
-                      Plan Your Trip
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </nav>
+
+      {/* Mobile Navigation Menu - Shadcn Sheet (Outside nav for proper portal rendering) */}
+      <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+        <SheetContent 
+          side="left" 
+          className="!w-[85vw] sm:!w-[400px] !max-w-[400px] p-0 bg-white"
+        >
+          <SheetHeader className="px-6 pt-6 pb-4 border-b">
+            <div className="flex items-center justify-between">
+              <div>
+                <SheetTitle className="text-2xl font-bold text-foreground">Easy Tripper</SheetTitle>
+                <SheetDescription className="text-sm text-muted-foreground mt-1">
+                  Your trusted guide to Sri Lanka
+                </SheetDescription>
+              </div>
+            </div>
+          </SheetHeader>
+          
+          <div className="flex flex-col h-[calc(100vh-120px)] overflow-y-auto">
+            {/* Navigation Items */}
+            <nav className="flex-1 px-4 py-6 space-y-2">
+              {navItems.map((item) => {
+                const isActive = pathname === item.link || 
+                  (item.link !== "/" && pathname.startsWith(item.link));
+                const Icon = item.icon;
+                
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.link}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      "flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-200 group",
+                      "text-base font-medium",
+                      isActive
+                        ? "bg-primary text-white shadow-md"
+                        : "text-foreground hover:bg-primary/10 hover:text-primary"
+                    )}
+                  >
+                    <Icon className={cn(
+                      "h-5 w-5 transition-colors",
+                      isActive ? "text-white" : "text-muted-foreground group-hover:text-primary"
+                    )} />
+                    <span className="flex-1">{item.name}</span>
+                    {isActive && (
+                      <motion.div
+                        layoutId="mobileActiveIndicator"
+                        className="h-2 w-2 rounded-full bg-white"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <Separator className="my-4" />
+
+            {/* CTA Button */}
+            <div className="px-4 pb-6">
+              <Button
+                asChild
+                className="w-full h-12 text-base font-semibold"
+                size="lg"
+              >
+                <Link href="/plan-your-trip" onClick={() => setIsMobileMenuOpen(false)}>
+                  Plan Your Trip
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+
+            {/* Contact Info */}
+            <div className="px-4 pb-6 space-y-3">
+              <Separator />
+              <div className="space-y-2">
+                <a
+                  href="tel:+94756433267"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors"
+                >
+                  <span className="font-medium">Call:</span>
+                  <span>+94 75 643 3267</span>
+                </a>
+                <a
+                  href="mailto:hello@easytripper.lk"
+                  className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary transition-colors"
+                >
+                  <span className="font-medium">Email:</span>
+                  <span className="truncate">hello@easytripper.lk</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
     </motion.header>
   );
 }

@@ -18,7 +18,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
+import { Spinner } from "@/components/ui/loader";
 import { toast } from "@/components/ui/toaster";
 
 const formSchema = z.object({
@@ -200,7 +201,7 @@ export function SaveTripDialog({ isOpen, onClose, selectedPlaces }: SaveTripDial
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Spinner size="sm" className="mr-2" />
                     Saving...
                   </>
                 ) : (

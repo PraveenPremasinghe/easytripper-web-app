@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { VehiclesGrid } from "@/components/sections/VehiclesGrid";
 import type { Vehicle } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 export function VehiclesPageClient() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
@@ -27,7 +28,7 @@ export function VehiclesPageClient() {
   };
 
   if (loading) {
-    return <div className="text-center py-12"><p className="text-muted-foreground">Loading vehicles...</p></div>;
+    return <div className="text-center py-12"><Loader size="md" text="Loading vehicles..." /></div>;
   }
 
   if (vehicles.length === 0) {

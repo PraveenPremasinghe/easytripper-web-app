@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, Lock, Shield } from "lucide-react";
+import { Lock, Shield } from "lucide-react";
+import { Loader, Spinner } from "@/components/ui/loader";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -68,10 +69,7 @@ export default function LoginPage() {
   if (status === "authenticated") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-slate-50 to-background">
-        <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto mb-4" />
-          <p className="text-muted-foreground">Redirecting...</p>
-        </div>
+        <Loader size="lg" text="Redirecting..." />
       </div>
     );
   }
@@ -140,7 +138,7 @@ export default function LoginPage() {
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Spinner size="sm" className="mr-2" />
                     Signing in...
                   </>
                 ) : (

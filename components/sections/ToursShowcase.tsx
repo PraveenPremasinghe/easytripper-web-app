@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Users, MapPin, ArrowRight, Check } from "lucide-react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import type { Tour } from "@/lib/types";
+import { Loader } from "@/components/ui/loader";
 
 export function ToursShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -122,7 +123,7 @@ export function ToursShowcase() {
 
         {loading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading tours...</p>
+            <Loader size="md" text="Loading tours..." />
           </div>
         ) : tours.length === 0 ? (
           <div className="text-center py-12">

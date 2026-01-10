@@ -26,16 +26,14 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { SaveTripDialog } from "./SaveTripDialog";
 import { cn } from "@/lib/utils";
+import { Loader } from "@/components/ui/loader";
 
 // Dynamically import the map component to avoid SSR issues with Leaflet
 const InteractiveMap = dynamic(() => import("./InteractiveMap"), {
   ssr: false,
   loading: () => (
-    <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-primary/5 via-accent/5 to-primary/5 rounded-2xl animate-pulse">
-      <div className="text-center">
-        <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
-        <p className="text-muted-foreground font-medium">Loading Map...</p>
-      </div>
+    <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-primary/5 via-accent/5 to-primary/5 rounded-2xl">
+      <Loader size="lg" text="Loading Map..." />
     </div>
   ),
 });
@@ -148,8 +146,7 @@ export function TripPlanner() {
     return (
       <div className="w-full space-y-6 pb-8">
         <div className="text-center py-12">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-primary border-r-transparent"></div>
-          <p className="mt-4 text-muted-foreground">Loading trip planner...</p>
+          <Loader size="md" text="Loading trip planner..." />
         </div>
       </div>
     );
