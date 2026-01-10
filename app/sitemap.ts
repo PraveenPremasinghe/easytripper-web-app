@@ -4,6 +4,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://easytripper.lk";
   const now = new Date();
 
+  // Helper function to safely parse dates
+  const safeDate = (dateString: string | undefined | null): Date => {
+    if (!dateString) return now;
+    const date = new Date(dateString);
+    return isNaN(date.getTime()) ? now : date;
+  };
+
   // Core pages with high priority
   const routes = [
     { path: "", priority: 1.0, changeFreq: "weekly" as const },
@@ -54,7 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (success && Array.isArray(destinations)) {
         destinationRoutes = destinations.map((dest: { slug: string; updatedAt?: string }) => ({
           url: `${baseUrl}/destinations/${dest.slug}`,
-          lastModified: dest.updatedAt ? new Date(dest.updatedAt) : now,
+          lastModified: safeDate(dest.updatedAt),
           changeFrequency: "monthly" as const,
           priority: 0.7,
           alternates: {
@@ -71,11 +78,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (success && Array.isArray(blogPosts)) {
         blogRoutes = blogPosts.map((post: { slug: string; publishedAt?: string; updatedAt?: string }) => ({
           url: `${baseUrl}/blog/${post.slug}`,
-          lastModified: post.updatedAt 
-            ? new Date(post.updatedAt) 
-            : post.publishedAt 
-            ? new Date(post.publishedAt) 
-            : now,
+          lastModified: safeDate(post.updatedAt || post.publishedAt),
           changeFrequency: "monthly" as const,
           priority: 0.6,
           alternates: {

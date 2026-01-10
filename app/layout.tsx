@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { AuthSessionProvider } from "@/components/providers/session-provider";
@@ -95,11 +95,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
   verification: {
     google: process.env.GOOGLE_VERIFICATION_ID,
     yandex: process.env.YANDEX_VERIFICATION_ID,
@@ -110,6 +105,12 @@ export const metadata: Metadata = {
     "geo.position": "7.8731;80.7718",
     "ICBM": "7.8731, 80.7718",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({

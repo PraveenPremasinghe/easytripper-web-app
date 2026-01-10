@@ -3,8 +3,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { verifyAdminPassword } from "./firebase/admin";
 
 // Fallback credentials (if Firebase is not configured)
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || process.env.AUTH_USERNAME || "admin";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || process.env.AUTH_PASSWORD || "admin123";
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || process.env.AUTH_USERNAME || "easytrippertours@gmail.com";
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || process.env.AUTH_PASSWORD || "Jaga@1969";
 
 // Check if Firebase is configured
 const isFirebaseConfigured = !!(
@@ -57,7 +57,7 @@ export const authOptions: NextAuthOptions = {
               return {
                 id: "1",
                 name: "Admin",
-                email: "admin@easytripper.com",
+                email: "easytrippertours@gmail.com",
               };
             }
             console.log("Authorization failed - credentials mismatch");
