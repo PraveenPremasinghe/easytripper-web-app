@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-7VB42L85CL";
 
-export function GoogleAnalytics() {
+function GoogleAnalyticsInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -22,6 +22,11 @@ export function GoogleAnalytics() {
       });
     }
   }, [pathname, searchParams]);
+
+  return null;
+}
+
+export function GoogleAnalytics() {
 
   if (!GA_MEASUREMENT_ID) {
     return null;
@@ -47,6 +52,7 @@ export function GoogleAnalytics() {
           `,
         }}
       />
+      <GoogleAnalyticsInner />
     </>
   );
 }

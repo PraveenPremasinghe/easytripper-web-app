@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import { AuthSessionProvider } from "@/components/providers/session-provider";
 import { ConditionalLayout } from "@/components/layout/conditional-layout";
@@ -122,7 +123,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="antialiased">
-        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
         <AuthSessionProvider>
           <ConditionalLayout>{children}</ConditionalLayout>
           <Toaster />
