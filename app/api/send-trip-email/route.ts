@@ -165,7 +165,7 @@ This email was sent from the Easy Tripper website trip planner.
     
     // Determine from email
     // For unverified domains, use Resend's test domain
-    const fromEmail = process.env.RESEND_FROM_EMAIL || "Easy Tripper <onboarding@resend.dev>";
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "Easy Tripper <hello@easytripper.lk>";
 
     // Send email
     const { data, error } = await resend.emails.send({

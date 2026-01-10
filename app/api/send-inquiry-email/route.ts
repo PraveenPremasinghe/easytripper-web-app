@@ -203,7 +203,7 @@ This email was sent from the Easy Tripper website inquiry form.
     const recipientEmail = process.env.RESEND_TO_EMAIL || "easytrippertours@gmail.com";
     
     // Determine from email
-    const fromEmail = process.env.RESEND_FROM_EMAIL || "Easy Tripper <onboarding@resend.dev>";
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "Easy Tripper <hello@easytripper.lk>";
 
     // Send email
     const { data, error } = await resend.emails.send({
