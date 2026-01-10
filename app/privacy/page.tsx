@@ -74,7 +74,7 @@ export default function PrivacyPolicyPage() {
                 <li className="flex items-start gap-3">
                   <span className="mt-1.5 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
                   <span>
-                    <strong className="text-foreground">We do not use tracking cookies</strong> or analytics tools that collect personal information.
+                    <strong className="text-foreground">We use Google Analytics</strong> to understand how visitors use our website. This helps us improve our services. Google Analytics uses cookies to collect anonymous information about your visit.
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
@@ -160,6 +160,49 @@ export default function PrivacyPolicyPage() {
                 While we do not collect extensive personal data, we take reasonable measures to protect any 
                 information you share with us. However, please note that no method of transmission over the 
                 internet is 100% secure, and we cannot guarantee absolute security.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Google Analytics */}
+          <Card>
+            <CardContent className="p-6 md:p-8">
+              <h2 className="mb-4 text-2xl font-bold text-foreground">Google Analytics</h2>
+              <p className="mb-4 text-muted-foreground leading-relaxed">
+                We use Google Analytics, a web analytics service provided by Google, to understand how 
+                visitors interact with our website. Google Analytics uses cookies to collect information 
+                such as:
+              </p>
+              <ul className="space-y-2 text-muted-foreground mb-4">
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
+                  <span>Pages you visit on our website</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
+                  <span>Time spent on each page</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
+                  <span>How you arrived at our website</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="mt-1.5 h-2 w-2 rounded-full bg-primary flex-shrink-0" />
+                  <span>General location information (country/city level)</span>
+                </li>
+              </ul>
+              <p className="text-muted-foreground leading-relaxed">
+                This information is collected anonymously and helps us improve our website and services. 
+                Google Analytics may share this data with other Google services. You can opt-out of Google 
+                Analytics by installing the{" "}
+                <a 
+                  href="https://tools.google.com/dlpage/gaoptout" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  Google Analytics Opt-out Browser Add-on
+                </a>.
               </p>
             </CardContent>
           </Card>

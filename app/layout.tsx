@@ -4,6 +4,7 @@ import "./globals.css";
 import { AuthSessionProvider } from "@/components/providers/session-provider";
 import { ConditionalLayout } from "@/components/layout/conditional-layout";
 import { Toaster } from "@/components/ui/toaster";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { SITE_URL, generateHreflangTags, TARGET_COUNTRIES } from "@/lib/seo";
 
 const inter = Inter({
@@ -121,6 +122,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="antialiased">
+        <GoogleAnalytics />
         <AuthSessionProvider>
           <ConditionalLayout>{children}</ConditionalLayout>
           <Toaster />

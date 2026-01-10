@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Place } from "@/lib/places";
+import { trackEvent } from "@/components/analytics/GoogleAnalytics";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -69,6 +70,8 @@ export function SaveTripDialog({ isOpen, onClose, selectedPlaces }: SaveTripDial
       const result = await response.json();
 
       if (result.success) {
+        // Track successful trip plan submission
+        trackEvent("submit_trip_plan", "form", "trip_planner", selectedPlaces.length);
         toast.success("Trip Plan Sent!", "Your trip plan has been sent successfully. We'll contact you soon!");
         setIsSuccess(true);
       } else {

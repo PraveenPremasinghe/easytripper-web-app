@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { trackEvent } from "@/components/analytics/GoogleAnalytics";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -81,6 +82,8 @@ export function InquiryForm() {
       if (result.success) {
         setIsSuccess(true);
         reset();
+        // Track successful inquiry submission
+        trackEvent("submit_inquiry", "form", "tour_inquiry", 1);
         toast.success(
           "Inquiry Sent Successfully!",
           "We've received your inquiry and will get back to you within 24 hours."
