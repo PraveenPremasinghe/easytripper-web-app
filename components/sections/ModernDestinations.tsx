@@ -44,7 +44,9 @@ export function ModernDestinations() {
                     src={destination.image}
                     alt={destination.name}
                     fill
+                    loading="lazy"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                   <Badge className="absolute top-4 right-4 bg-primary text-primary-foreground border-0 shadow-lg">

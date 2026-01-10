@@ -34,7 +34,9 @@ const DestinationCard = ({
           src={image}
           alt={name}
           fill
+          loading="lazy"
           className="object-cover transition-transform duration-300 group-hover:scale-110"
+          sizes="(max-width: 640px) 192px, (max-width: 768px) 224px, (max-width: 1024px) 240px, 320px"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 md:p-4">

@@ -101,7 +101,9 @@ export function TravelStories() {
                           src={story.cover}
                           alt={story.title}
                           fill
+                          loading="lazy"
                           className="object-cover transition-transform duration-700 group-hover:scale-110"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                         <div className="absolute bottom-4 left-4 right-4">

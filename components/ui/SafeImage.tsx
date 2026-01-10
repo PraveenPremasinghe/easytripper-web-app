@@ -50,6 +50,7 @@ export function SafeImage({
         src={imgSrc}
         alt={alt}
         fill
+        loading="lazy"
         className={className}
         onError={() => {
           setHasError(true);
@@ -65,6 +66,7 @@ export function SafeImage({
       alt={alt}
       width={width}
       height={height}
+      loading="lazy"
       className={className}
       onError={() => {
         setHasError(true);
