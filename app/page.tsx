@@ -14,6 +14,7 @@ import { NewsletterSection } from "@/components/sections/NewsletterSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { OrganizationSchema, LocalBusinessSchema, TouristTripSchemas, FAQSchema } from "@/components/seo/structured-data";
 import { ServiceSchema } from "@/components/seo/ServiceSchema";
+import { WebSiteSchema } from "@/components/seo/WebSiteSchema";
 import { generatePageMetadata, SITE_URL, TARGET_COUNTRIES } from "@/lib/seo";
 
 export const metadata: Metadata = generatePageMetadata({
@@ -39,6 +40,7 @@ export const metadata: Metadata = generatePageMetadata({
 export default function Home() {
   return (
     <>
+      <WebSiteSchema />
       <OrganizationSchema />
       <LocalBusinessSchema />
       <ServiceSchema />

@@ -346,3 +346,268 @@ export const SEMANTIC_KEYWORDS = {
     "Polonnaruwa tours",
   ],
 };
+
+/**
+ * Generate optimized meta description
+ * Ensures proper length (150-160 characters) and includes keywords
+ */
+export function generateMetaDescription(
+  description: string,
+  maxLength: number = 160
+): string {
+  if (description.length <= maxLength) return description;
+  
+  // Try to cut at sentence boundary
+  const sentences = description.match(/[^.!?]+[.!?]+/g) || [];
+  let result = "";
+  
+  for (const sentence of sentences) {
+    if ((result + sentence).length <= maxLength) {
+      result += sentence;
+    } else {
+      break;
+    }
+  }
+  
+  // If no sentences fit, cut at word boundary
+  if (!result) {
+    const words = description.split(" ");
+    result = words[0];
+    for (let i = 1; i < words.length; i++) {
+      if ((result + " " + words[i]).length <= maxLength - 3) {
+        result += " " + words[i];
+      } else {
+        break;
+      }
+    }
+    result += "...";
+  }
+  
+  return result.trim();
+}
+
+/**
+ * Generate optimized title tag
+ * Ensures proper length (50-60 characters) and includes primary keyword
+ */
+export function generateTitleTag(
+  title: string,
+  primaryKeyword?: string,
+  maxLength: number = 60
+): string {
+  let optimizedTitle = title;
+  
+  // Add primary keyword if not present and space allows
+  if (primaryKeyword && !title.toLowerCase().includes(primaryKeyword.toLowerCase())) {
+    const withKeyword = `${title} - ${primaryKeyword}`;
+    if (withKeyword.length <= maxLength) {
+      optimizedTitle = withKeyword;
+    }
+  }
+  
+  // Truncate if too long
+  if (optimizedTitle.length > maxLength) {
+    optimizedTitle = optimizedTitle.substring(0, maxLength - 3) + "...";
+  }
+  
+  return optimizedTitle;
+}
+
+/**
+ * Generate keyword-rich URL slug
+ */
+export function generateSlug(text: string): string {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "") // Remove special characters
+    .replace(/[\s_-]+/g, "-") // Replace spaces and underscores with hyphens
+    .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
+}
+
+/**
+ * Extract keywords from text for SEO analysis
+ */
+export function extractKeywords(text: string, minLength: number = 3): string[] {
+  const words = text
+    .toLowerCase()
+    .replace(/[^\w\s]/g, " ")
+    .split(/\s+/)
+    .filter((word) => word.length >= minLength);
+  
+  // Count word frequency
+  const frequency: Record<string, number> = {};
+  words.forEach((word) => {
+    frequency[word] = (frequency[word] || 0) + 1;
+  });
+  
+  // Sort by frequency and return top keywords
+  return Object.entries(frequency)
+    .sort(([, a], [, b]) => b - a)
+    .slice(0, 10)
+    .map(([word]) => word);
+}
+
+/**
+ * Generate structured data for WebSite with search action
+ */
+export function generateWebSiteSchema(searchUrl?: string) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: SITE_URL,
+    potentialAction: searchUrl
+      ? {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: searchUrl,
+          },
+          "query-input": "required name=search_term_string",
+        }
+      : undefined,
+  };
+  
+  if (!searchUrl) {
+    delete schema.potentialAction;
+  }
+  
+  return schema;
+}
+
+/**
+ * Generate ItemList schema for collections (tours, destinations, etc.)
+ */
+export function generateItemListSchema({
+  name,
+  description,
+  items,
+  itemType = "TouristTrip",
+}: {
+  name: string;
+  description: string;
+  items: Array<{
+    name: string;
+    url: string;
+    description?: string;
+    image?: string;
+  }>;
+  itemType?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: name,
+    description: description,
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": itemType,
+        name: item.name,
+        url: item.url.startsWith("http") ? item.url : `${SITE_URL}${item.url}`,
+        ...(item.description && { description: item.description }),
+        ...(item.image && {
+          image: item.image.startsWith("http") ? item.image : `${SITE_URL}${item.image}`,
+        }),
+      },
+    })),
+  };
+}
+
+/**
+ * Generate HowTo schema for step-by-step guides
+ */
+export function generateHowToSchema({
+  name,
+  description,
+  steps,
+  totalTime,
+  image,
+}: {
+  name: string;
+  description: string;
+  steps: Array<{
+    name: string;
+    text: string;
+    image?: string;
+  }>;
+  totalTime?: string; // ISO 8601 duration (e.g., "PT2H30M")
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: name,
+    description: description,
+    ...(image && {
+      image: image.startsWith("http") ? image : `${SITE_URL}${image}`,
+    }),
+    ...(totalTime && { totalTime: totalTime }),
+    step: steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.image && {
+        image: step.image.startsWith("http") ? step.image : `${SITE_URL}${step.image}`,
+      }),
+    })),
+  };
+}
+
+/**
+ * Generate Event schema for tour events or special occasions
+ */
+export function generateEventSchema({
+  name,
+  description,
+  startDate,
+  endDate,
+  location,
+  image,
+  offers,
+}: {
+  name: string;
+  description: string;
+  startDate: string; // ISO 8601 date
+  endDate?: string;
+  location: {
+    name: string;
+    address?: string;
+  };
+  image?: string;
+  offers?: {
+    price: string;
+    priceCurrency: string;
+    availability: string;
+    url: string;
+  };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: name,
+    description: description,
+    startDate: startDate,
+    ...(endDate && { endDate: endDate }),
+    location: {
+      "@type": "Place",
+      name: location.name,
+      ...(location.address && { address: location.address }),
+    },
+    ...(image && {
+      image: image.startsWith("http") ? image : `${SITE_URL}${image}`,
+    }),
+    ...(offers && {
+      offers: {
+        "@type": "Offer",
+        price: offers.price,
+        priceCurrency: offers.priceCurrency,
+        availability: offers.availability,
+        url: offers.url.startsWith("http") ? offers.url : `${SITE_URL}${offers.url}`,
+      },
+    }),
+  };
+}

@@ -6,6 +6,7 @@ import { AuthSessionProvider } from "@/components/providers/session-provider";
 import { ConditionalLayout } from "@/components/layout/conditional-layout";
 import { Toaster } from "@/components/ui/toaster";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { GoogleTagManager } from "@/components/analytics/GoogleTagManager";
 import { SITE_URL, generateHreflangTags, TARGET_COUNTRIES } from "@/lib/seo";
 
 const inter = Inter({
@@ -133,9 +134,11 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
       </head>
       <body className="antialiased">
         <Suspense fallback={null}>
+          <GoogleTagManager />
           <GoogleAnalytics />
         </Suspense>
         <AuthSessionProvider>

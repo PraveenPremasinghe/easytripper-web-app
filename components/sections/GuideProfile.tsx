@@ -34,8 +34,8 @@ export function GuideProfile() {
     { name: "English", level: "Fluent", flag: "🇬🇧" },
     { name: "Sinhala", level: "Native", flag: "🇱🇰" },
     { name: "Tamil", level: "Fluent", flag: "🇱🇰" },
-    { name: "French", level: "Basic", flag: "🇫🇷" },
-    { name: "German", level: "Basic", flag: "🇩🇪" },
+ 
+ 
   ];
 
   const features = [

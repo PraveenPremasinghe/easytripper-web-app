@@ -269,3 +269,107 @@ export function BreadcrumbSchema({ items }: { items: Array<{ name: string; url: 
     />
   );
 }
+
+/**
+ * Enhanced Organization Schema with more details
+ */
+export function EnhancedOrganizationSchema() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "@id": `${SITE_URL}/#organization`,
+    name: "Easy Tripper",
+    alternateName: "Easy Tripper Sri Lanka Tours",
+    url: SITE_URL,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}/images/logo.png`,
+      width: 200,
+      height: 200
+    },
+    description: "Custom Sri Lanka tours with private chauffeur service. Expert local guide offering personalized tours tailored to your preferences, cultural experiences, wildlife safaris, and luxury transportation services. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden.",
+    telephone: "+94756433267",
+    email: "hello@easytripper.lk",
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "LK",
+      addressLocality: "Sri Lanka",
+      addressRegion: "Central Province"
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "7.8731",
+      longitude: "80.7718"
+    },
+    areaServed: [
+      {
+        "@type": "Country",
+        name: "Sri Lanka"
+      },
+      ...TARGET_COUNTRIES.map(country => ({
+        "@type": "Country",
+        name: country.name
+      }))
+    ],
+    priceRange: "$$",
+    image: `${SITE_URL}/images/og-image.jpg`,
+    foundingDate: "2020",
+    founder: {
+      "@type": "Person",
+      name: "Jagath Premasinghe"
+    },
+    sameAs: [
+      // Add social media links when available
+    ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5.0",
+      reviewCount: "5000+",
+      bestRating: "5",
+      worstRating: "1"
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Sri Lanka Tour Packages",
+      itemListElement: [
+        {
+          "@type": "OfferCatalog",
+          name: "Custom Tours",
+          itemListElement: []
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "Private Chauffeur Services",
+          itemListElement: []
+        }
+      ]
+    },
+    serviceType: [
+      "Tour Guide Services",
+      "Private Chauffeur Services",
+      "Custom Tour Planning",
+      "Airport Transfer",
+      "Vehicle Rental"
+    ],
+    // Additional SEO enhancements
+    knowsAbout: [
+      "Sri Lanka Tourism",
+      "Cultural Heritage Tours",
+      "Wildlife Safaris",
+      "Beach Holidays",
+      "Adventure Travel",
+      "Luxury Travel"
+    ],
+    memberOf: {
+      "@type": "Organization",
+      name: "Sri Lanka Tourism"
+    }
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema, null, 2) }}
+    />
+  );
+}
