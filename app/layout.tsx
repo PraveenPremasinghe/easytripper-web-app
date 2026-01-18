@@ -31,10 +31,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: "Custom Sri Lanka Tours with Private Chauffeur | Easy Tripper",
-    template: "%s | Easy Tripper - Sri Lanka Tour Guide",
+    template: "%s | Easy Tripper",
   },
   description:
-    "Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden. Create your perfect custom tour today. Airport pickup available.",
+    "Custom Sri Lanka tours with private chauffeur service. Personalized itineraries, luxury vehicles, and expert English-speaking guides. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden. Create your perfect tour today.",
   keywords: [
     "custom Sri Lanka tours",
     "Sri Lanka private tour guide",
@@ -128,13 +128,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <head>
-        {/* Resource hints for performance */}
+        {/* Resource hints for performance - non-blocking */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+        {/* Preload critical resources */}
+        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/fonts/inter.woff2" />
       </head>
       <body className="antialiased">
         <Suspense fallback={null}>

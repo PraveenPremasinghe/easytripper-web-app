@@ -180,7 +180,9 @@ export function generatePageMetadata({
   targetCountries?: string[];
 }) {
   const canonical = getCanonicalUrl(path);
-  const fullTitle = `${title} | ${SITE_NAME}`;
+  // Optimize title length (max 60 chars for SEO)
+  const optimizedTitle = generateTitleTag(title, undefined, 60);
+  const fullTitle = `${optimizedTitle} | Easy Tripper`;
 
   // Add country-specific keywords
   const countryKeywords: string[] = [];
@@ -193,9 +195,12 @@ export function generatePageMetadata({
 
   const hreflangTags = generateHreflangTags(path);
 
+  // Optimize description length (150-220 chars for SEO)
+  const optimizedDescription = generateMetaDescription(description, 220);
+  
   return {
     title: fullTitle,
-    description,
+    description: optimizedDescription,
     keywords: [
       ...keywords,
       ...countryKeywords,

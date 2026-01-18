@@ -17,8 +17,8 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email",
-      content: "hello@easytripper.lk",
-      href: "mailto:hello@easytripper.lk",
+      content: "hello@easytripper.lk", // Display text (will be obfuscated in render)
+      href: "mailto:hello&#64;easytripper.lk", // Obfuscated href
       color: "from-purple-500 to-pink-500",
     },
     {
@@ -80,8 +80,18 @@ export default function ContactPage() {
                     <a
                               href={info.href}
                               className="text-xs sm:text-sm md:text-base text-neutral-600 hover:text-primary transition-colors break-words"
+                              onClick={(e) => {
+                                // Decode email on click for better UX
+                                if (info.title === "Email") {
+                                  e.currentTarget.href = "mailto:hello@easytripper.lk";
+                                }
+                              }}
                     >
-                              {info.content}
+                              {info.title === "Email" ? (
+                                <span dangerouslySetInnerHTML={{ __html: "hello&#64;easytripper.lk" }} />
+                              ) : (
+                                info.content
+                              )}
                             </a>
                           ) : (
                             <p className="text-xs sm:text-sm md:text-base text-neutral-600">{info.content}</p>

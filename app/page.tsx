@@ -19,7 +19,7 @@ import { generatePageMetadata, SITE_URL, TARGET_COUNTRIES } from "@/lib/seo";
 
 export const metadata: Metadata = generatePageMetadata({
   title: "Custom Sri Lanka Tours with Private Chauffeur",
-  description: "Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden. Create your perfect custom tour today. Airport pickup available.",
+  description: "Custom Sri Lanka tours with private chauffeur service. Personalized itineraries, luxury vehicles, and expert English-speaking guides. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden. Create your perfect tour today.",
   keywords: [
     "custom Sri Lanka tours",
     "Sri Lanka private tour guide",

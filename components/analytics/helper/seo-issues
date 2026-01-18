@@ -1,0 +1,151 @@
+HIGH
+To improve the website experience for your visitors, it is recommended to eliminate any render-blocking resources on this webpage.
+MEDIUM
+Serve properly sized images to reduce page loading times and to improve user's experience.
+MEDIUM
+Avoid using distorted images, as they can have a negative impact on the user experience.
+LOW
+Consider reducing the HTML size to improve loading times and retain visitors.
+LOW
+Reducing the Document Object Model (DOM) size can lead to faster page loading times, improved site performance, and better user experience by decreasing the amount of time it takes for the browser to process and render the page.
+LOW
+Resolving errors identified by the Chrome DevTools Console can improve user experience.
+LOW
+While a canonical link tag can help in resolving duplicate content issues, it's important to verify that the specified URL is accurate, especially if the site's URL structure has been recently updated.
+LOW
+Without an SPF record, spammers can easily spoof emails from this domain, potentially leading to compromised email security and deliverability issues.
+LOW
+Using more than 20 HTTP requests on a webpage can negatively impact the loading time.
+
+
+Common SEO issues
+Score: 69
+Failed: 3
+Warnings: 3
+Passed: 14
+Meta Title Test
+100% of top 100 sites passed
+This webpage is using a title tag with a length of 85 characters. While there's no target number of characters, titles should be descriptive and concise. We recommend using a title with a length between 20 - 60 characters in order to fit Google Search results that have a 600-pixel limit.
+Text: Custom Sri Lanka Tours with Private Chauffeur | Easy Tripper - Custom Sri Lanka Tours
+Length: 85 characters
+Meta Description Test
+92% of top 100 sites passed
+This webpage is using a meta description tag with a length of 300 characters. We recommend using well-written and inviting meta descriptions with a length between 150 and 220 characters (spaces included).
+Text: Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden. Create your perfect custom tour today. Airport pickup available.
+Length: 300 characters
+Google Search Results Preview Test
+Desktop version
+https://www.easytripper.lk/
+Custom Sri Lanka Tours with Private Chauffeur | Easy Tripper - Custom Sri Lanka Tours
+Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and expert English-speaking guides. Serving travelers from India, Switzerland, Netherlands, Germany, and Sweden. Create your perfect custom tour today. Airport pickup available.
+Mobile version
+https://www.easytripper.lk/
+Custom Sri Lanka Tours with Private Chauffeur | Easy Tripper - Custom Sri Lanka Tours
+Custom Sri Lanka tours tailored to your preferences. Private chauffeur service, personalized itineraries, luxury vehicles, and
+
+
+Most Common Keywords Test
+There is likely no optimal keyword density (search engine algorithms have evolved beyond keyword density metrics as a significant ranking factor). It can be useful, however, to note which keywords appear most often on your page and if they reflect the intended topic of your page. More importantly, the keywords on your page should appear within natural sounding and grammatically correct copy.
+72central49southern25lanka25north18ella
+Keywords Cloud Test
+adventureancientanuradhapuraauthenticbasedbeachbeachesbentotabestcapitalcentralcountrycuisineculturalculturecustomdambulladaysdestinationsdetailsdiscovereasyeliyaellaexperienceexperiencesexploreexploringfluentfortfortressgallegamphagoldenguideguideshellohsdcdgdgheritagehighlightshillhistoryhomeislandjaffnajourneykandylanguageslankalankanluxurymirissamistymountainnationalnightsnorthnorthernnuwaraparadiseparkpeopleperfectpersonplanplantationspolonnaruwapravenpremiumpristinerichrocksacredsafarissigiriyasitesitessouthernsrilankastoriesswesttamiltempletipstourtourstraintraveltravelerstriptripperunescovehiclesvibrantviewwatchingwhalewildlifeworldyalayears
+
+
+Responsive Image Test
+29% of top 100 sites passed
+Not all images in this webpage are properly sized! This webpage is serving images that are larger than needed for the size of the user's viewport.
+
+Image Aspect Ratio Test
+75% of top 100 sites passed
+Not all image display dimensions match the natural aspect ratio! Fix aspect ratio issues to avoid distorted images on this website!
+
+Console Errors Test
+27% of top 100 sites passed
+This webpage has some errors caught by the Chrome DevTools Console!
+
+HTML Page Size Test
+23% of top 100 sites passed
+The size of this webpage's HTML is 6019.69 Kb, and is greater than the average size of 33 Kb! This can lead to slower loading times, lost visitors, and decreased revenue. Good steps to reduce HTML size include: using HTML compression, CSS layouts, external style sheets, and moving javascript to external files.
+
+DOM Size Test
+56% of top 100 sites passed
+The Document Object Model (DOM) of this webpage has 2,471 nodes which is greater than the recommended value of 1,500 nodes! A large DOM size negatively affects site performance and increases the page load time.
+HTML
+
+JS Execution Time Test
+53% of top 100 sites passed
+The JavaScript code used by this webpage is executed in more than 2 seconds!
+
+Page Objects Test
+This webpage is using more than 20 http requests, which can slow down page loading and negatively impact user experience!
+Content size by content type
+Content type	Percent	Size
+other	41.7 %	1.01 Mb
+image	30.6 %	761.28 Kb
+javascript	22.4 %	558.15 Kb
+font	3.4 %	85.35 Kb
+css	1.0 %	23.99 Kb
+html	0.9 %	23.14 Kb
+TOTAL	100%	2.43 Mb
+Requests by content type
+Content type	Percent	Requests
+other	47.3 %	43
+javascript	29.7 %	27
+image	16.5 %	15
+css	3.3 %	3
+font	2.2 %	2
+html	1.1 %	1
+TOTAL	100%	91
+Content size by domain
+Domain	Percent	Size
+easytripper.lk	96.0 %	2.33 Mb
+googletagmanager.com	4.0 %	99.36 Kb
+TOTAL	100%	2.43 Mb
+Requests by domain
+Domain	Percent	Requests
+easytripper.lk	98.9 %	90
+googletagmanager.com	1.1 %	1
+TOTAL	100%	91
+
+
+
+CDN Usage Test
+95% of top 100 sites passed
+This webpage is not serving all resources (images, javascript and css) from CDNs!
+
+
+Render Blocking Resources Test
+15% of top 100 sites passed
+This webpage is using render blocking resources! Eliminating render-blocking resources can help this webpage to load significantly faster and will improve the website experience for your visitors.
+
+
+URL Redirects Test
+97% of top 100 sites passed
+This URL performed 1 redirects! While redirects are typically not advisable (as they can affect search engine indexing issues and adversely affect site loading time), one redirect may be acceptable, particularly if the URL is redirecting from a non-www version to its www version, or vice-versa.
+https://easytripper.lk/
+https://www.easytripper.lk/
+
+
+Plaintext Emails Test
+97% of top 100 sites passed
+We've found 1 email addresses in your page code! We advise you to protect email links in a way that hides them from the spam harvesters.
+
+
+Canonical Tag Test
+93% of top 100 sites passed
+This webpage is using the canonical link tag. This tag specifies that the URL: https://easytripper.lk should be the preferred version of this page. The canonical tag can be useful when there are similar versions of the same content on several URLs (e.g., such as e-commerce sites where URL modifiers like sort parameters are appended to a product page's URL). Please ensure that this specification is correct, as canonical tags are often hard-coded and may not always reflect the latest changes in a site's URL structure.
+<link href="https://easytripper.lk" rel="canonical"/>
+
+
+
+Nofollow Tag Test
+This webpage does not use the nofollow meta tag. This means that search engines will crawl all links from this webpage.
+
+
+Disallow Directive Test
+Your robots.txt file includes a disallow command which instructs search engines to avoid certain parts of your website! You are advised to confirm if access to these resources or pages are intended to be blocked (e.g., if they contain internal-only content or sensitive information).
+
+
+SPF Records Test
+94% of top 100 sites passed
+This DNS server is not using an SPF record! SPF (Sender Policy Framework) allows administrators to specify which hosts are allowed to send mail from a given domain by creating a specific SPF record or TXT record in the Domain Name System (DNS). You can find more information about SPF records here.
